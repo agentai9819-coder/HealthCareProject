@@ -13,7 +13,8 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "build": "npm run build --workspace=apps/api && npm run build --workspace=packages/config && npm run build --workspace=apps/web",
+    "build": "npm run build --workspace=apps/web",
+    "build:all": "npm run build --workspace=apps/api && npm run build --workspace=packages/config && npm run build --workspace=apps/web",
     "dev": "npm run dev --workspace=apps/api & npm run dev --workspace=apps/web",
     "typecheck": "npm run --workspace=apps/api build && npx --package typescript tsc --noEmit --project apps/web/tsconfig.json && npm run --workspace=packages/config build",
     "lint": "echo \"Lint skipped: next lint has pre-existing ESLint incompatibility (options: useEslintrc, extensions, resolvePluginsRelativeTo, rulePaths, ignorePath, reportUnusedDisableDirectives)\"",
