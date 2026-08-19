@@ -73,6 +73,11 @@ app.use("/api/v1/staff", staffRouter);
 app.use("/api/v1/admin/staff", adminStaffRouter);
 app.use("/api/v1/admin/visits", adminVisitsRouter);
 
-app.listen(env.PORT, () => {
-  console.log(`Server running on port ${env.PORT}`);
-});
+if (process.env.NODE_ENV !== "test" && !process.env.VERCEL) {
+  app.listen(env.PORT, () => {
+    console.log(`Server running on port ${env.PORT}`);
+  });
+}
+
+export default app;
+export { app };
