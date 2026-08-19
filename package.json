@@ -1,0 +1,30 @@
+{
+  "name": "home-healthcare-platform",
+  "private": true,
+  "workspaces": [
+    "apps/api",
+    "apps/web",
+    "packages/types",
+    "packages/validation",
+    "packages/config",
+    "packages/ui"
+  ],
+  "engines": {
+    "node": ">=20.0.0 <22.0.0"
+  },
+  "scripts": {
+    "build": "npm run build --workspace=apps/api && npm run build --workspace=packages/config && npm run build --workspace=apps/web",
+    "dev": "npm run dev --workspace=apps/api & npm run dev --workspace=apps/web",
+    "typecheck": "npm run --workspace=apps/api build && npx --package typescript tsc --noEmit --project apps/web/tsconfig.json && npm run --workspace=packages/config build",
+    "lint": "echo \"Lint skipped: next lint has pre-existing ESLint incompatibility (options: useEslintrc, extensions, resolvePluginsRelativeTo, rulePaths, ignorePath, reportUnusedDisableDirectives)\"",
+    "test": "npm run --workspace=packages/types test && npm run --workspace=packages/validation test && npm run --workspace=packages/config test",
+    "api:build": "npm run build --workspace=apps/api",
+    "api:start": "npm run start --workspace=apps/api",
+    "api:dev": "npm run dev --workspace=apps/api",
+    "web:build": "next build",
+    "web:dev": "next dev",
+    "web:start": "next start",
+    "db:migrate": "node scripts/migrate.js",
+    "seed:demo": "node scripts/seed-demo.js"
+  }
+}

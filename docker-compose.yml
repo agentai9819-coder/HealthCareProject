@@ -1,0 +1,61 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: homecare-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: healthcare
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d healthcare"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: homecare-api
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3001
+      DATABASE_URL: postgresql://postgres:postgrespassword@postgres:5432/healthcare
+      CORS_ORIGIN: http://localhost:3000
+      SESSION_SECRET: production-super-secure-session-secret-key-32-chars-min!
+      BCRYPT_SALT_ROUNDS: 10
+      API_PREFIX: /api/v1
+    ports:
+      - "3001:3001"
+    command: >
+      sh -c "node /app/scripts/migrate.js && node /app/scripts/seed-demo.js && node dist/index.js"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    container_name: homecare-web
+    restart: unless-stopped
+    depends_on:
+      - api
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      NEXT_PUBLIC_API_URL: http://localhost:3001/api/v1
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres_data:
+    driver: local
