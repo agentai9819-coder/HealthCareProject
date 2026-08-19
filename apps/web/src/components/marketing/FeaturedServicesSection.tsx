@@ -39,15 +39,23 @@ const fallbackServices = [
 
 async function getFeaturedServices(): Promise<Service[]> {
   try {
-    const res = await fetch(`${API_BASE}/services`, { next: { revalidate: 60 } });
-    const json = await res.json();
-    if (json.success && Array.isArray(json.data)) {
-      return json.data;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 2000);
+    const res = await fetch(`${API_BASE}/services`, {
+      next: { revalidate: 60 },
+      signal: controller.signal,
+    }).finally(() => clearTimeout(timer));
+
+    if (res.ok) {
+      const json = await res.json();
+      if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+        return json.data;
+      }
     }
-  } catch (err) {
-    console.error("Failed to fetch featured services on server:", err);
+  } catch (_err) {
+    // API offline during static build time
   }
-  return [];
+  return DEFAULT_SERVICES;
 }
 
 export async function FeaturedServicesSection() {

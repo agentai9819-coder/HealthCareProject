@@ -10,6 +10,37 @@ export interface Service {
   preparationTips?: string[];
 }
 
+export const DEFAULT_SERVICES: Service[] = [
+  {
+    id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    name: "Home Health Assessment",
+    description: "Comprehensive in-home clinical evaluation by a licensed registered nurse to determine vital health metrics and personalized care planning.",
+    durationMinutes: 60,
+    price: 2400,
+  },
+  {
+    id: "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+    name: "Skilled Nursing Visit",
+    description: "Dedicated bedside nursing care including medication administration, wound dressing, catheter management, and vital signs monitoring.",
+    durationMinutes: 60,
+    price: 2800,
+  },
+  {
+    id: "c3d4e5f6-a7b8-9012-cdef-123456789012",
+    name: "Physical Therapy & Rehabilitation",
+    description: "Specialized in-home therapeutic exercise, mobility restoration, and fall-risk prevention by certified physical therapists.",
+    durationMinutes: 60,
+    price: 2600,
+  },
+  {
+    id: "d4e5f6a7-b8c9-0123-def1-234567890123",
+    name: "Elder Wellness & Companion Check",
+    description: "Holistic senior wellness visit ensuring daily living support, hydration/nutrition review, and reassurance for family caregivers.",
+    durationMinutes: 60,
+    price: 1900,
+  },
+];
+
 export function slugify(text: string): string {
   return text
     .toLowerCase()
@@ -30,5 +61,9 @@ export function findServiceBySlug(services: Service[], slug: string): Service | 
   const matched = services.find((s) => slugify(s.name) === slug);
   if (matched) return matched;
   // 2. Match by direct ID if slug is a UUID
-  return services.find((s) => s.id === slug);
+  const matchedById = services.find((s) => s.id === slug);
+  if (matchedById) return matchedById;
+  // 3. Match from default catalog
+  const matchedDefault = DEFAULT_SERVICES.find((s) => slugify(s.name) === slug || s.id === slug);
+  return matchedDefault;
 }
