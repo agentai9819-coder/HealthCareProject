@@ -3,7 +3,7 @@
   "framework": "nextjs",
   "buildCommand": "npm run build --workspace=packages/config && npm run build --workspace=apps/web",
   "outputDirectory": "apps/web/.next",
-  "installCommand": "npm ci",
+  "installCommand": "npm install",
   "cleanUrls": true,
   "headers": [
     {

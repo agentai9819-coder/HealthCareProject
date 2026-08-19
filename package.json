@@ -10,7 +10,7 @@
     "packages/ui"
   ],
   "engines": {
-    "node": ">=20.0.0 <22.0.0"
+    "node": ">=20.0.0"
   },
   "scripts": {
     "build": "npm run build --workspace=apps/api && npm run build --workspace=packages/config && npm run build --workspace=apps/web",
