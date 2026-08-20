@@ -13,9 +13,14 @@
   --font-display: 'Outfit', 'Plus Jakarta Sans', sans-serif;
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   border-color: var(--border);
+}
+
+input, textarea, select, button {
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 html {

@@ -2,6 +2,11 @@
 const nextConfig = {
   output: "standalone",
   reactStrictMode: true,
+  compress: true,
+  poweredByHeader: false,
+  images: {
+    formats: ["image/avif", "image/webp"],
+  },
   eslint: {
     ignoreDuringBuilds: true,
   },
@@ -10,6 +15,12 @@ const nextConfig = {
   },
   async headers() {
     return [
+      {
+        source: "/assets/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
       {
         source: "/api/:path*",
         headers: [

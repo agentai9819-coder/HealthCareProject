@@ -55,6 +55,32 @@ export function getServiceSlug(service: { id: string; name: string }): string {
   return base || service.id;
 }
 
+export async function getServicesCatalog(): Promise<Service[]> {
+  const envUrl = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.API_BASE_URL;
+  // If running in production SSR without a live remote HTTPS backend, return static curated services immediately (0ms)
+  if (!envUrl || (process.env.NODE_ENV === "production" && !envUrl.startsWith("https://") && typeof window === "undefined")) {
+    return DEFAULT_SERVICES;
+  }
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 400);
+    const res = await fetch(`${envUrl}/services`, {
+      next: { revalidate: 3600 },
+      signal: controller.signal,
+    }).finally(() => clearTimeout(timer));
+
+    if (res.ok) {
+      const json = await res.json();
+      if (json.success && Array.isArray(json.data) && json.data.length > 0) {
+        return json.data;
+      }
+    }
+  } catch {
+    // Fall back instantly to curated clinical catalog
+  }
+  return DEFAULT_SERVICES;
+}
+
 export function findServiceBySlug(services: Service[], slug: string): Service | undefined {
   if (!slug) return undefined;
   // 1. Match by exact slugified name
@@ -67,3 +93,5 @@ export function findServiceBySlug(services: Service[], slug: string): Service | 
   const matchedDefault = DEFAULT_SERVICES.find((s) => slugify(s.name) === slug || s.id === slug);
   return matchedDefault;
 }
+
+

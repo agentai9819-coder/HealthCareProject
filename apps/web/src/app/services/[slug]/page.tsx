@@ -1,27 +1,13 @@
 import Link from "next/link";
-import { API_BASE } from "../../../lib/api";
-import { Service, findServiceBySlug, DEFAULT_SERVICES } from "../../../lib/services";
+import { Service, findServiceBySlug, getServiceSlug, getServicesCatalog, DEFAULT_SERVICES } from "../../../lib/services";
 import { servicesEnrichmentMap, defaultEnrichment } from "../../../content/marketing/services";
 
-async function getServices(): Promise<Service[]> {
-  try {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 2000);
-    const res = await fetch(`${API_BASE}/services`, {
-      next: { revalidate: 60 },
-      signal: controller.signal,
-    }).finally(() => clearTimeout(timer));
+export const revalidate = 3600;
 
-    if (res.ok) {
-      const json = await res.json();
-      if (json.success && Array.isArray(json.data) && json.data.length > 0) {
-        return json.data;
-      }
-    }
-  } catch (_err) {
-    // API offline during static build time, use default catalog
-  }
-  return DEFAULT_SERVICES;
+export async function generateStaticParams() {
+  return DEFAULT_SERVICES.map((s) => ({
+    slug: getServiceSlug(s),
+  }));
 }
 
 export default async function ServiceDetailPage({
@@ -30,7 +16,7 @@ export default async function ServiceDetailPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const services = await getServices();
+  const services = await getServicesCatalog();
   const service = findServiceBySlug(services, slug);
 
   if (!service) {
