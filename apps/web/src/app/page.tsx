@@ -79,8 +79,6 @@ const styles: Record<string, React.CSSProperties> = {
   faqSection: {
     padding: "80px 0 60px",
     position: "relative",
-    contentVisibility: "auto",
-    containIntrinsicSize: "1px 400px",
   },
   container: {
     maxWidth: "960px",
