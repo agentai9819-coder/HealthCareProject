@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export function ClinicianSection() {
   return (
     <section id="clinician" className="clinician-section" aria-labelledby="clinician-title">
@@ -45,10 +47,14 @@ export function ClinicianSection() {
         <div className="portrait-frame">
           <div className="portrait-glow" aria-hidden="true" />
           <div className="portrait-card">
-            <img
+            <Image
               className="portrait-image"
               src="/assets/images/dr-img.png"
               alt="David Vance, a registered nurse"
+              width={440}
+              height={440}
+              quality={85}
+              loading="lazy"
             />
             <div className="license-tag">
               <small>Verified profile</small>

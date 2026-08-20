@@ -104,15 +104,18 @@ button:focus-visible, a:focus-visible {
   opacity: 0.86;
   pointer-events: none;
   z-index: 0;
+  contain: strict;
+  transform: translateZ(0);
 }
 
 .aurora-orb {
   position: absolute;
   pointer-events: none;
-  filter: blur(40px);
   border-radius: 999px;
   opacity: 0.32;
   z-index: 0;
+  contain: strict;
+  transform: translateZ(0);
 }
 
 .orb-one {
@@ -120,8 +123,7 @@ button:focus-visible, a:focus-visible {
   height: 34rem;
   top: 11rem;
   right: -11rem;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.42) 0, rgba(16, 185, 129, 0.08) 42%, transparent 71%);
-  animation: subtle-drift 16s ease-in-out infinite;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.35) 0, rgba(16, 185, 129, 0.05) 50%, transparent 70%);
 }
 
 .orb-two {
@@ -129,8 +131,7 @@ button:focus-visible, a:focus-visible {
   height: 25rem;
   top: 27rem;
   left: -12rem;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.28), transparent 68%);
-  animation: subtle-drift 18s ease-in-out infinite reverse;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.22) 0, transparent 65%);
 }
 
 .page-frame {
@@ -679,8 +680,10 @@ button:focus-visible, a:focus-visible {
   width: 86%;
   height: 80%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.3), transparent 67%);
-  filter: blur(30px);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.25) 0, rgba(16, 185, 129, 0.05) 45%, transparent 70%);
+  pointer-events: none;
+  contain: strict;
+  transform: translateZ(0);
 }
 .portrait-card {
   position: relative;

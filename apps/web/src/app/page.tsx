@@ -9,6 +9,8 @@ import { FaqAccordion } from "../components/marketing/FaqAccordion";
 import { CtaBanner } from "../components/marketing/CtaBanner";
 import { faqsContent } from "../content/marketing/faqs";
 
+export const revalidate = 3600;
+
 export default function HomePage() {
   return (
     <div className="site-shell">
