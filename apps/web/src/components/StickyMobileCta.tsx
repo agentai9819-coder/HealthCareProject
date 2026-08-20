@@ -29,13 +29,13 @@ export function StickyMobileCta() {
         zIndex: 999,
         backgroundColor: "rgba(8, 13, 12, 0.95)",
         borderTop: "1px solid rgba(52, 211, 153, 0.25)",
-        backdropFilter: "blur(20px)",
-        padding: "10px 16px",
+        padding: "10px 16px max(10px, env(safe-area-inset-bottom))",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
         gap: "10px",
         boxShadow: "0 -10px 30px rgba(0, 0, 0, 0.6)",
+        transform: "translateZ(0)",
       }}
     >
       <div style={{ display: "flex", flexDirection: "column" }}>

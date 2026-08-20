@@ -138,7 +138,7 @@ export function HeroSection() {
             ))}
           </div>
 
-          <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+          <div className="hero-btn-group" style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
             <Link
               href="/services"
               className="shimmer-button book-button"
@@ -150,9 +150,11 @@ export function HeroSection() {
             </Link>
             <Link
               href="/how-it-works"
+              className="hero-secondary-btn"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
+                justifyContent: "center",
                 gap: "8px",
                 padding: "0 16px",
                 minHeight: "44px",

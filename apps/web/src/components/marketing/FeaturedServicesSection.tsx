@@ -99,7 +99,7 @@ export async function FeaturedServicesSection() {
                       href={`/services/${slug}`}
                       style={{
                         textAlign: "center",
-                        padding: "8px",
+                        padding: "0 10px",
                         fontSize: "12px",
                         fontWeight: 600,
                         color: "#d1fae5",
@@ -107,6 +107,10 @@ export async function FeaturedServicesSection() {
                         borderRadius: "8px",
                         textDecoration: "none",
                         border: "1px solid rgba(255, 255, 255, 0.08)",
+                        minHeight: "42px",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
                     >
                       Details
@@ -114,7 +118,7 @@ export async function FeaturedServicesSection() {
                     <Link
                       href={`/booking/select-slot?serviceId=${service.id}`}
                       className="shimmer-button"
-                      style={{ minHeight: "34px", padding: "0 10px", fontSize: "11px" }}
+                      style={{ minHeight: "42px", padding: "0 10px", fontSize: "12px" }}
                     >
                       <span>Book Slot</span>
                     </Link>
@@ -152,7 +156,7 @@ export async function FeaturedServicesSection() {
                     href={`/services/${service.slug}`}
                     style={{
                       textAlign: "center",
-                      padding: "8px",
+                      padding: "0 10px",
                       fontSize: "12px",
                       fontWeight: 600,
                       color: "#d1fae5",
@@ -160,6 +164,10 @@ export async function FeaturedServicesSection() {
                       borderRadius: "8px",
                       textDecoration: "none",
                       border: "1px solid rgba(255, 255, 255, 0.08)",
+                      minHeight: "42px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                     }}
                   >
                     Details
@@ -167,7 +175,7 @@ export async function FeaturedServicesSection() {
                   <Link
                     href="/services"
                     className="shimmer-button"
-                    style={{ minHeight: "34px", padding: "0 10px", fontSize: "11px" }}
+                    style={{ minHeight: "42px", padding: "0 10px", fontSize: "12px" }}
                   >
                     <span>Book Slot</span>
                   </Link>

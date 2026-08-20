@@ -114,7 +114,8 @@ const styles: Record<string, React.CSSProperties> = {
     padding: "2.5rem",
     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.03)",
     display: "flex",
-    gap: "2rem",
+    flexWrap: "wrap",
+    gap: "1.5rem",
     alignItems: "flex-start",
   },
   stepNumberCol: {

@@ -273,7 +273,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   formRow: {
     display: "grid",
-    gridTemplateColumns: "1fr 1fr",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
     gap: "1rem",
   },
   formGroup: {
