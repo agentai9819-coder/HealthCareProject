@@ -38,115 +38,143 @@ export function SelectSlotPageContent() {
       return;
     }
 
-    Promise.all([
-      fetch(`${API_BASE}/services/${serviceId}`, { credentials: "include" }).then((r) => r.json()),
-      fetch(`${API_BASE}/services/${serviceId}/slots`, { credentials: "include" }).then((r) => r.json()),
-    ])
-      .then(([serviceRes, slotsRes]) => {
-        if (serviceRes.success) {
-          setService(serviceRes.data);
-        } else {
-          setError(serviceRes.error || "Failed to load service");
+    const fetchData = async () => {
+      try {
+        const [serviceRes, slotsRes] = await Promise.all([
+          fetch(`${API_BASE}/services`),
+          fetch(`${API_BASE}/bookings/slots?serviceId=${serviceId}`),
+        ]);
+
+        const serviceData = await serviceRes.json();
+        const slotsData = await slotsRes.json();
+
+        if (serviceData.success && Array.isArray(serviceData.data)) {
+          const found = serviceData.data.find((s: Service) => s.id === serviceId);
+          if (found) {
+            setService(found);
+          } else {
+            setError("Service not found");
+          }
         }
-        if (slotsRes.success) {
-          setSlots(slotsRes.data);
-        } else {
-          setError(slotsRes.error || "Failed to load appointment slots");
+
+        if (slotsData.success && Array.isArray(slotsData.data)) {
+          setSlots(slotsData.data);
         }
-      })
-      .catch(() => setError("Network error. Please try again."))
-      .finally(() => setLoading(false));
+      } catch {
+        setError("Failed to load appointment slots. Please check your connection.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, [serviceId]);
 
-  const formatDateTime = (iso: string) => {
-    const date = new Date(iso);
-    return date.toLocaleDateString("en-US", {
-      weekday: "short",
-      month: "short",
-      day: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-    });
+  const handleSelectSlot = (slotId: string) => {
+    setSelectedSlotId(slotId);
   };
 
   const handleContinue = () => {
-    if (selectedSlotId && serviceId) {
-      const url = `/booking/confirm?serviceId=${serviceId}&slotId=${selectedSlotId}${
-        rebookFrom ? `&rebookFrom=${encodeURIComponent(rebookFrom)}` : ""
-      }`;
-      router.push(url);
-    }
+    if (!selectedSlotId || !serviceId) return;
+    const rebookParam = rebookFrom ? `&rebookFrom=${encodeURIComponent(rebookFrom)}` : "";
+    router.push(`/booking/confirm?serviceId=${serviceId}&slotId=${selectedSlotId}${rebookParam}`);
+  };
+
+  const formatSlotTime = (isoString: string) => {
+    const d = new Date(isoString);
+    return d.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+    });
   };
 
   if (loading) {
+    return <div style={styles.loading}>Loading clinical appointment slots...</div>;
+  }
+
+  if (error) {
     return (
       <main style={styles.main}>
-        <div style={styles.loading}>Loading...</div>
+        <div style={styles.errorBox}>
+          <p>{error}</p>
+          <Link href="/services" style={styles.backLink}>
+            ← Browse Available Services
+          </Link>
+        </div>
       </main>
     );
   }
 
+  const formattedPrice = service ? Number(service.price).toLocaleString("en-IN") : "";
+
   return (
     <main style={styles.main}>
-      <header style={styles.header}>
-        <Link href="/services" style={styles.backLink}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <line x1="19" y1="12" x2="5" y2="12" />
-            <polyline points="12 19 5 12 12 5" />
-          </svg>
-          Back to Services
-        </Link>
+      <div style={styles.header}>
+        <div style={styles.badge}>
+          <span className="live-dot" />
+          <span>Step 2 • Slot Selection</span>
+        </div>
+        <h1 style={styles.title}>Select In-Home Visit Time</h1>
         {service && (
-          <div>
-            <h1 style={styles.title}>{service.name}</h1>
-            <p style={styles.subtitle}>Select an available appointment slot</p>
-          </div>
+          <p style={styles.subtitle}>
+            {service.name} • {service.durationMinutes} minutes • ₹{formattedPrice}
+          </p>
         )}
-      </header>
+      </div>
 
-      {error && <div style={styles.error}>{error}</div>}
-
-      {service && slots.length === 0 && (
+      {slots.length === 0 ? (
         <div style={styles.empty}>
-          <p>No available appointments for this service.</p>
-          <p style={styles.emptyHint}>Please check back later or contact us.</p>
+          <p>No appointment slots available for this service right now.</p>
+          <p style={styles.emptyHint}>Please check back later or choose another clinical service.</p>
+          <Link href="/services" style={styles.backLink}>
+            ← Back to Healthcare Services
+          </Link>
+        </div>
+      ) : (
+        <div style={styles.list}>
+          {slots.map((slot) => {
+            const isSelected = selectedSlotId === slot.id;
+            return (
+              <button
+                key={slot.id}
+                type="button"
+                onClick={() => slot.isAvailable && handleSelectSlot(slot.id)}
+                disabled={!slot.isAvailable}
+                style={{
+                  ...styles.slot,
+                  ...(isSelected ? styles.slotSelected : {}),
+                  ...(!slot.isAvailable ? styles.slotUnavailable : {}),
+                }}
+                aria-pressed={isSelected}
+              >
+                <div style={styles.slotTime}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={styles.icon}>
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                  </svg>
+                  <span>{formatSlotTime(slot.startTime)}</span>
+                </div>
+                <span
+                  style={{
+                    ...styles.slotStatus,
+                    ...(slot.isAvailable ? styles.available : styles.unavailable),
+                  }}
+                >
+                  {slot.isAvailable ? "Available" : "Booked"}
+                </span>
+              </button>
+            );
+          })}
         </div>
       )}
 
-      <div style={styles.list}>
-        {slots.map((slot) => (
-          <button
-            key={slot.id}
-            onClick={() => setSelectedSlotId(slot.id)}
-            disabled={!slot.isAvailable}
-            style={{
-              ...styles.slot,
-              ...(selectedSlotId === slot.id ? styles.slotSelected : {}),
-              ...(!slot.isAvailable ? styles.slotUnavailable : {}),
-            }}
-          >
-            <div style={styles.slotTime}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={styles.icon}>
-                <circle cx="12" cy="12" r="10" />
-                <polyline points="12 6 12 12 16 14" />
-              </svg>
-              <span>{formatDateTime(slot.startTime)} - {new Date(slot.endTime).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })}</span>
-            </div>
-            <div style={styles.slotStatus}>
-              {slot.isAvailable ? (
-                <span style={styles.available}>Available</span>
-              ) : (
-                <span style={styles.unavailable}>Booked</span>
-              )}
-            </div>
-          </button>
-        ))}
-      </div>
-
       {selectedSlotId && (
         <div style={styles.continueBar}>
-          <button onClick={handleContinue} style={styles.continueButton}>
-            Continue to Confirmation
+          <button type="button" onClick={handleContinue} className="shimmer-button" style={styles.continueButton}>
+            <span>Continue to Confirmation →</span>
           </button>
         </div>
       )}
@@ -156,137 +184,152 @@ export function SelectSlotPageContent() {
 
 const styles: Record<string, React.CSSProperties> = {
   main: {
-    minHeight: "100vh",
-    padding: "2rem",
-    backgroundColor: "#f5f7fa",
+    minHeight: "80vh",
+    padding: "3rem 1.5rem 6rem 1.5rem",
+    maxWidth: "800px",
+    margin: "0 auto",
   },
   header: {
-    maxWidth: "600px",
-    margin: "0 auto 2rem",
+    textAlign: "center",
+    marginBottom: "2.5rem",
   },
-  backLink: {
+  badge: {
     display: "inline-flex",
     alignItems: "center",
-    gap: "0.375rem",
-    marginBottom: "1rem",
-    fontSize: "0.875rem",
-    color: "#5a6a7a",
-    textDecoration: "none",
+    gap: "8px",
+    padding: "4px 12px",
+    backgroundColor: "rgba(52, 211, 153, 0.1)",
+    border: "1px solid rgba(52, 211, 153, 0.25)",
+    color: "#a7f3d0",
+    borderRadius: "9999px",
+    fontSize: "12px",
+    fontWeight: 700,
+    textTransform: "uppercase",
+    letterSpacing: "0.06em",
+    marginBottom: "16px",
   },
   title: {
-    margin: "0 0 0.25rem",
-    fontSize: "1.5rem",
-    fontWeight: 600,
-    color: "#1a2a3a",
+    margin: "0 0 0.5rem",
+    fontFamily: "var(--font-display, 'Outfit', sans-serif)",
+    fontSize: "clamp(26px, 4vw, 36px)",
+    fontWeight: 800,
+    color: "#f6f7f3",
+    letterSpacing: "-0.03em",
   },
   subtitle: {
     margin: 0,
-    fontSize: "0.9rem",
-    color: "#5a6a7a",
+    fontSize: "1.05rem",
+    color: "#34d399",
+    fontWeight: 600,
   },
-  error: {
-    maxWidth: "600px",
-    margin: "0 auto 1.5rem",
-    padding: "1rem",
-    backgroundColor: "#fef2f2",
-    border: "1px solid #fecaca",
-    borderRadius: "8px",
-    color: "#b91c1c",
+  errorBox: {
+    textAlign: "center",
+    padding: "3rem 2rem",
+    backgroundColor: "rgba(18, 30, 27, 0.8)",
+    border: "1px solid rgba(239, 68, 68, 0.3)",
+    borderRadius: "20px",
+    color: "#fca5a5",
+  },
+  backLink: {
+    display: "inline-block",
+    marginTop: "1rem",
+    color: "#34d399",
+    textDecoration: "none",
+    fontWeight: 600,
   },
   empty: {
-    maxWidth: "600px",
-    margin: "3rem auto",
     textAlign: "center",
-    color: "#5a6a7a",
+    padding: "3rem",
+    backgroundColor: "rgba(18, 30, 27, 0.8)",
+    borderRadius: "20px",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
+    color: "#cbd5e1",
   },
   emptyHint: {
     marginTop: "0.5rem",
     fontSize: "0.875rem",
-    color: "#8a9aa8",
+    color: "#94a3b8",
   },
   list: {
     maxWidth: "600px",
     margin: "0 auto",
     display: "flex",
     flexDirection: "column",
-    gap: "0.75rem",
+    gap: "0.85rem",
   },
   slot: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: "1rem 1.25rem",
-    backgroundColor: "white",
-    border: "1px solid #e8edf2",
-    borderRadius: "10px",
+    padding: "1.1rem 1.35rem",
+    backgroundColor: "rgba(18, 30, 27, 0.75)",
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+    borderRadius: "14px",
     cursor: "pointer",
-    transition: "border-color 0.2s, box-shadow 0.2s",
     textAlign: "left",
     width: "100%",
+    backdropFilter: "blur(16px)",
+    color: "#f8fafc",
+    transition: "border-color 0.2s, box-shadow 0.2s",
   },
   slotSelected: {
-    borderColor: "#2a7f8f",
-    boxShadow: "0 0 0 3px rgba(42, 127, 143, 0.15)",
+    borderColor: "#34d399",
+    backgroundColor: "rgba(16, 185, 129, 0.15)",
+    boxShadow: "0 0 0 2px rgba(52, 211, 153, 0.4)",
   },
   slotUnavailable: {
-    opacity: 0.5,
+    opacity: 0.4,
     cursor: "not-allowed",
   },
   slotTime: {
     display: "flex",
     alignItems: "center",
-    gap: "0.5rem",
-    fontSize: "0.95rem",
-    color: "#1a2a3a",
+    gap: "0.75rem",
+    fontSize: "1rem",
+    fontWeight: 600,
+    color: "#f8fafc",
   },
   icon: {
-    color: "#2a7f8f",
+    color: "#34d399",
     flexShrink: 0,
   },
   slotStatus: {
     fontSize: "0.8rem",
-    fontWeight: 600,
+    fontWeight: 700,
     textTransform: "uppercase",
-    letterSpacing: "0.03em",
+    letterSpacing: "0.05em",
   },
   available: {
-    color: "#166534",
+    color: "#34d399",
   },
   unavailable: {
-    color: "#b91c1c",
+    color: "#ef4444",
   },
   continueBar: {
     position: "fixed",
     bottom: 0,
     left: 0,
     right: 0,
-    padding: "1rem 2rem",
-    backgroundColor: "rgba(245, 247, 250, 0.95)",
-    backdropFilter: "blur(8px)",
-    borderTop: "1px solid #e8edf2",
+    padding: "1.25rem 2rem",
+    backgroundColor: "rgba(8, 13, 12, 0.95)",
+    backdropFilter: "blur(20px)",
+    borderTop: "1px solid rgba(52, 211, 153, 0.25)",
     display: "flex",
     justifyContent: "center",
-    maxWidth: "600px",
-    margin: "0 auto",
-    borderRadius: "10px 10px 0 0",
     zIndex: 100,
   },
   continueButton: {
-    padding: "0.875rem 2rem",
+    padding: "0.875rem 2.5rem",
     fontSize: "1rem",
-    fontWeight: 600,
-    color: "white",
-    backgroundColor: "#2a7f8f",
-    border: "none",
-    borderRadius: "10px",
-    cursor: "pointer",
-    minWidth: "240px",
+    fontWeight: 700,
+    minWidth: "280px",
   },
   loading: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     minHeight: "50vh",
-    color: "#5a6a7a",
+    color: "#94a3b8",
+    fontSize: "1rem",
   },
 };

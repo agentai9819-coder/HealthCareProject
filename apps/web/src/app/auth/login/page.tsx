@@ -2,6 +2,7 @@
 
 import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001/api/v1";
 
@@ -71,17 +72,26 @@ function LoginForm() {
     }
   };
 
+  const registerLink = returnUrl
+    ? `/auth/register?returnUrl=${encodeURIComponent(returnUrl)}`
+    : "/auth/register";
+
   return (
     <main style={styles.main}>
       <div style={styles.card}>
+        <div style={styles.headerBadge}>
+          <span className="live-dot" />
+          <span>Patient & Family Access</span>
+        </div>
+
         <h1 style={styles.title}>Sign In</h1>
-        <p style={styles.subtitle}>Access your home healthcare account</p>
+        <p style={styles.subtitle}>Access your home healthcare bookings & records</p>
 
         <form onSubmit={handleSubmit} style={styles.form}>
-          {error && <div style={styles.error}>{error}</div>}
+          {error && <div role="alert" style={styles.error}>{error}</div>}
 
           <div style={styles.field}>
-            <label htmlFor="identifier" style={styles.label}>Email</label>
+            <label htmlFor="identifier" style={styles.label}>Email Address</label>
             <input
               type="email"
               id="identifier"
@@ -91,6 +101,7 @@ function LoginForm() {
               required
               style={styles.input}
               autoComplete="email"
+              placeholder="name@example.com"
             />
           </div>
 
@@ -105,22 +116,20 @@ function LoginForm() {
               required
               style={styles.input}
               autoComplete="current-password"
+              placeholder="Enter your password"
             />
           </div>
 
-          <button type="submit" disabled={loading} style={styles.button}>
-            {loading ? "Signing in..." : "Sign In"}
+          <button type="submit" disabled={loading} className="shimmer-button" style={{ minHeight: "46px", width: "100%", marginTop: "8px", fontSize: "14px" }}>
+            <span>{loading ? "Signing in..." : "Sign In"}</span>
           </button>
         </form>
 
         <p style={styles.footer}>
           Don't have an account?{" "}
-          <a
-            href={returnUrl ? `/auth/register?returnUrl=${encodeURIComponent(returnUrl)}` : "/auth/register"}
-            style={styles.link}
-          >
+          <Link href={registerLink} style={styles.link}>
             Create one
-          </a>
+          </Link>
         </p>
       </div>
     </main>
@@ -129,7 +138,7 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div style={styles.main}>Loading...</div>}>
+    <Suspense fallback={<div style={{ color: "#94a3b8", textAlign: "center", padding: "80px 20px" }}>Loading sign in portal...</div>}>
       <LoginForm />
     </Suspense>
   );
@@ -137,31 +146,51 @@ export default function LoginPage() {
 
 const styles: Record<string, React.CSSProperties> = {
   main: {
-    minHeight: "100vh",
+    minHeight: "80vh",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding: "2rem",
-    backgroundColor: "#f5f7fa",
+    padding: "3rem 1.5rem 6rem 1.5rem",
+    position: "relative",
   },
   card: {
     width: "100%",
-    maxWidth: "420px",
+    maxWidth: "440px",
     padding: "2.5rem",
-    backgroundColor: "white",
-    borderRadius: "12px",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+    backgroundColor: "rgba(18, 30, 27, 0.8)",
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+    borderRadius: "24px",
+    backdropFilter: "blur(20px)",
+    boxShadow: "0 24px 60px rgba(0, 0, 0, 0.5)",
+  },
+  headerBadge: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+    padding: "4px 12px",
+    borderRadius: "999px",
+    backgroundColor: "rgba(52, 211, 153, 0.1)",
+    border: "1px solid rgba(52, 211, 153, 0.25)",
+    color: "#a7f3d0",
+    fontSize: "12px",
+    fontWeight: 700,
+    letterSpacing: "0.06em",
+    textTransform: "uppercase",
+    marginBottom: "16px",
   },
   title: {
     margin: "0 0 0.5rem",
-    fontSize: "1.75rem",
-    fontWeight: 600,
-    color: "#1a2a3a",
+    fontFamily: "var(--font-display, 'Outfit', sans-serif)",
+    fontSize: "1.85rem",
+    fontWeight: 800,
+    color: "#f6f7f3",
+    letterSpacing: "-0.03em",
   },
   subtitle: {
-    margin: "0 0 2rem",
-    fontSize: "1rem",
-    color: "#5a6a7a",
+    margin: "0 0 1.75rem",
+    fontSize: "0.95rem",
+    color: "#94a3b8",
+    lineHeight: 1.5,
   },
   form: {
     display: "flex",
@@ -171,51 +200,41 @@ const styles: Record<string, React.CSSProperties> = {
   field: {
     display: "flex",
     flexDirection: "column",
-    gap: "0.375rem",
+    gap: "0.4rem",
   },
   label: {
-    fontSize: "0.875rem",
-    fontWeight: 500,
-    color: "#3a4a5a",
+    fontSize: "0.85rem",
+    fontWeight: 600,
+    color: "#cbd5e1",
   },
   input: {
-    padding: "0.625rem 0.875rem",
-    fontSize: "1rem",
-    border: "1px solid #d0d8e0",
-    borderRadius: "8px",
+    padding: "0.75rem 1rem",
+    fontSize: "0.95rem",
+    border: "1px solid rgba(255, 255, 255, 0.12)",
+    borderRadius: "10px",
     outline: "none",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    color: "#f8fafc",
     transition: "border-color 0.2s, box-shadow 0.2s",
-    backgroundColor: "white",
   },
   error: {
     padding: "0.75rem 1rem",
-    backgroundColor: "#fef2f2",
-    border: "1px solid #fecaca",
-    borderRadius: "8px",
-    color: "#b91c1c",
+    backgroundColor: "rgba(239, 68, 68, 0.12)",
+    border: "1px solid rgba(239, 68, 68, 0.3)",
+    borderRadius: "10px",
+    color: "#fca5a5",
     fontSize: "0.875rem",
-  },
-  button: {
-    marginTop: "0.5rem",
-    padding: "0.75rem 1rem",
-    fontSize: "1rem",
-    fontWeight: 600,
-    color: "white",
-    backgroundColor: "#2a7f8f",
-    border: "none",
-    borderRadius: "8px",
-    cursor: "pointer",
-    transition: "background-color 0.2s",
+    marginBottom: "0.5rem",
   },
   footer: {
-    marginTop: "1.5rem",
+    marginTop: "1.75rem",
     textAlign: "center",
     fontSize: "0.875rem",
-    color: "#5a6a7a",
+    color: "#94a3b8",
   },
   link: {
-    color: "#2a7f8f",
+    color: "#34d399",
     textDecoration: "none",
-    fontWeight: 500,
+    fontWeight: 600,
   },
 };

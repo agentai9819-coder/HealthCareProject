@@ -8,37 +8,47 @@ const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001/
 
 export default function StaffLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setError("");
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
+    setLoading(true);
 
     try {
       const res = await fetch(`${API_BASE}/staff/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify(formData),
       });
 
       const data = await res.json();
 
-      if (res.ok && data.success) {
-        if (data.data.staff.role === "ADMIN") {
-          router.push("/admin/dispatch");
-        } else {
-          router.push("/staff/schedule");
-        }
-      } else {
-        setError(data.error || "Login failed. Please check your credentials.");
+      if (!res.ok) {
+        setError(data.error || "Authentication failed");
+        return;
       }
+
+      if (data.data?.role === "admin") {
+        router.push("/admin/dispatch");
+      } else {
+        router.push("/staff/schedule");
+      }
+      router.refresh();
     } catch {
-      setError("Network error. Please try again.");
+      setError("Network error. Please check your connection.");
     } finally {
       setLoading(false);
     }
@@ -48,61 +58,70 @@ export default function StaffLoginPage() {
     <main style={styles.main}>
       <div style={styles.card}>
         <div style={styles.header}>
-          <div style={styles.badge}>Healthcare Staff Portal</div>
-          <h1 style={styles.title}>Staff & Operations Sign In</h1>
+          <div style={styles.badge}>
+            <span className="live-dot" />
+            <span>Clinical Staff & Admin Gateway</span>
+          </div>
+          <h1 style={styles.title}>Clinician Portal</h1>
           <p style={styles.subtitle}>
-            Sign in to access your visit schedule, clinical execution, or operations dispatch.
+            Authorized clinical care team and operations access
           </p>
         </div>
 
-        {error && <div style={styles.errorBanner}>{error}</div>}
+        {error && (
+          <div role="alert" style={styles.errorBanner}>
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} style={styles.form}>
-          <div style={styles.formGroup}>
+          <div style={styles.field}>
             <label htmlFor="email" style={styles.label}>
-              Staff Email Address
+              Professional Clinical Email
             </label>
             <input
               id="email"
+              name="email"
               type="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="e.g. nurse@springfield-health.org"
               required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="caregiver@healthcare.local"
               style={styles.input}
+              autoComplete="email"
             />
           </div>
 
-          <div style={styles.formGroup}>
+          <div style={styles.field}>
             <label htmlFor="password" style={styles.label}>
               Password
             </label>
             <input
               id="password"
+              name="password"
               type="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Enter your security credential"
               required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
               style={styles.input}
+              autoComplete="current-password"
             />
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            style={{
-              ...styles.submitButton,
-              ...(loading ? styles.buttonDisabled : {}),
-            }}
+            className="shimmer-button"
+            style={{ width: "100%", minHeight: "46px", marginTop: "8px", fontSize: "14px" }}
           >
-            {loading ? "Signing in..." : "Sign In to Staff Portal"}
+            <span>{loading ? "Authenticating..." : "Sign In to Operations"}</span>
           </button>
         </form>
 
         <div style={styles.footer}>
           <Link href="/auth/login" style={styles.customerLink}>
-            ← Switch to Customer Portal Sign In
+            ← Switch to Patient & Family Sign In
           </Link>
         </div>
       </div>
@@ -112,108 +131,100 @@ export default function StaffLoginPage() {
 
 const styles: Record<string, React.CSSProperties> = {
   main: {
-    minHeight: "100vh",
+    minHeight: "80vh",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#f0fdfa",
-    padding: "1.5rem",
+    padding: "3rem 1.5rem 6rem 1.5rem",
+    position: "relative",
   },
   card: {
-    backgroundColor: "#ffffff",
-    borderRadius: "16px",
+    backgroundColor: "rgba(18, 30, 27, 0.8)",
+    borderRadius: "24px",
     padding: "2.5rem",
     width: "100%",
     maxWidth: "460px",
-    boxShadow: "0 10px 25px -5px rgba(15, 118, 110, 0.1), 0 8px 10px -6px rgba(15, 118, 110, 0.05)",
-    border: "1px solid #ccfbf1",
+    boxShadow: "0 24px 60px rgba(0, 0, 0, 0.5)",
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+    backdropFilter: "blur(20px)",
   },
   header: {
     textAlign: "center" as const,
     marginBottom: "2rem",
   },
   badge: {
-    display: "inline-block",
-    padding: "0.25rem 0.75rem",
-    backgroundColor: "#ccfbf1",
-    color: "#0f766e",
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+    padding: "4px 12px",
+    backgroundColor: "rgba(52, 211, 153, 0.1)",
+    border: "1px solid rgba(52, 211, 153, 0.25)",
+    color: "#a7f3d0",
     borderRadius: "9999px",
-    fontSize: "0.75rem",
+    fontSize: "12px",
     fontWeight: 700,
     textTransform: "uppercase",
-    letterSpacing: "0.05em",
-    marginBottom: "0.75rem",
+    letterSpacing: "0.06em",
+    marginBottom: "16px",
   },
   title: {
     margin: "0 0 0.5rem",
-    fontSize: "1.5rem",
-    fontWeight: 700,
-    color: "#134e4a",
+    fontFamily: "var(--font-display, 'Outfit', sans-serif)",
+    fontSize: "1.85rem",
+    fontWeight: 800,
+    color: "#f6f7f3",
+    letterSpacing: "-0.03em",
   },
   subtitle: {
     margin: 0,
-    fontSize: "0.875rem",
-    color: "#5eead4",
+    fontSize: "0.95rem",
+    color: "#94a3b8",
     lineHeight: 1.5,
   },
   errorBanner: {
     padding: "0.75rem 1rem",
-    backgroundColor: "#fef2f2",
-    border: "1px solid #fecaca",
-    borderRadius: "8px",
-    color: "#b91c1c",
+    backgroundColor: "rgba(239, 68, 68, 0.12)",
+    border: "1px solid rgba(239, 68, 68, 0.3)",
+    borderRadius: "10px",
+    color: "#fca5a5",
     fontSize: "0.875rem",
-    marginBottom: "1.5rem",
+    marginBottom: "1.25rem",
   },
   form: {
     display: "flex",
     flexDirection: "column",
     gap: "1.25rem",
   },
-  formGroup: {
+  field: {
     display: "flex",
     flexDirection: "column",
-    gap: "0.375rem",
+    gap: "0.4rem",
   },
   label: {
-    fontSize: "0.875rem",
+    fontSize: "0.85rem",
     fontWeight: 600,
-    color: "#1e293b",
+    color: "#cbd5e1",
   },
   input: {
     padding: "0.75rem 1rem",
-    borderRadius: "8px",
-    border: "1px solid #cbd5e1",
+    borderRadius: "10px",
+    border: "1px solid rgba(255, 255, 255, 0.12)",
     fontSize: "0.95rem",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    color: "#f8fafc",
     outline: "none",
-    transition: "border-color 0.2s",
-  },
-  submitButton: {
-    padding: "0.875rem",
-    backgroundColor: "#0f766e",
-    color: "#ffffff",
-    border: "none",
-    borderRadius: "8px",
-    fontSize: "1rem",
-    fontWeight: 600,
-    cursor: "pointer",
-    transition: "background-color 0.2s",
-    marginTop: "0.5rem",
-  },
-  buttonDisabled: {
-    opacity: 0.6,
-    cursor: "not-allowed",
+    transition: "border-color 0.15s ease",
   },
   footer: {
     marginTop: "2rem",
     textAlign: "center" as const,
-    borderTop: "1px solid #f1f5f9",
+    borderTop: "1px solid rgba(255, 255, 255, 0.08)",
     paddingTop: "1.25rem",
   },
   customerLink: {
     fontSize: "0.875rem",
-    color: "#0f766e",
+    color: "#34d399",
     textDecoration: "none",
-    fontWeight: 500,
+    fontWeight: 600,
   },
 };

@@ -2,6 +2,7 @@
 
 import { useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:3001/api/v1";
 
@@ -66,105 +67,129 @@ function RegisterForm() {
   return (
     <main style={styles.main}>
       <div style={styles.card}>
-        <h1 style={styles.title}>Create Account</h1>
-        <p style={styles.subtitle}>Register for home healthcare services</p>
+        <div style={styles.headerBadge}>
+          <span className="live-dot" />
+          <span>Patient & Family Portal</span>
+        </div>
 
-        {success && (
-          <div style={styles.success}>
-            Registration successful!{" "}
-            <a href={loginLink} style={styles.link}>
-              Sign in
-            </a>
+        <h1 style={styles.title}>Create Account</h1>
+        <p style={styles.subtitle}>Register for private in-home healthcare services</p>
+
+        {error && (
+          <div role="alert" style={styles.error}>
+            {error}
           </div>
         )}
 
-        {!success && (
+        {success ? (
+          <div>
+            <div style={styles.success}>
+              Registration successful! You can now sign in to your clinical account.
+            </div>
+            <Link href={loginLink} className="shimmer-button" style={{ width: "100%", justifyContent: "center", display: "inline-flex", minHeight: "44px" }}>
+              <span>Proceed to Sign In</span>
+            </Link>
+          </div>
+        ) : (
           <form onSubmit={handleSubmit} style={styles.form}>
-            {error && <div style={styles.error}>{error}</div>}
-
             <div style={styles.fieldGroup}>
               <div style={styles.field}>
-                <label htmlFor="firstName" style={styles.label}>First Name</label>
+                <label htmlFor="firstName" style={styles.label}>
+                  First Name
+                </label>
                 <input
-                  type="text"
                   id="firstName"
                   name="firstName"
+                  type="text"
                   value={formData.firstName}
                   onChange={handleChange}
                   required
                   style={styles.input}
                   autoComplete="given-name"
+                  placeholder="e.g. Jane"
                 />
               </div>
+
               <div style={styles.field}>
-                <label htmlFor="lastName" style={styles.label}>Last Name</label>
+                <label htmlFor="lastName" style={styles.label}>
+                  Last Name
+                </label>
                 <input
-                  type="text"
                   id="lastName"
                   name="lastName"
+                  type="text"
                   value={formData.lastName}
                   onChange={handleChange}
                   required
                   style={styles.input}
                   autoComplete="family-name"
+                  placeholder="e.g. Smith"
                 />
               </div>
             </div>
 
             <div style={styles.field}>
-              <label htmlFor="email" style={styles.label}>Email</label>
+              <label htmlFor="email" style={styles.label}>
+                Email Address
+              </label>
               <input
-                type="email"
                 id="email"
                 name="email"
+                type="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
                 style={styles.input}
                 autoComplete="email"
+                placeholder="jane.smith@example.com"
               />
             </div>
 
             <div style={styles.field}>
-              <label htmlFor="password" style={styles.label}>Password</label>
+              <label htmlFor="password" style={styles.label}>
+                Password
+              </label>
               <input
-                type="password"
                 id="password"
                 name="password"
+                type="password"
                 value={formData.password}
                 onChange={handleChange}
                 required
-                minLength={8}
                 style={styles.input}
                 autoComplete="new-password"
+                placeholder="Minimum 8 characters"
               />
             </div>
 
             <div style={styles.field}>
-              <label htmlFor="confirmPassword" style={styles.label}>Confirm Password</label>
+              <label htmlFor="confirmPassword" style={styles.label}>
+                Confirm Password
+              </label>
               <input
-                type="password"
                 id="confirmPassword"
                 name="confirmPassword"
+                type="password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
                 style={styles.input}
                 autoComplete="new-password"
+                placeholder="Re-enter password"
               />
             </div>
 
-            <button type="submit" disabled={loading} style={styles.button}>
-              {loading ? "Creating account..." : "Create Account"}
+            <button type="submit" disabled={loading} className="shimmer-button" style={{ minHeight: "46px", width: "100%", marginTop: "8px", fontSize: "14px" }}>
+              <span>{loading ? "Creating account..." : "Create Account"}</span>
             </button>
           </form>
         )}
 
         <p style={styles.footer}>
           Already have an account?{" "}
-          <a href={loginLink} style={styles.link}>
+          <Link href={loginLink} style={styles.link}>
             Sign in
-          </a>
+          </Link>
         </p>
       </div>
     </main>
@@ -173,7 +198,7 @@ function RegisterForm() {
 
 export default function RegisterPage() {
   return (
-    <Suspense fallback={<div style={styles.main}>Loading...</div>}>
+    <Suspense fallback={<div style={{ color: "#94a3b8", textAlign: "center", padding: "80px 20px" }}>Loading registration portal...</div>}>
       <RegisterForm />
     </Suspense>
   );
@@ -181,31 +206,51 @@ export default function RegisterPage() {
 
 const styles: Record<string, React.CSSProperties> = {
   main: {
-    minHeight: "100vh",
+    minHeight: "80vh",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding: "2rem",
-    backgroundColor: "#f5f7fa",
+    padding: "3rem 1.5rem 6rem 1.5rem",
+    position: "relative",
   },
   card: {
     width: "100%",
-    maxWidth: "420px",
+    maxWidth: "460px",
     padding: "2.5rem",
-    backgroundColor: "white",
-    borderRadius: "12px",
-    boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+    backgroundColor: "rgba(18, 30, 27, 0.8)",
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+    borderRadius: "24px",
+    backdropFilter: "blur(20px)",
+    boxShadow: "0 24px 60px rgba(0, 0, 0, 0.5)",
+  },
+  headerBadge: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+    padding: "4px 12px",
+    borderRadius: "999px",
+    backgroundColor: "rgba(52, 211, 153, 0.1)",
+    border: "1px solid rgba(52, 211, 153, 0.25)",
+    color: "#a7f3d0",
+    fontSize: "12px",
+    fontWeight: 700,
+    letterSpacing: "0.06em",
+    textTransform: "uppercase",
+    marginBottom: "16px",
   },
   title: {
     margin: "0 0 0.5rem",
-    fontSize: "1.75rem",
-    fontWeight: 600,
-    color: "#1a2a3a",
+    fontFamily: "var(--font-display, 'Outfit', sans-serif)",
+    fontSize: "1.85rem",
+    fontWeight: 800,
+    color: "#f6f7f3",
+    letterSpacing: "-0.03em",
   },
   subtitle: {
-    margin: "0 0 2rem",
-    fontSize: "1rem",
-    color: "#5a6a7a",
+    margin: "0 0 1.75rem",
+    fontSize: "0.95rem",
+    color: "#94a3b8",
+    lineHeight: 1.5,
   },
   form: {
     display: "flex",
@@ -220,60 +265,51 @@ const styles: Record<string, React.CSSProperties> = {
     flex: 1,
     display: "flex",
     flexDirection: "column",
-    gap: "0.375rem",
+    gap: "0.4rem",
   },
   label: {
-    fontSize: "0.875rem",
-    fontWeight: 500,
-    color: "#3a4a5a",
+    fontSize: "0.85rem",
+    fontWeight: 600,
+    color: "#cbd5e1",
   },
   input: {
-    padding: "0.625rem 0.875rem",
-    fontSize: "1rem",
-    border: "1px solid #d0d8e0",
-    borderRadius: "8px",
+    padding: "0.75rem 1rem",
+    fontSize: "0.95rem",
+    border: "1px solid rgba(255, 255, 255, 0.12)",
+    borderRadius: "10px",
     outline: "none",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    color: "#f8fafc",
     transition: "border-color 0.2s, box-shadow 0.2s",
-    backgroundColor: "white",
   },
   error: {
     padding: "0.75rem 1rem",
-    backgroundColor: "#fef2f2",
-    border: "1px solid #fecaca",
-    borderRadius: "8px",
-    color: "#b91c1c",
-    fontSize: "0.875rem",
-  },
-  success: {
-    padding: "0.75rem 1rem",
-    backgroundColor: "#f0fdf4",
-    border: "1px solid #bbf7d0",
-    borderRadius: "8px",
-    color: "#166534",
+    backgroundColor: "rgba(239, 68, 68, 0.12)",
+    border: "1px solid rgba(239, 68, 68, 0.3)",
+    borderRadius: "10px",
+    color: "#fca5a5",
     fontSize: "0.875rem",
     marginBottom: "1rem",
   },
-  button: {
-    marginTop: "0.5rem",
-    padding: "0.75rem 1rem",
-    fontSize: "1rem",
-    fontWeight: 600,
-    color: "white",
-    backgroundColor: "#2a7f8f",
-    border: "none",
-    borderRadius: "8px",
-    cursor: "pointer",
-    transition: "background-color 0.2s",
+  success: {
+    padding: "0.85rem 1rem",
+    backgroundColor: "rgba(52, 211, 153, 0.12)",
+    border: "1px solid rgba(52, 211, 153, 0.3)",
+    borderRadius: "10px",
+    color: "#a7f3d0",
+    fontSize: "0.9rem",
+    marginBottom: "1.25rem",
+    lineHeight: 1.5,
   },
   footer: {
-    marginTop: "1.5rem",
+    marginTop: "1.75rem",
     textAlign: "center",
     fontSize: "0.875rem",
-    color: "#5a6a7a",
+    color: "#94a3b8",
   },
   link: {
-    color: "#2a7f8f",
+    color: "#34d399",
     textDecoration: "none",
-    fontWeight: 500,
+    fontWeight: 600,
   },
 };
