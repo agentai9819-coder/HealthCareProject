@@ -139,27 +139,51 @@ To guarantee **60–120 FPS buttery smooth scrolling** and **<50ms load times**:
 
 ---
 
-## 7. 🛠 Common Development & Verification Commands
+---
+
+## 7. 🇮🇳 Indian Market Localization & Emergency Protocols
+
+| Dimension | Indian Specification |
+|---|---|
+| **Currency** | Indian Rupee (`₹` INR) — all service catalog listings, visit fees, itemized summaries |
+| **Emergency Guidance** | **112** (National Unified Emergency) & **108 / 102** (Ambulance & Medical Emergency) |
+| **Clinical Helpline** | `+91 (11) 4050-6070` |
+| **Address & PIN Validation** | 6-digit Indian PIN codes (`^[1-9][0-9]{5}$`) and Indian State names/codes |
+| **Coverage Corridors** | Delhi NCR (South Delhi, Gurugram, Noida), Bengaluru, Mumbai MMR, Pune, Hyderabad, Chennai |
+| **Compliance References** | DISHA (Digital Information Security in Healthcare Act) privacy and state medical registries |
+
+---
+
+## 8. ☁️ Cloud PostgreSQL Database (Neon / Supabase / AWS RDS)
+
+The backend pool in `apps/api/src/lib/db.ts` and migration runner in `scripts/migrate.js` support direct cloud database connections:
+*   **SSL Support**: Auto-detects `sslmode=require` and cloud domains (`neon.tech`, `supabase.co`, `aws.com`, `render.com`) with `{ rejectUnauthorized: false }`.
+*   **Timeouts**: `statement_timeout: 10000` (10s) and `connectionTimeoutMillis: 8000` (8s) optimized for cloud latency and serverless execution.
+
+---
+
+## 9. 🧪 Automated Test Suite & Verification
+
+The repository includes behavior-focused unit, integration, and E2E verification suites:
+
+*   **Validation Suite**: `packages/validation/__tests__/validation.test.js` (Indian PIN codes, mobile numbers, passwords, and booking schemas).
+*   **API Concurrency & RBAC**: `apps/api/__tests__/booking-concurrency.test.js` and `auth-security.test.js` (Double-booking prevention, status lifecycle transitions, bcrypt security).
+*   **Full Flow Runner**: `scripts/verify-all.js` (Executes 6/6 test stages in sequence).
 
 ```bash
-# 1. Full Monorepo Typecheck (must pass with 0 errors)
+# Run full automated verification suite
+npm test
+
+# Full Monorepo Typecheck (must pass with 0 errors)
 npm run typecheck
 
-# 2. Production Build Check
+# Production Build Check
 npm run build
-
-# 3. Local Development Servers
-npm run dev
-
-# 4. Git Deployment Workflow (Pushing directly to Vercel Production)
-.\scratch\mingit\cmd\git.exe add .
-.\scratch\mingit\cmd\git.exe commit -m "feat/fix/perf(scope): description"
-.\scratch\mingit\cmd\git.exe push origin main
 ```
 
 ---
 
-## 8. 🚨 Solution Reference / Troubleshooting History
+## 10. 🚨 Solution Reference / Troubleshooting History
 
 | Problem / Symptom | Root Cause | Solution Implemented |
 |---|---|---|
@@ -169,3 +193,5 @@ npm run dev
 | **Scroll Jitter / GPU Lag** | Infinite Gaussian blur animations (`filter: blur(40px)`) on 500px background orbs | Replaced with hardware-accelerated CSS radial gradients (`contain: strict; transform: translateZ(0);`) |
 | **Scroll-Down Layout Stutter** | `content-visibility: auto` causing on-the-fly layout reflows during scrolling | Removed `content-visibility: auto` in favor of full upfront DOM pre-rendering |
 | **Mobile Menu Missing** | Desktop nav links hidden without mobile drawer | Implemented animated mobile hamburger toggle and slide-down drawer with safe-area insets |
+| **5-digit US Zip Code Rejection** | Address schema strictly expected US 2-char states & 5-digit zips | Updated Zod schema with Indian 6-digit PIN regex (`^[1-9][0-9]{5}$`) and Indian states |
+| **Cloud DB SSL Handshake Failure** | `pg.Pool` defaulted to unencrypted connection | Added automatic cloud domain detection and `ssl: { rejectUnauthorized: false }` |

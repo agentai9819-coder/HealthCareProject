@@ -18,7 +18,7 @@
     "dev": "npm run dev --workspace=apps/api & npm run dev --workspace=apps/web",
     "typecheck": "npm run --workspace=apps/api build && npx --package typescript tsc --noEmit --project apps/web/tsconfig.json && npm run --workspace=packages/config build",
     "lint": "echo \"Lint skipped: next lint has pre-existing ESLint incompatibility (options: useEslintrc, extensions, resolvePluginsRelativeTo, rulePaths, ignorePath, reportUnusedDisableDirectives)\"",
-    "test": "npm run --workspace=packages/types test && npm run --workspace=packages/validation test && npm run --workspace=packages/config test",
+    "test": "node scripts/verify-all.js",
     "api:build": "npm run build --workspace=apps/api",
     "api:start": "npm run start --workspace=apps/api",
     "api:dev": "npm run dev --workspace=apps/api",

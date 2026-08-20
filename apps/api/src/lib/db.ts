@@ -1,12 +1,23 @@
 import { Pool } from "pg";
 import { env } from "home-healthcare-config";
 
+const isCloudOrProduction =
+  env.NODE_ENV === "production" ||
+  (Boolean(env.DATABASE_URL) &&
+    (env.DATABASE_URL.includes("sslmode=require") ||
+      env.DATABASE_URL.includes("neon.tech") ||
+      env.DATABASE_URL.includes("supabase.co") ||
+      env.DATABASE_URL.includes("aws.com") ||
+      env.DATABASE_URL.includes("render.com") ||
+      env.DATABASE_URL.includes("railway.app")));
+
 export const pool = new Pool({
   connectionString: env.DATABASE_URL,
   max: 20,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 3000,
-  statement_timeout: 5000, // 5s hard query timeout
+  connectionTimeoutMillis: 8000,
+  statement_timeout: 10000, // 10s timeout accommodating cloud network hops
+  ssl: isCloudOrProduction ? { rejectUnauthorized: false } : undefined,
 });
 
 pool.on("error", (err) => {

@@ -10,17 +10,21 @@ export const customerIdSchema = z.string().uuid();
 export const addressSchema = z.object({
   street: z.string().min(1).max(100),
   city: z.string().min(1).max(50),
-  state: z.string().length(2),
-  postalCode: z.string().min(3).max(10),
-  country: z.string().min(1).max(50),
+  state: z.string().min(2).max(50),
+  postalCode: z.string().regex(/^[1-9][0-9]{5}$/, "Please provide a valid 6-digit Indian PIN code"),
+  country: z.string().min(1).max(50).default("India"),
 });
 
 export const bookingAddressSchema = z.object({
   street: z.string().min(1).max(100),
   city: z.string().min(1).max(50),
-  state: z.string().length(2),
-  postalCode: z.string().min(3).max(10),
+  state: z.string().min(2).max(50),
+  postalCode: z.string().regex(/^[1-9][0-9]{5}$/, "Please provide a valid 6-digit Indian PIN code"),
 });
+
+export const indianPhoneSchema = z
+  .string()
+  .regex(/^(\+91[\-\s]?)?[6789]\d{9}$/, "Please enter a valid 10-digit Indian mobile number");
 
 export const serviceSchema = z.object({
   id: z.string().uuid(),

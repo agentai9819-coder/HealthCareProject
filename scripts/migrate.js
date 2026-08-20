@@ -29,7 +29,18 @@ function getDatabaseUrl() {
 
 async function runMigrations() {
   const connectionString = getDatabaseUrl();
-  const pool = new Pool({ connectionString });
+  const isCloud =
+    connectionString.includes('sslmode=require') ||
+    connectionString.includes('neon.tech') ||
+    connectionString.includes('supabase.co') ||
+    connectionString.includes('aws.com') ||
+    process.env.NODE_ENV === 'production';
+
+  const pool = new Pool({
+    connectionString,
+    ssl: isCloud ? { rejectUnauthorized: false } : undefined,
+    connectionTimeoutMillis: 8000,
+  });
 
   try {
     const client = await pool.connect();

@@ -65,7 +65,7 @@ export function HeroSection() {
             <span className="live-dot" />
             <span>State-Licensed Clinical Care Network</span>
             <span>•</span>
-            <span>Springfield</span>
+            <span>Delhi NCR • Bengaluru • Mumbai</span>
           </div>
 
           <h1 id="hero-title" className="fade-in delay-1">

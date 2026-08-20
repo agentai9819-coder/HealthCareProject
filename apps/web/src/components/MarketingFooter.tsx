@@ -10,7 +10,7 @@ export function MarketingFooter() {
             <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
           </svg>
           <span>
-            <strong>Emergency Medical Guidance:</strong> If you are experiencing a life-threatening emergency, call 911 immediately. Veridian Care is not an emergency response service.
+            <strong>Emergency Medical Guidance:</strong> If you are experiencing a life-threatening medical emergency, call <strong>112</strong> or <strong>108 (Ambulance)</strong> immediately. Veridian Care provides scheduled and same-day in-home clinical support and is not an acute emergency trauma dispatch service.
           </span>
         </div>
       </div>
@@ -30,7 +30,7 @@ export function MarketingFooter() {
               </span>
             </Link>
             <p className="footer-about">
-              Private, licensed in-home clinical care for the moments that deserve both medical expertise and compassionate attention.
+              Private, licensed in-home clinical care across Delhi NCR, Bengaluru, Mumbai, Pune, and Hyderabad for the moments that deserve both medical expertise and compassionate attention.
             </p>
           </div>
 
@@ -38,9 +38,10 @@ export function MarketingFooter() {
             <h3 className="footer-heading">Care Access</h3>
             <div className="footer-links">
               <Link href="/services">Book In-Home Care</Link>
-              <Link href="/services">Care services</Link>
-              <a href="tel:5550192834">Clinical support</a>
+              <Link href="/services">Care Services Directory</Link>
+              <a href="tel:+911140506070">Clinical Support: +91 (11) 4050-6070</a>
               <Link href="/how-it-works">How It Works</Link>
+              <Link href="/service-areas">Service Coverage Areas</Link>
             </div>
           </div>
 
@@ -73,9 +74,9 @@ export function MarketingFooter() {
             <Link href="/terms" style={{ color: "#94a3b8", textDecoration: "none" }}>Terms of Service</Link>
           </div>
           <div className="compliance-row">
-            <span className="compliance-seal">HIPAA COMPLIANT</span>
-            <span className="compliance-seal">STATE LICENSED</span>
-            <span className="compliance-seal">CLINICAL OVERSIGHT</span>
+            <span className="compliance-seal">DISHA / DATA PRIVACY</span>
+            <span className="compliance-seal">STATE REGISTERED CLINICIANS</span>
+            <span className="compliance-seal">NABH CLINICAL GUIDELINES</span>
           </div>
         </div>
       </div>

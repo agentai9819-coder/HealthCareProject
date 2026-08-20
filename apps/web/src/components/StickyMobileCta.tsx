@@ -50,7 +50,7 @@ export function StickyMobileCta() {
 
       <div style={{ display: "flex", gap: "8px" }}>
         <a
-          href="tel:5550192834"
+          href="tel:+911140506070"
           aria-label="Call clinical desk"
           style={{
             display: "inline-flex",

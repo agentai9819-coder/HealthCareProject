@@ -95,7 +95,7 @@ export default function ContactPage() {
                         type="tel"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="(555) 000-0000"
+                        placeholder="+91 98765 43210"
                         style={styles.input}
                       />
                     </div>

@@ -26,15 +26,27 @@ export default function ServiceAreasPage() {
                   <circle cx="12" cy="10" r="3" />
                 </svg>
               </div>
-              <h2 style={styles.cardTitle}>Metropolitan Service Hub</h2>
+              <h2 style={styles.cardTitle}>Tier-1 Metros & Care Corridors</h2>
               <p style={styles.cardDesc}>
-                We serve residential homes, assisted living facilities, and senior living communities throughout the central metropolitan region and surrounding suburban corridors.
+                We provide hospital-grade clinical visits directly to residential homes, apartment communities, and senior living residences across major Indian metropolitan clusters.
               </p>
-              <div style={styles.placeholderBox}>
-                <span style={styles.placeholderLabel}>Regional Coverage Policy:</span>
-                <p style={styles.placeholderText}>
-                  Clinician travel is automatically coordinated based on your service address during booking confirmation.
-                </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginTop: "12px" }}>
+                <div style={styles.placeholderBox}>
+                  <span style={styles.placeholderLabel}>Delhi NCR</span>
+                  <p style={styles.placeholderText}>South Delhi, Gurugram (Golf Course / Cyber City), Noida & Dwarka</p>
+                </div>
+                <div style={styles.placeholderBox}>
+                  <span style={styles.placeholderLabel}>Bengaluru</span>
+                  <p style={styles.placeholderText}>Koramangala, Indiranagar, Whitefield, HSR Layout & Jayanagar</p>
+                </div>
+                <div style={styles.placeholderBox}>
+                  <span style={styles.placeholderLabel}>Mumbai MMR</span>
+                  <p style={styles.placeholderText}>South Mumbai, Bandra, Juhu, Powai, Thane & Navi Mumbai</p>
+                </div>
+                <div style={styles.placeholderBox}>
+                  <span style={styles.placeholderLabel}>Hyderabad & Pune</span>
+                  <p style={styles.placeholderText}>Jubilee Hills, Gachibowli, Koregaon Park & Kalyani Nagar</p>
+                </div>
               </div>
             </div>
 
@@ -47,10 +59,16 @@ export default function ServiceAreasPage() {
                   <line x1="3" y1="10" x2="21" y2="10" />
                 </svg>
               </div>
-              <h2 style={styles.cardTitle}>How to Verify Your Address</h2>
+              <h2 style={styles.cardTitle}>How to Verify Your PIN Code</h2>
               <p style={styles.cardDesc}>
-                When scheduling an appointment, simply enter your home street address and postal code during the booking flow. Our dispatch engine verifies service feasibility in real-time.
+                When scheduling an appointment, enter your 6-digit Indian PIN code (e.g. 110001, 560034, 400050) during slot selection. Our clinical dispatch radar calculates clinician ETA in real-time.
               </p>
+              <div style={{ ...styles.placeholderBox, marginBottom: "20px" }}>
+                <span style={styles.placeholderLabel}>Same-Day Dispatch:</span>
+                <p style={styles.placeholderText}>
+                  Available for requests submitted before 2:00 PM IST across all primary coverage sectors.
+                </p>
+              </div>
               <Link href="/services" style={styles.actionButton}>
                 Browse Services & Check Slots →
               </Link>

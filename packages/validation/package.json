@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc -b",
-    "test": "echo \"No tests yet\""
+    "test": "npm run build && node __tests__/validation.test.js"
   },
   "dependencies": {
     "zod": "^3.22.4"
