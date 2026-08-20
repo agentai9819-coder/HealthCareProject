@@ -11,7 +11,13 @@
     "rootDir": "src",
     "moduleResolution": "node",
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "home-healthcare-types": ["../../packages/types/dist"],
+      "home-healthcare-validation": ["../../packages/validation/dist"],
+      "home-healthcare-config": ["../../packages/config/dist"]
+    }
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

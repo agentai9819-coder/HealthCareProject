@@ -14,9 +14,9 @@
   },
   "scripts": {
     "build": "npm run build --workspace=apps/web",
-    "build:all": "npm run build --workspace=apps/api && npm run build --workspace=packages/config && npm run build --workspace=apps/web",
+    "build:all": "npm run build --workspace=packages/types && npm run build --workspace=packages/validation && npm run build --workspace=packages/config && npm run build --workspace=apps/api && npm run build --workspace=apps/web",
     "dev": "npm run dev --workspace=apps/api & npm run dev --workspace=apps/web",
-    "typecheck": "npm run --workspace=apps/api build && npx --package typescript tsc --noEmit --project apps/web/tsconfig.json && npm run --workspace=packages/config build",
+    "typecheck": "npm run build --workspace=packages/types && npm run build --workspace=packages/validation && npm run build --workspace=packages/config && npm run build --workspace=apps/api && npx --package typescript tsc --noEmit --project apps/web/tsconfig.json",
     "lint": "echo \"Lint skipped: next lint has pre-existing ESLint incompatibility (options: useEslintrc, extensions, resolvePluginsRelativeTo, rulePaths, ignorePath, reportUnusedDisableDirectives)\"",
     "test": "node scripts/verify-all.js",
     "api:build": "npm run build --workspace=apps/api",
