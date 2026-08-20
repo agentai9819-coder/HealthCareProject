@@ -86,16 +86,19 @@ export const metadata: Metadata = {
       "Compassionate, state-licensed in-home clinical care, nursing assessments, physical therapy, and personalized recovery delivered directly to your doorstep.",
     images: ["/assets/images/about-img.png"],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
+  other: {
+    "zero-threat-verification": "zeroThreat=MTA4OTA=TVRBNE9UQT0=TVRBNE9UQT",
   },
 };
 
@@ -106,6 +109,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${outfit.variable} ${plusJakartaSans.variable}`}>
+      <head>
+        <meta name="zero-threat-verification" content="zeroThreat=MTA4OTA=TVRBNE9UQT0=TVRBNE9UQT" />
+      </head>
       <body
         style={{
           margin: 0,
