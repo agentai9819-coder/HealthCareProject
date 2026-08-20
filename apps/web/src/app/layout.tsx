@@ -1,11 +1,87 @@
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Header } from "../components/Header";
 import { MarketingFooter } from "../components/MarketingFooter";
+import { CookieBanner } from "../components/CookieBanner";
+import { StickyMobileCta } from "../components/StickyMobileCta";
 
-export const metadata = {
-  title: "HomeCare — Professional In-Home Clinical Healthcare",
+export const viewport: Viewport = {
+  themeColor: "#080d0c",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
+export const metadata: Metadata = {
+  title: {
+    default: "Veridian Care — Luxury In-Home Clinical Healthcare",
+    template: "%s | Veridian Care",
+  },
   description:
-    "Compassionate, state-licensed in-home clinical care, nursing assessments, physical therapy, and personalized care delivered directly to your home.",
+    "Compassionate, state-licensed in-home clinical care, nursing assessments, physical therapy, and personalized recovery delivered directly to your doorstep.",
+  keywords: [
+    "in-home healthcare",
+    "skilled nursing visit",
+    "physical therapy at home",
+    "elder wellness check",
+    "post-op recovery care",
+    "home health assessment",
+    "licensed RN",
+  ],
+  authors: [{ name: "Veridian Care Clinical Team" }],
+  creator: "Veridian Care",
+  publisher: "Veridian Care",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  icons: {
+    icon: [
+      { url: "/assets/images/favicon_io/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/assets/images/favicon_io/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [
+      { url: "/assets/images/favicon_io/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/assets/images/favicon_io/favicon.ico",
+  },
+  manifest: "/assets/images/favicon_io/site.webmanifest",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://health-care-project-api-delta.vercel.app",
+    siteName: "Veridian Care",
+    title: "Veridian Care — Luxury In-Home Clinical Healthcare",
+    description:
+      "Compassionate, state-licensed in-home clinical care, nursing assessments, physical therapy, and personalized recovery delivered directly to your doorstep.",
+    images: [
+      {
+        url: "/assets/images/about-img.png",
+        width: 1200,
+        height: 630,
+        alt: "Veridian Care Clinical Team In-Home Care Visit",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Veridian Care — Luxury In-Home Clinical Healthcare",
+    description:
+      "Compassionate, state-licensed in-home clinical care, nursing assessments, physical therapy, and personalized recovery delivered directly to your doorstep.",
+    images: ["/assets/images/about-img.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
@@ -37,6 +113,8 @@ export default function RootLayout({
         <Header />
         <div style={{ flex: 1 }}>{children}</div>
         <MarketingFooter />
+        <CookieBanner />
+        <StickyMobileCta />
       </body>
     </html>
   );

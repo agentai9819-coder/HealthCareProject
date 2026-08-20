@@ -67,6 +67,11 @@ export function MarketingFooter() {
 
         <div className="footer-bottom">
           <span>© 2026 Veridian Care Network • All Rights Reserved</span>
+          <div style={{ display: "flex", gap: "16px", fontSize: "12px", color: "#94a3b8" }}>
+            <Link href="/privacy" style={{ color: "#94a3b8", textDecoration: "none" }}>Privacy Policy</Link>
+            <span>•</span>
+            <Link href="/terms" style={{ color: "#94a3b8", textDecoration: "none" }}>Terms of Service</Link>
+          </div>
           <div className="compliance-row">
             <span className="compliance-seal">HIPAA COMPLIANT</span>
             <span className="compliance-seal">STATE LICENSED</span>

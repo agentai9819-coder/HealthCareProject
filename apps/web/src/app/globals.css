@@ -1164,3 +1164,17 @@ button:focus-visible, a:focus-visible {
   .care-detail-card { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
 }
+
+.mobile-sticky-cta {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .mobile-sticky-cta {
+    display: flex !important;
+  }
+  body {
+    padding-bottom: 64px;
+  }
+}
+
