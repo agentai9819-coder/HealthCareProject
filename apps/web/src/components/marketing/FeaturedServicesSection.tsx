@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { API_BASE } from "../../lib/api";
-import { Service, getServiceSlug } from "../../lib/services";
+import { Service, getServiceSlug, DEFAULT_SERVICES } from "../../lib/services";
 
 const fallbackServices = [
   {
