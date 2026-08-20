@@ -18,7 +18,9 @@ export function MarketingHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
-    fetch(`${API_BASE}/customers/me`, { credentials: "include" })
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 300);
+    fetch(`${API_BASE}/customers/me`, { credentials: "include", signal: controller.signal })
       .then((res) => res.json())
       .then((data) => {
         if (data.success && data.data) {
@@ -27,7 +29,13 @@ export function MarketingHeader() {
           setCustomer(null);
         }
       })
-      .catch(() => setCustomer(null));
+      .catch(() => setCustomer(null))
+      .finally(() => clearTimeout(timer));
+
+    return () => {
+      controller.abort();
+      clearTimeout(timer);
+    };
   }, [pathname]);
 
   const handleLogout = async () => {

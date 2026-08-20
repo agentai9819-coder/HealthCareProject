@@ -4,8 +4,12 @@ const nextConfig = {
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
+  },
   images: {
     formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 31536000,
   },
   eslint: {
     ignoreDuringBuilds: true,
