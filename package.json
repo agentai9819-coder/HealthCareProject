@@ -22,9 +22,9 @@
     "api:build": "npm run build --workspace=apps/api",
     "api:start": "npm run start --workspace=apps/api",
     "api:dev": "npm run dev --workspace=apps/api",
-    "web:build": "next build",
-    "web:dev": "next dev",
-    "web:start": "next start",
+    "web:build": "npm run build --workspace=apps/web",
+    "web:dev": "npm run dev --workspace=apps/web",
+    "web:start": "npm run start --workspace=apps/web",
     "db:migrate": "node scripts/migrate.js",
     "seed:demo": "node scripts/seed-demo.js"
   }
