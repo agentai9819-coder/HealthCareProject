@@ -36,6 +36,8 @@ const styles: Record<string, React.CSSProperties> = {
     textAlign: "center",
     borderTop: "1px solid rgba(255, 255, 255, 0.08)",
     position: "relative",
+    contentVisibility: "auto",
+    containIntrinsicSize: "1px 300px",
   },
   container: {
     maxWidth: "820px",

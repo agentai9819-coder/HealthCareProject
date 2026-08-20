@@ -54,6 +54,8 @@ const styles: Record<string, React.CSSProperties> = {
     padding: "5.5rem 1.5rem",
     backgroundColor: "#050908",
     position: "relative",
+    contentVisibility: "auto",
+    containIntrinsicSize: "1px 450px",
   },
   container: {
     maxWidth: "1200px",
