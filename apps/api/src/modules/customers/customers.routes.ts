@@ -88,17 +88,13 @@ customersRouter.post("/login", async (req: Request, res: Response) => {
       [identifier]
     );
 
-    if (result.rows.length === 0) {
-      return res.status(401).json({
-        success: false,
-        error: "Invalid email or password",
-      });
-    }
-
+    // Timing-attack mitigation: always compute bcrypt verification even if customer does not exist
+    const DUMMY_HASH = "$2a$12$e8uqf0Jg.8m9WfJ23Lh.8eN5n5f5n5f5n5f5n5f5n5f5n5f5n5f5n";
     const customer = result.rows[0];
-    const isValid = await verifyPassword(password, customer.password_hash);
+    const passwordHash = customer ? customer.password_hash : DUMMY_HASH;
+    const isValid = await verifyPassword(password, passwordHash);
 
-    if (!isValid) {
+    if (!customer || !isValid) {
       return res.status(401).json({
         success: false,
         error: "Invalid email or password",

@@ -12,6 +12,12 @@
   "engines": {
     "node": ">=20.0.0"
   },
+  "overrides": {
+    "zod": "^3.24.2",
+    "uuid": "^11.1.1",
+    "postcss": "^8.5.3",
+    "sharp": "^0.35.0"
+  },
   "scripts": {
     "build": "npm run build --workspace=apps/web",
     "build:all": "npm run build --workspace=packages/types && npm run build --workspace=packages/validation && npm run build --workspace=packages/config && npm run build --workspace=apps/api && npm run build --workspace=apps/web",

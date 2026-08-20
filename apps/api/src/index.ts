@@ -14,6 +14,19 @@ import { staffVisitsRouter, adminVisitsRouter } from "./modules/visits/visits.ro
 
 const app = express();
 
+app.disable("x-powered-by");
+
+// Global Security Headers Middleware
+app.use((_req, res, next) => {
+  res.setHeader("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "SAMEORIGIN");
+  res.setHeader("X-XSS-Protection", "1; mode=block");
+  res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+  res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+  next();
+});
+
 app.use(
   compression({
     threshold: 1024,
@@ -38,7 +51,8 @@ app.use(
   })
 );
 
-app.use(express.json());
+app.use(express.json({ limit: "100kb" }));
+app.use(express.urlencoded({ extended: true, limit: "100kb" }));
 
 app.use(
   session({

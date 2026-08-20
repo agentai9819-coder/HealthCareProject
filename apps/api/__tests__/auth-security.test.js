@@ -5,13 +5,13 @@ console.log("▶ Running apps/api auth-security test suite...");
 
 async function runAuthSecurityTests() {
   // 1. Password Hashing & Salt verification
-  const rawPassword = "HospitalGradeSecret123!";
+  const testMockPassword = "MockUserSamplePassword_2026";
   const salt = await bcrypt.genSalt(10);
-  const hash = await bcrypt.hash(rawPassword, salt);
+  const hash = await bcrypt.hash(testMockPassword, salt);
 
-  assert.notStrictEqual(rawPassword, hash, "Password must not be stored in plaintext");
-  assert.strictEqual(await bcrypt.compare(rawPassword, hash), true, "Correct password must verify against hash");
-  assert.strictEqual(await bcrypt.compare("WrongPassword123!", hash), false, "Wrong password must fail verification");
+  assert.notStrictEqual(testMockPassword, hash, "Password must not be stored in plaintext");
+  assert.strictEqual(await bcrypt.compare(testMockPassword, hash), true, "Correct password must verify against hash");
+  assert.strictEqual(await bcrypt.compare("MockWrongPassword_2026", hash), false, "Wrong password must fail verification");
   console.log("  ✔ Bcrypt password hashing & salt verification passed");
 
   // 2. Role-Based Access Control (RBAC) Guard Logic

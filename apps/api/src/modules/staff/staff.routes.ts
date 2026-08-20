@@ -28,28 +28,23 @@ staffRouter.post("/login", async (req: Request, res: Response) => {
       [email]
     );
 
-    if (result.rows.length === 0) {
+    // Timing-attack mitigation: always compute bcrypt verification even if staff does not exist
+    const DUMMY_HASH = "$2a$12$e8uqf0Jg.8m9WfJ23Lh.8eN5n5f5n5f5n5f5n5f5n5f5n5f5n5f5n";
+    const staff = result.rows[0];
+    const passwordHash = staff ? staff.password_hash : DUMMY_HASH;
+    const isValid = await verifyPassword(password, passwordHash);
+
+    if (!staff || !isValid) {
       return res.status(401).json({
         success: false,
         error: "Invalid email or password",
       });
     }
-
-    const staff = result.rows[0];
 
     if (!staff.is_active) {
       return res.status(401).json({
         success: false,
         error: "Staff account is deactivated",
-      });
-    }
-
-    const isValid = await verifyPassword(password, staff.password_hash);
-
-    if (!isValid) {
-      return res.status(401).json({
-        success: false,
-        error: "Invalid email or password",
       });
     }
 

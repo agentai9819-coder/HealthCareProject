@@ -1,14 +1,17 @@
-import { z } from "zod";
-const envSchema = z.object({
-    NODE_ENV: z.enum(["development", "production", "test"]).default("development"),
-    PORT: z.coerce.number().default(3000),
-    API_PREFIX: z.string().default("/api/v1"),
-    DATABASE_URL: z.string().url(),
-    BCRYPT_SALT_ROUNDS: z.coerce.number().default(10),
-    CORS_ORIGIN: z.string().default("http://localhost:3000"),
-    SESSION_SECRET: z.string().min(32),
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.env = exports.validateEnv = void 0;
+const zod_1 = require("zod");
+const envSchema = zod_1.z.object({
+    NODE_ENV: zod_1.z.enum(["development", "production", "test"]).default("development"),
+    PORT: zod_1.z.coerce.number().default(3000),
+    API_PREFIX: zod_1.z.string().default("/api/v1"),
+    DATABASE_URL: zod_1.z.string().url(),
+    BCRYPT_SALT_ROUNDS: zod_1.z.coerce.number().default(10),
+    CORS_ORIGIN: zod_1.z.string().default("http://localhost:3000"),
+    SESSION_SECRET: zod_1.z.string().min(32),
 });
-export const validateEnv = () => {
+const validateEnv = () => {
     const result = envSchema.safeParse(process.env);
     if (!result.success) {
         console.error("❌ Invalid environment variables:", result.error.format());
@@ -16,4 +19,5 @@ export const validateEnv = () => {
     }
     return result.data;
 };
-export const env = validateEnv();
+exports.validateEnv = validateEnv;
+exports.env = (0, exports.validateEnv)();
