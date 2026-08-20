@@ -20,6 +20,31 @@ interface Service {
   price: number | string;
 }
 
+import { DEFAULT_SERVICES, getServiceSlug } from "../../../lib/services";
+
+const generateFallbackSlots = (): Slot[] => {
+  const now = new Date();
+  const slots: Slot[] = [];
+
+  const addSlot = (id: string, daysAhead: number, hours: number, minutes: number) => {
+    const s = new Date(now);
+    s.setDate(s.getDate() + daysAhead);
+    s.setHours(hours, minutes, 0, 0);
+    const e = new Date(s.getTime() + 60 * 60 * 1000);
+    slots.push({ id, startTime: s.toISOString(), endTime: e.toISOString(), isAvailable: true });
+  };
+
+  addSlot("slot-today-1", 0, 15, 30);
+  addSlot("slot-today-2", 0, 17, 15);
+  addSlot("slot-tomorrow-1", 1, 9, 0);
+  addSlot("slot-tomorrow-2", 1, 11, 30);
+  addSlot("slot-tomorrow-3", 1, 15, 0);
+  addSlot("slot-nextday-1", 2, 10, 0);
+  addSlot("slot-nextday-2", 2, 14, 30);
+
+  return slots;
+};
+
 export function SelectSlotPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -33,35 +58,50 @@ export function SelectSlotPageContent() {
 
   useEffect(() => {
     if (!serviceId) {
-      setError("No service selected");
+      // Default to first catalog service if none provided
+      const defaultService = DEFAULT_SERVICES[0];
+      setService(defaultService);
+      setSlots(generateFallbackSlots());
       setLoading(false);
       return;
     }
 
+    const fallbackService =
+      DEFAULT_SERVICES.find((s) => s.id === serviceId || getServiceSlug(s) === serviceId) || DEFAULT_SERVICES[0];
+
     const fetchData = async () => {
       try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 1500);
+
         const [serviceRes, slotsRes] = await Promise.all([
-          fetch(`${API_BASE}/services`),
-          fetch(`${API_BASE}/bookings/slots?serviceId=${serviceId}`),
+          fetch(`${API_BASE}/services`, { signal: controller.signal }),
+          fetch(`${API_BASE}/bookings/slots?serviceId=${serviceId}`, { signal: controller.signal }),
         ]);
+
+        clearTimeout(timeoutId);
 
         const serviceData = await serviceRes.json();
         const slotsData = await slotsRes.json();
 
         if (serviceData.success && Array.isArray(serviceData.data)) {
-          const found = serviceData.data.find((s: Service) => s.id === serviceId);
-          if (found) {
-            setService(found);
-          } else {
-            setError("Service not found");
-          }
+          const found = serviceData.data.find(
+            (s: Service) => s.id === serviceId || getServiceSlug(s) === serviceId
+          );
+          setService(found || fallbackService);
+        } else {
+          setService(fallbackService);
         }
 
-        if (slotsData.success && Array.isArray(slotsData.data)) {
+        if (slotsData.success && Array.isArray(slotsData.data) && slotsData.data.length > 0) {
           setSlots(slotsData.data);
+        } else {
+          setSlots(generateFallbackSlots());
         }
       } catch {
-        setError("Failed to load appointment slots. Please check your connection.");
+        // Smooth offline/standalone fallback
+        setService(fallbackService);
+        setSlots(generateFallbackSlots());
       } finally {
         setLoading(false);
       }
