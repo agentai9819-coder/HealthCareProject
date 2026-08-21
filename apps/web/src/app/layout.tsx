@@ -108,11 +108,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${outfit.variable} ${plusJakartaSans.variable}`}>
+    <html lang="en" className={`${outfit.variable} ${plusJakartaSans.variable}`} suppressHydrationWarning>
       <head>
         <meta name="zero-threat-verification" content="zeroThreat=MTA4OTA=TVRBNE9UQT0=TVRBNE9UQT" />
       </head>
       <body
+        suppressHydrationWarning
         style={{
           margin: 0,
           fontFamily: "var(--font-sans, 'Plus Jakarta Sans', sans-serif)",
