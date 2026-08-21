@@ -15,10 +15,13 @@
   "overrides": {
     "zod": "^3.24.2",
     "uuid": "^11.1.1",
-    "postcss": "^8.5.3",
-    "sharp": "^0.35.0",
+    "postcss": "^8.5.26",
+    "sharp": "^0.35.3",
     "raw-body": "^2.5.2",
-    "body-parser": "^1.20.3"
+    "body-parser": "^1.20.3",
+    "exceljs": {
+      "uuid": "^11.1.1"
+    }
   },
   "scripts": {
     "build": "npm run build --workspace=apps/web",
