@@ -14,20 +14,18 @@ export const revalidate = 3600;
 export default function HomePage() {
   return (
     <div className="site-shell">
-      {/* Background Aurora Orbs */}
-      <div className="aurora-hero" aria-hidden="true" />
-      <div className="aurora-orb orb-one" aria-hidden="true" />
-      <div className="aurora-orb orb-two" aria-hidden="true" />
+      {/* Refined Architectural Grid Background */}
+      <div className="architectural-grid" aria-hidden="true" />
 
       <div className="page-frame">
         <main id="top">
-          {/* 1. Veridian Care Hero with Interactive Booking Console */}
+          {/* 1. Veridian Care Hero with Live Dispatch Console */}
           <HeroSection />
 
           {/* 2. Clinician Spotlight Section */}
           <ClinicianSection />
 
-          {/* 3. Tailored Care Pathways / Who We Help */}
+          {/* 3. Tailored Clinical Care Pathways */}
           <WhoWeHelpSection />
 
           {/* 4. Featured Clinical Services with upfront INR Pricing */}
@@ -36,7 +34,7 @@ export default function HomePage() {
           {/* 5. 4-Step Care Journey Timeline Track */}
           <HowItWorksSection />
 
-          {/* 6. The Veridian Standard Detail Card */}
+          {/* 6. The Veridian Clinical Standard */}
           <TrustQualitySection />
 
           {/* 7. Frequently Asked Questions */}
@@ -67,7 +65,7 @@ export default function HomePage() {
             </div>
           </section>
 
-          {/* 8. Conversion Banner */}
+          {/* 8. Conversion Banner with 24/7 Desk */}
           <CtaBanner />
         </main>
       </div>
@@ -90,8 +88,8 @@ const styles: Record<string, React.CSSProperties> = {
     margin: "0 auto 3rem",
   },
   faqSubtitle: {
-    fontSize: "14px",
-    color: "#98a49e",
+    fontSize: "15px",
+    color: "#94a3b8",
     lineHeight: 1.6,
     margin: "0 auto",
   },

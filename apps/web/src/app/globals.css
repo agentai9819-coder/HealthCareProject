@@ -73,48 +73,26 @@ button:focus-visible, a:focus-visible {
 }
 
 .site-shell {
-  overflow: clip;
+  overflow-x: hidden;
   position: relative;
-  background: #080d0c;
+  background-color: #090e13;
+  background-image: radial-gradient(at 50% 0%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
   min-height: 100vh;
 }
 
-.aurora-hero {
+.architectural-grid {
   position: absolute;
-  inset: -8rem -10rem auto;
-  height: min(64rem, 84vw);
-  background: radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.18) 0%, rgba(8, 13, 12, 0.8) 60%, #080d0c 100%);
-  opacity: 0.86;
+  inset: 0;
+  height: 1200px;
+  width: 100%;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%);
   pointer-events: none;
   z-index: 0;
-  contain: strict;
-  transform: translateZ(0);
-}
-
-.aurora-orb {
-  position: absolute;
-  pointer-events: none;
-  border-radius: 999px;
-  opacity: 0.32;
-  z-index: 0;
-  contain: strict;
-  transform: translateZ(0);
-}
-
-.orb-one {
-  width: 34rem;
-  height: 34rem;
-  top: 11rem;
-  right: -11rem;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.35) 0, rgba(16, 185, 129, 0.05) 50%, transparent 70%);
-}
-
-.orb-two {
-  width: 25rem;
-  height: 25rem;
-  top: 27rem;
-  left: -12rem;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.22) 0, transparent 65%);
 }
 
 .page-frame {
@@ -404,12 +382,14 @@ button:focus-visible, a:focus-visible {
 /* Booking Console */
 .booking-console {
   position: relative;
-  margin-top: 44px;
-  padding: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 26px;
-  background: linear-gradient(120deg, rgba(22, 37, 33, 0.95), rgba(12, 22, 19, 0.95));
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  margin-top: 40px;
+  padding: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(14, 23, 30, 0.94), rgba(9, 15, 20, 0.96));
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 24px 60px rgba(0, 0, 0, 0.45);
   transform: translateZ(0);
 }
 .console-top {
@@ -454,30 +434,34 @@ button:focus-visible, a:focus-visible {
 }
 .specialty-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 12px;
 }
 .specialty-card {
   position: relative;
-  min-height: 114px;
+  min-height: 120px;
   padding: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.02);
   text-align: left;
   color: #edf4ef;
-  transition: all 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justifyContent: space-between;
 }
 .specialty-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(110, 231, 183, 0.3);
-  background: rgba(16, 185, 129, 0.075);
+  border-color: rgba(52, 211, 153, 0.35);
+  background: rgba(16, 185, 129, 0.06);
+  box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.5);
 }
 .specialty-card.active {
-  border-color: rgba(52, 211, 153, 0.62);
-  background: linear-gradient(145deg, rgba(16, 185, 129, 0.2), rgba(16, 185, 129, 0.06));
-  box-shadow: inset 0 1px 0 rgba(167, 243, 208, 0.12), 0 12px 25px rgba(0, 0, 0, 0.14);
+  border-color: rgba(52, 211, 153, 0.7);
+  background: linear-gradient(145deg, rgba(16, 185, 129, 0.16), rgba(16, 185, 129, 0.04));
+  box-shadow: inset 0 1px 0 rgba(167, 243, 208, 0.15), 0 16px 32px -12px rgba(16, 185, 129, 0.25);
 }
 .specialty-icon {
   display: grid;
@@ -798,25 +782,28 @@ button:focus-visible, a:focus-visible {
 }
 .service-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
 }
 .service-card {
   position: relative;
-  min-height: 390px;
+  min-height: 380px;
   display: flex;
   flex-direction: column;
-  padding: 22px;
+  padding: 24px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
-  background: rgba(18, 30, 27, 0.52);
-  transition: transform 0.22s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.22s ease, background 0.22s ease;
+  background: rgba(15, 25, 33, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 16px 36px -12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .service-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(110, 231, 183, 0.34);
-  background: rgba(20, 39, 34, 0.72);
+  transform: translateY(-5px);
+  border-color: rgba(52, 211, 153, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 20px 48px -12px rgba(0, 0, 0, 0.6);
 }
 .service-icon {
   display: grid;
