@@ -5,9 +5,16 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL || 'postgresql://postgres:postgres@localhost:5432/healthcare',
 });
 
+const crypto = require('crypto');
+
 async function seedDemoData() {
-  console.log('--- SEEDING DEMO ACCOUNTS AND APPOINTMENT SLOTS FOR HUMAN UI TESTING ---');
-  const password = process.env.DEMO_SEED_PASSWORD || 'DevDemoPass_2026!';
+  if (process.env.NODE_ENV === 'production' && process.env.ALLOW_DEMO_SEED !== 'true') {
+    console.log('[SECURITY] Skipping demo data seeding in production environment.');
+    return;
+  }
+
+  console.log('--- SEEDING DEMO ACCOUNTS AND APPOINTMENT SLOTS FOR LOCAL/DEV TESTING ---');
+  const password = process.env.DEMO_SEED_PASSWORD || crypto.randomBytes(12).toString('base64');
   const passwordHash = await bcrypt.hash(password, 10);
 
   const client = await pool.connect();
@@ -21,7 +28,7 @@ async function seedDemoData() {
        ON CONFLICT (email) DO UPDATE SET password_hash = $1, is_active = TRUE, role = 'ADMIN'`,
       [passwordHash]
     );
-    console.log('✓ Demo Admin seeded: admin@homecare.local (Password: configured via DEMO_SEED_PASSWORD)');
+    console.log(`✓ Demo Admin seeded: admin@homecare.local (One-time password: ${password})`);
 
     // 2. Seed Demo Staff Clinicians
     await client.query(

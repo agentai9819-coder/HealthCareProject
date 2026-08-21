@@ -39,7 +39,7 @@ services:
     ports:
       - "3001:3001"
     command: >
-      sh -c "node /app/scripts/migrate.js && node /app/scripts/seed-demo.js && node dist/index.js"
+      sh -c "node /app/scripts/migrate.js && node dist/index.js"
 
   web:
     build:
