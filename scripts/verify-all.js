@@ -59,9 +59,10 @@ runStep("Verifying Cloud PostgreSQL SSL & Connection Settings", () => {
 });
 
 // 6. SSL Trust & HSTS Security Headers
-runStep("Verifying HSTS & SSL Trust Security Headers", () => {
+runStep("Verifying HSTS, CSP & SSL Trust Security Headers", () => {
   const fs = require("fs");
   const vercelJson = fs.readFileSync("vercel.json", "utf8");
+  assert.ok(vercelJson.includes("Content-Security-Policy"), "vercel.json must include CSP header");
   assert.ok(vercelJson.includes("Strict-Transport-Security"), "vercel.json must include HSTS header");
   assert.ok(vercelJson.includes("X-Content-Type-Options"), "vercel.json must include X-Content-Type-Options");
   assert.ok(vercelJson.includes("X-Frame-Options"), "vercel.json must include X-Frame-Options");
