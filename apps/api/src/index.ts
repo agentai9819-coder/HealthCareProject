@@ -1,4 +1,5 @@
 import express from "express";
+import helmet from "helmet";
 import cors from "cors";
 import compression from "compression";
 import session from "express-session";
@@ -17,7 +18,8 @@ const app = express();
 
 app.disable("x-powered-by");
 
-// Global Security Headers Middleware
+// Express Security Headers via Helmet & Strict Custom Policies
+app.use(helmet());
 app.use((_req, res, next) => {
   res.setHeader("Strict-Transport-Security", "max-age=63072000; includeSubDomains; preload");
   res.setHeader("X-Content-Type-Options", "nosniff");

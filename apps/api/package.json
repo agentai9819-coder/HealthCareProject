@@ -17,6 +17,7 @@
     "exceljs": "^4.4.0",
     "express": "^4.21.2",
     "express-session": "^1.19.0",
+    "helmet": "^8.3.0",
     "home-healthcare-config": "^1.0.0",
     "home-healthcare-types": "^1.0.0",
     "home-healthcare-validation": "^1.0.0",
