@@ -208,3 +208,21 @@ To prevent LLM coding failure modes (silent assumptions, over-engineering, wide 
 3. **Surgical Changes**: Touch ONLY target lines and files. Never reformat unrelated code, rename unrelated variables, or modify adjacent working logic.
 4. **Goal-Driven Verification**: Define success criteria upfront and verify with real commands (`npm test`, `npm run typecheck`, `npm run build`). Never declare completion without executable proof.
 
+---
+
+## 12. 🎨 Anti-AI-Slop Design Craft Rules
+
+All UI components in this repository follow three core design disciplines:
+
+1. **Emil Kowalski Motion (`.opencode/skills/emil-motion/SKILL.md`)**:
+   - Restraint-first motion with intent. 150ms–250ms duration.
+   - Believable physics with custom cubic-bezier curves (`--ease-snappy: cubic-bezier(0.16, 1, 0.3, 1)`).
+   - Tactile feedback: Active press scale (`scale(0.98)`), hover elevations (`translateY(-2px)`), accessible focus rings (`outline-offset: 4px`).
+2. **Taste Skill (`.opencode/skills/taste-anti-slop/SKILL.md`)**:
+   - Zero AI-slop: No generic purple-blue gradients, no floating decorative orbs, no meaningless vanity stats.
+   - Curated clinical palette: Luminous dark emerald `#080d0c`, surgical jade accents `#34d399`, `#10b981`, and warm off-white typography `#f8fafc`.
+3. **Impeccable Style (`.opencode/skills/impeccable-style/SKILL.md`)**:
+   - 1px crisp translucent borders (`rgba(255, 255, 255, 0.08)`), multi-layered ambient depth shadows.
+   - Strict 4px/8px spatial rhythm, minimum 44px accessible touch targets, and realistic clinical micro-copy.
+
+
