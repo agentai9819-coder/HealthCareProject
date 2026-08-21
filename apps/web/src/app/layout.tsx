@@ -97,7 +97,11 @@ export const metadata: Metadata = {
         "max-snippet": -1,
       },
     },
+  verification: {
+    google: "wB7DFyJxxysgOt1gd_-X9M4pyepew6heR4lcrqrRrv0",
+  },
   other: {
+    "google-site-verification": "wB7DFyJxxysgOt1gd_-X9M4pyepew6heR4lcrqrRrv0",
     "zero-threat-verification": "zeroThreat=MTA4OTA=TVRBNE9UQT0=TVRBNE9UQT",
   },
 };
@@ -110,6 +114,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${outfit.variable} ${plusJakartaSans.variable}`} suppressHydrationWarning>
       <head>
+        <meta name="google-site-verification" content="wB7DFyJxxysgOt1gd_-X9M4pyepew6heR4lcrqrRrv0" />
         <meta name="zero-threat-verification" content="zeroThreat=MTA4OTA=TVRBNE9UQT0=TVRBNE9UQT" />
       </head>
       <body
