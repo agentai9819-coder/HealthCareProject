@@ -192,6 +192,19 @@ npm run build
 | **Homepage Slow Load (2-3s delay)** | SSR fetch calling non-existent live API during server render | Created `getServicesCatalog()` with 0ms fallback to `DEFAULT_SERVICES` + `revalidate = 3600` |
 | **Scroll Jitter / GPU Lag** | Infinite Gaussian blur animations (`filter: blur(40px)`) on 500px background orbs | Replaced with hardware-accelerated CSS radial gradients (`contain: strict; transform: translateZ(0);`) |
 | **Scroll-Down Layout Stutter** | `content-visibility: auto` causing on-the-fly layout reflows during scrolling | Removed `content-visibility: auto` in favor of full upfront DOM pre-rendering |
-| **Mobile Menu Missing** | Desktop nav links hidden without mobile drawer | Implemented animated mobile hamburger toggle and slide-down drawer with safe-area insets |
 | **5-digit US Zip Code Rejection** | Address schema strictly expected US 2-char states & 5-digit zips | Updated Zod schema with Indian 6-digit PIN regex (`^[1-9][0-9]{5}$`) and Indian states |
 | **Cloud DB SSL Handshake Failure** | `pg.Pool` defaulted to unencrypted connection | Added automatic cloud domain detection and `ssl: { rejectUnauthorized: false }` |
+| **Monorepo TS Path Resolution** | Standalone API `tsconfig.json` failed to resolve package paths during CI | Added `paths` and `baseUrl` pointing to package `dist/` outputs |
+| **Login Timing Attack** | Immediate return on unknown emails leaked user existence | Implemented constant-time verification with dummy bcrypt hash |
+
+---
+
+## 11. 🧠 Andrej Karpathy Engineering Guidelines
+
+To prevent LLM coding failure modes (silent assumptions, over-engineering, wide non-surgical edits, and unverified completions), all AI assistants working on this repo MUST follow:
+
+1. **Think Before Coding**: State assumptions explicitly before modifying files. Clarify ambiguities rather than guessing silently.
+2. **Simplicity First (KISS / YAGNI)**: Implement the minimum effective code to solve the problem cleanly. Avoid speculative abstractions, factories, and unnecessary wrappers.
+3. **Surgical Changes**: Touch ONLY target lines and files. Never reformat unrelated code, rename unrelated variables, or modify adjacent working logic.
+4. **Goal-Driven Verification**: Define success criteria upfront and verify with real commands (`npm test`, `npm run typecheck`, `npm run build`). Never declare completion without executable proof.
+
