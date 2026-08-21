@@ -11,6 +11,7 @@ import { addressesRouter } from "./modules/addresses/addresses.routes";
 import { staffRouter } from "./modules/staff/staff.routes";
 import { adminStaffRouter } from "./modules/staff/admin.routes";
 import { staffVisitsRouter, adminVisitsRouter } from "./modules/visits/visits.routes";
+import { apiRateLimiter, authRateLimiter } from "./middleware/rate-limiter";
 
 const app = express();
 
@@ -75,13 +76,19 @@ app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
 
+// Rate limiting & Bot Protection
+app.use("/api/v1", apiRateLimiter);
+app.use("/api/v1/customers/register", authRateLimiter);
+app.use("/api/v1/customers/login", authRateLimiter);
+app.use("/api/v1/staff/login", authRateLimiter);
+
 // Customer Endpoints
 app.use("/api/v1/customers/me/addresses", addressesRouter);
 app.use("/api/v1/customers", customersRouter);
 app.use("/api/v1/services", servicesRouter);
 app.use("/api/v1/bookings", bookingsRouter);
 
-// Phase 2H: Staff & Admin Endpoints
+// Staff & Admin Endpoints
 app.use("/api/v1/staff/visits", staffVisitsRouter);
 app.use("/api/v1/staff", staffRouter);
 app.use("/api/v1/admin/staff", adminStaffRouter);
