@@ -383,7 +383,7 @@ export function ConfirmPageContent() {
             onChange={handleChange}
             required
             style={styles.input}
-            placeholder="123 Main Street"
+            placeholder="Flat, House No., Street, Sector"
           />
         </div>
 
@@ -398,7 +398,7 @@ export function ConfirmPageContent() {
               onChange={handleChange}
               required
               style={styles.input}
-              placeholder="City"
+              placeholder="e.g. New Delhi"
             />
           </div>
           <div style={styles.field}>
@@ -410,13 +410,12 @@ export function ConfirmPageContent() {
               value={formData.state}
               onChange={handleChange}
               required
-              maxLength={2}
               style={styles.input}
-              placeholder="CA"
+              placeholder="e.g. Delhi"
             />
           </div>
           <div style={styles.field}>
-            <label htmlFor="postalCode" style={styles.label}>ZIP Code</label>
+            <label htmlFor="postalCode" style={styles.label}>PIN Code</label>
             <input
               type="text"
               id="postalCode"
@@ -424,8 +423,9 @@ export function ConfirmPageContent() {
               value={formData.postalCode}
               onChange={handleChange}
               required
+              maxLength={6}
               style={styles.input}
-              placeholder="90210"
+              placeholder="110001"
             />
           </div>
         </div>
@@ -440,7 +440,7 @@ export function ConfirmPageContent() {
 const styles: Record<string, React.CSSProperties> = {
   main: {
     minHeight: "80vh",
-    padding: "3rem 1.5rem 6rem 1.5rem",
+    padding: "7.5rem 1.5rem 6rem 1.5rem",
     position: "relative",
   },
   header: {
@@ -563,6 +563,8 @@ const styles: Record<string, React.CSSProperties> = {
   },
   form: {
     maxWidth: "540px",
+    width: "100%",
+    boxSizing: "border-box",
     margin: "0 auto",
     backgroundColor: "rgba(18, 30, 27, 0.8)",
     padding: "2rem",
@@ -573,6 +575,8 @@ const styles: Record<string, React.CSSProperties> = {
   },
   error: {
     maxWidth: "540px",
+    width: "100%",
+    boxSizing: "border-box",
     margin: "0 auto 1.5rem",
     padding: "1rem",
     backgroundColor: "rgba(239, 68, 68, 0.12)",
@@ -627,14 +631,20 @@ const styles: Record<string, React.CSSProperties> = {
     marginLeft: "0.375rem",
   },
   fieldGroup: {
-    display: "flex",
-    gap: "1rem",
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(110px, 1fr))",
+    gap: "0.75rem",
+    width: "100%",
+    boxSizing: "border-box",
   },
   field: {
-    flex: 1,
+    flex: "1 1 0%",
+    minWidth: 0,
+    width: "100%",
     display: "flex",
     flexDirection: "column",
     gap: "0.4rem",
+    boxSizing: "border-box",
   },
   label: {
     fontSize: "0.85rem",
@@ -642,7 +652,11 @@ const styles: Record<string, React.CSSProperties> = {
     color: "#cbd5e1",
   },
   input: {
-    padding: "0.75rem 1rem",
+    width: "100%",
+    maxWidth: "100%",
+    minWidth: 0,
+    boxSizing: "border-box",
+    padding: "0.75rem 0.875rem",
     fontSize: "0.95rem",
     border: "1px solid rgba(255, 255, 255, 0.12)",
     borderRadius: "10px",
