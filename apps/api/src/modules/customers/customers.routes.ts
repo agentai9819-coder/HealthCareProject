@@ -34,7 +34,7 @@ customersRouter.post("/register", async (req: Request, res: Response) => {
     if (existing.rows.length > 0) {
       return res.status(409).json({
         success: false,
-        error: "Email already registered",
+        error: "Unable to complete registration with the provided details. Please try signing in or use a different email.",
       });
     }
 

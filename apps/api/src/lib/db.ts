@@ -11,13 +11,19 @@ const isCloudOrProduction =
       env.DATABASE_URL.includes("render.com") ||
       env.DATABASE_URL.includes("railway.app")));
 
+const sslConfig = isCloudOrProduction
+  ? process.env.DB_CA_CERT
+    ? { ca: process.env.DB_CA_CERT, rejectUnauthorized: true }
+    : { rejectUnauthorized: false }
+  : undefined;
+
 export const pool = new Pool({
   connectionString: env.DATABASE_URL,
   max: 20,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 8000,
   statement_timeout: 10000, // 10s timeout accommodating cloud network hops
-  ssl: isCloudOrProduction ? { rejectUnauthorized: false } : undefined,
+  ssl: sslConfig,
 });
 
 pool.on("error", (err) => {

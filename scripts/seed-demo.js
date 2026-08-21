@@ -7,7 +7,7 @@ const pool = new Pool({
 
 async function seedDemoData() {
   console.log('--- SEEDING DEMO ACCOUNTS AND APPOINTMENT SLOTS FOR HUMAN UI TESTING ---');
-  const password = 'Password123!';
+  const password = process.env.DEMO_SEED_PASSWORD || 'DevDemoPass_2026!';
   const passwordHash = await bcrypt.hash(password, 10);
 
   const client = await pool.connect();
@@ -21,7 +21,7 @@ async function seedDemoData() {
        ON CONFLICT (email) DO UPDATE SET password_hash = $1, is_active = TRUE, role = 'ADMIN'`,
       [passwordHash]
     );
-    console.log('✓ Demo Admin seeded: admin@homecare.local (Password: Password123!)');
+    console.log('✓ Demo Admin seeded: admin@homecare.local (Password: configured via DEMO_SEED_PASSWORD)');
 
     // 2. Seed Demo Staff Clinicians
     await client.query(
@@ -30,7 +30,7 @@ async function seedDemoData() {
        ON CONFLICT (email) DO UPDATE SET password_hash = $1, is_active = TRUE, role = 'STAFF'`,
       [passwordHash]
     );
-    console.log('✓ Demo Staff seeded: nurse.david@homecare.local (Password: Password123!)');
+    console.log('✓ Demo Staff seeded: nurse.david@homecare.local');
 
     await client.query(
       `INSERT INTO staff (id, email, password_hash, name, role, phone, specialty, is_active)
@@ -38,7 +38,7 @@ async function seedDemoData() {
        ON CONFLICT (email) DO UPDATE SET password_hash = $1, is_active = TRUE, role = 'STAFF'`,
       [passwordHash]
     );
-    console.log('✓ Demo Staff seeded: pt.elena@homecare.local (Password: Password123!)');
+    console.log('✓ Demo Staff seeded: pt.elena@homecare.local');
 
     // 3. Seed Demo Customer Account
     const custRes = await client.query(
@@ -49,7 +49,7 @@ async function seedDemoData() {
       [passwordHash]
     );
     const customerId = custRes.rows[0].id;
-    console.log('✓ Demo Customer seeded: patient.alice@example.com (Password: Password123!)');
+    console.log('✓ Demo Customer seeded: patient.alice@example.com');
 
     // 4. Seed Saved Default Address for Alice
     await client.query(
