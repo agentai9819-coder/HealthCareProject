@@ -53,7 +53,7 @@ runStep("Verifying Indian Metropolitan Care Network Hubs", () => {
 runStep("Verifying Cloud PostgreSQL SSL & Connection Settings", () => {
   const fs = require("fs");
   const dbContent = fs.readFileSync("apps/api/src/lib/db.ts", "utf8");
-  assert.ok(dbContent.includes("rejectUnauthorized: false"), "db.ts must support Cloud SSL pooling");
+  assert.ok(dbContent.includes("rejectUnauthorized: true"), "db.ts must enforce strict TLS peer certificate validation");
   assert.ok(dbContent.includes("neon.tech"), "db.ts must recognize Neon cloud connections");
   assert.ok(dbContent.includes("supabase.co"), "db.ts must recognize Supabase cloud connections");
 });

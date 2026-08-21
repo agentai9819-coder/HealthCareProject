@@ -143,21 +143,24 @@ Always add these overrides in the root `package.json` to prevent Aikido / Snyk /
   "overrides": {
     "zod": "^3.24.2",
     "uuid": "^11.1.1",
-    "postcss": "^8.5.3",
-    "sharp": "^0.35.0",
+    "postcss": "^8.5.26",
+    "sharp": "^0.35.3",
     "raw-body": "^2.5.2",
-    "body-parser": "^1.20.3"
+    "body-parser": "^1.20.3",
+    "exceljs": {
+      "uuid": "^11.1.1"
+    }
   }
 }
 ```
 
 ---
 
-## 5. PostgreSQL SSL Connection & Circuit Breaker
+## 5. PostgreSQL Strict TLS Peer Verification & Circuit Breaker
 
 In `apps/api/src/lib/db.ts`:
 ```typescript
-import { Pool } from "pg";
+import { Pool, PoolConfig } from "pg";
 
 const isCloudOrProduction =
   process.env.NODE_ENV === "production" ||
@@ -168,11 +171,29 @@ const isCloudOrProduction =
       process.env.DATABASE_URL.includes("render.com") ||
       process.env.DATABASE_URL.includes("railway.app")));
 
-const sslConfig = isCloudOrProduction
-  ? process.env.DB_CA_CERT
-    ? { ca: process.env.DB_CA_CERT, rejectUnauthorized: true }
-    : { rejectUnauthorized: false }
-  : undefined;
+function getDatabaseSslConfig(): PoolConfig["ssl"] {
+  if (!isCloudOrProduction) {
+    return undefined;
+  }
+
+  // If a custom CA certificate is provided, verify against that certificate authority
+  if (process.env.DB_CA_CERT) {
+    return {
+      ca: process.env.DB_CA_CERT,
+      rejectUnauthorized: true,
+    };
+  }
+
+  // Development bypass strictly for local self-signed dev proxies if explicitly requested
+  if (process.env.NODE_ENV !== "production" && process.env.DB_ALLOW_SELF_SIGNED === "true") {
+    return { rejectUnauthorized: false };
+  }
+
+  // Production and Cloud default: Strict TLS Peer Certificate Verification against system trust store
+  return {
+    rejectUnauthorized: true,
+  };
+}
 
 export const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -180,6 +201,6 @@ export const pool = new Pool({
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 8000,
   statement_timeout: 10000,
-  ssl: sslConfig,
+  ssl: getDatabaseSslConfig(),
 });
 ```
