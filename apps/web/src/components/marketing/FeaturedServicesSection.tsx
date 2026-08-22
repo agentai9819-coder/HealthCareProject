@@ -8,7 +8,7 @@ const fallbackServices = [
     copy: "Hospital-grade bedside nursing including sterile wound management, IV infusion, and vital telemetry.",
     price: "₹1,499",
     duration: "45–60 Mins",
-    tag: "Hospital Grade",
+    tag: "Most Requested",
     slug: "home-health-assessment",
     items: ["Sterile IV cannula insertion & infusion", "Complex post-op dressing & drain care", "ABHA-linked physician care summary"],
   },
@@ -84,32 +84,32 @@ export async function FeaturedServicesSection() {
                   <div className="price-row">
                     <span className="duration-tag">{service.durationMinutes} Mins Visit</span>
                     <span className="price">
-                      ₹{formattedPrice} <small style={{ fontSize: "11px", color: "#64748b", fontWeight: 700 }}>upfront</small>
+                      ₹{formattedPrice} <small style={{ fontSize: "11px", color: "#94a3b8" }}>upfront</small>
                     </span>
                   </div>
 
                   <ul className="care-list">
                     <li>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                       <span>Vitals & bedside clinical evaluation</span>
                     </li>
                     <li>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                       <span>Medication & sterile treatment protocol</span>
                     </li>
                     <li>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                       <span>ABHA-linked care report for family</span>
                     </li>
                   </ul>
 
-                  <div style={{ marginTop: "auto", display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: "10px", paddingTop: "18px" }}>
+                  <div style={{ marginTop: "auto", display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: "10px", paddingTop: "16px" }}>
                     <Link
                       href={`/services/${slug}`}
                       style={styles.detailBtn}
@@ -144,14 +144,14 @@ export async function FeaturedServicesSection() {
                 <div className="price-row">
                   <span className="duration-tag">{service.duration}</span>
                   <span className="price">
-                    {service.price} <small style={{ fontSize: "11px", color: "#64748b", fontWeight: 700 }}>upfront</small>
+                    {service.price} <small style={{ fontSize: "11px", color: "#94a3b8" }}>upfront</small>
                   </span>
                 </div>
 
                 <ul className="care-list">
                   {service.items.map((item) => (
                     <li key={item}>
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5">
                         <polyline points="20 6 9 17 4 12" />
                       </svg>
                       <span>{item}</span>
@@ -159,7 +159,7 @@ export async function FeaturedServicesSection() {
                   ))}
                 </ul>
 
-                <div style={{ marginTop: "auto", display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: "10px", paddingTop: "18px" }}>
+                <div style={{ marginTop: "auto", display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: "10px", paddingTop: "16px" }}>
                   <Link
                     href={`/services/${service.slug}`}
                     style={styles.detailBtn}
@@ -184,11 +184,11 @@ export async function FeaturedServicesSection() {
 const styles: Record<string, React.CSSProperties> = {
   tag: {
     fontSize: "10px",
-    fontWeight: 800,
+    fontWeight: 700,
     textTransform: "uppercase",
     letterSpacing: "0.06em",
-    color: "#047857",
-    backgroundColor: "#ecfdf5",
+    color: "#a7f3d0",
+    backgroundColor: "rgba(16, 185, 129, 0.12)",
     border: "1px solid rgba(16, 185, 129, 0.25)",
     padding: "3px 8px",
     borderRadius: "6px",
@@ -197,12 +197,12 @@ const styles: Record<string, React.CSSProperties> = {
     textAlign: "center",
     padding: "0 10px",
     fontSize: "12px",
-    fontWeight: 700,
-    color: "#334155",
-    backgroundColor: "#f8fafc",
+    fontWeight: 600,
+    color: "#cbd5e1",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
     borderRadius: "999px",
     textDecoration: "none",
-    border: "1px solid rgba(226, 232, 240, 0.9)",
+    border: "1px solid rgba(255, 255, 255, 0.1)",
     minHeight: "42px",
     display: "inline-flex",
     alignItems: "center",

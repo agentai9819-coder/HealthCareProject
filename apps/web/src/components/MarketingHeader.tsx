@@ -165,11 +165,11 @@ export function MarketingHeader() {
                 <Link
                   href="/auth/login"
                   style={{
-                    color: "#334155",
+                    color: "#b9c3be",
                     textDecoration: "none",
-                    fontWeight: 700,
+                    fontWeight: 600,
                     fontSize: "13px",
-                    padding: "6px 12px",
+                    padding: "6px 10px",
                   }}
                 >
                   Sign In

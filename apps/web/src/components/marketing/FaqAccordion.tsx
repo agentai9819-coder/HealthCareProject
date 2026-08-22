@@ -40,7 +40,7 @@ export function FaqAccordion({ items, limit }: FaqAccordionProps) {
                   height="18"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="#059669"
+                  stroke="#10b981"
                   strokeWidth="2.5"
                   style={{
                     transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
@@ -67,17 +67,16 @@ const styles: Record<string, React.CSSProperties> = {
   accordionContainer: {
     display: "flex",
     flexDirection: "column",
-    gap: "0.9rem",
-    maxWidth: "840px",
+    gap: "0.85rem",
+    maxWidth: "800px",
     margin: "0 auto",
   },
   faqCard: {
-    backgroundColor: "#ffffff",
-    borderRadius: "18px",
-    border: "1px solid rgba(226, 232, 240, 0.9)",
+    backgroundColor: "rgba(18, 30, 27, 0.55)",
+    borderRadius: "16px",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
     overflow: "hidden",
-    boxShadow: "0 2px 8px rgba(15, 23, 42, 0.03)",
-    transition: "border-color 0.2s ease",
+    backdropFilter: "blur(12px)",
   },
   questionButton: {
     width: "100%",
@@ -89,9 +88,9 @@ const styles: Record<string, React.CSSProperties> = {
     justifyContent: "space-between",
     alignItems: "center",
     cursor: "pointer",
-    color: "#0f172a",
-    fontSize: "1rem",
-    fontWeight: 700,
+    color: "#f8fafc",
+    fontSize: "1.0625rem",
+    fontWeight: 600,
     gap: "1rem",
   },
   questionText: {
@@ -101,15 +100,14 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    flexShrink: 0,
   },
   answerPanel: {
     padding: "0 1.5rem 1.25rem 1.5rem",
-    borderTop: "1px solid rgba(226, 232, 240, 0.7)",
+    borderTop: "1px solid rgba(255, 255, 255, 0.05)",
   },
   answerText: {
     margin: "0.85rem 0 0 0",
-    color: "#475569",
+    color: "#98a49e",
     fontSize: "0.9375rem",
     lineHeight: 1.65,
   },
