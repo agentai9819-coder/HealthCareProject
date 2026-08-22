@@ -1,13 +1,34 @@
 /*
- * VERIDIAN CARE — Luminous Clinical Observatory Design System
- * Integrated from Manus AI Template
+ * VERIDIAN CARE — Luminous Clinical Observatory & Luxury Studio Design System
+ * $20K Bespoke Studio Standard
  */
 :root {
-  --background: #080d0c;
-  --foreground: #f6f7f3;
+  --background: #060b0e;
+  --foreground: #f8fafc;
   --border: rgba(255, 255, 255, 0.08);
-  --ring: #10b981;
-  --radius: 1.25rem;
+  --border-light: rgba(255, 255, 255, 0.12);
+  --border-glow: rgba(52, 211, 153, 0.35);
+  
+  --color-obsidian: #060b0e;
+  --color-slate-surface: #0c141a;
+  --color-glass-surface: rgba(12, 20, 26, 0.72);
+  --color-glass-surface-hover: rgba(16, 28, 36, 0.85);
+  
+  --color-mint: #10b981;
+  --color-mint-bright: #34d399;
+  --color-mint-dark: #059669;
+  --color-mint-subtle: rgba(16, 185, 129, 0.12);
+  --color-cyan-glow: rgba(56, 189, 248, 0.15);
+  
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 30px;
+  --radius-pill: 9999px;
   
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Outfit', 'Plus Jakarta Sans', sans-serif;
@@ -16,6 +37,9 @@
   --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-smooth: cubic-bezier(0.65, 0, 0.35, 1);
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 160ms;
+  --duration-normal: 260ms;
+  --duration-slow: 420ms;
 }
 
 *, *::before, *::after {
@@ -30,22 +54,24 @@ input, textarea, select, button {
 
 button:active:not(:disabled) {
   transform: scale(0.98);
-  transition: transform 0.08s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.08s var(--ease-snappy);
 }
 
 html {
   scroll-behavior: smooth;
-  background: #080d0c;
+  background: var(--background);
+  color-scheme: dark;
 }
 
 body {
   margin: 0;
   padding: 0;
   min-width: 320px;
-  background: #080d0c;
-  color: #f6f7f3;
+  background: var(--background);
+  color: var(--color-text-primary);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
@@ -57,14 +83,14 @@ button:not(:disabled), a[href] {
   cursor: pointer;
 }
 button:focus-visible, a:focus-visible {
-  outline: 2px solid #34d399;
+  outline: 2px solid var(--color-mint-bright);
   outline-offset: 4px;
 }
 
 @keyframes reveal-up {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -72,25 +98,48 @@ button:focus-visible, a:focus-visible {
   }
 }
 
+@keyframes pulse-beacon {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.35);
+    opacity: 0.4;
+  }
+}
+
+@keyframes float-subtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
 .site-shell {
   overflow-x: hidden;
   position: relative;
-  background-color: #090e13;
-  background-image: radial-gradient(at 50% 0%, rgba(16, 185, 129, 0.08) 0px, transparent 50%);
+  background-color: var(--color-obsidian);
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.12) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 40% at 85% 60%, rgba(56, 189, 248, 0.04) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 15% 85%, rgba(16, 185, 129, 0.04) 0%, transparent 50%);
   min-height: 100vh;
 }
 
 .architectural-grid {
   position: absolute;
   inset: 0;
-  height: 1200px;
+  height: 1400px;
   width: 100%;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%);
-  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%);
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 65% at 50% 0%, #000 50%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 65% at 50% 0%, #000 50%, transparent 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -107,23 +156,25 @@ button:focus-visible, a:focus-visible {
 .top-bar {
   position: relative;
   z-index: 6;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  background: rgba(5, 10, 9, 0.75);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(6, 11, 14, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .top-bar-inner {
   max-width: 1320px;
   margin: 0 auto;
-  min-height: 38px;
+  min-height: 40px;
   padding: 0 28px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  color: #a6b1ac;
+  color: var(--color-text-secondary);
   font-size: 11px;
   line-height: 1;
   font-weight: 700;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 .status-line, .hotline {
@@ -133,7 +184,7 @@ button:focus-visible, a:focus-visible {
   white-space: nowrap;
 }
 .status-line strong {
-  color: #d6eee2;
+  color: #e2e8f0;
   font-weight: 700;
 }
 .live-dot {
@@ -141,18 +192,26 @@ button:focus-visible, a:focus-visible {
   height: 8px;
   border-radius: 50%;
   display: inline-block;
-  background: #22c55e;
-  box-shadow: 0 0 8px rgba(34, 197, 94, 0.7);
+  background: #10b981;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
   flex-shrink: 0;
-  transform: translateZ(0);
+  position: relative;
+}
+.live-dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid rgba(16, 185, 129, 0.6);
+  animation: pulse-beacon 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 .hotline {
-  color: #d6eee2;
+  color: #cbd5e1;
   text-decoration: none;
   transition: color 0.18s ease;
 }
 .hotline:hover {
-  color: #6ee7b7;
+  color: var(--color-mint-bright);
 }
 
 /* Floating Frosted Glass Header */

@@ -106,7 +106,12 @@ function LoginForm() {
           </div>
 
           <div style={styles.field}>
-            <label htmlFor="password" style={styles.label}>Password</label>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <label htmlFor="password" style={styles.label}>Password</label>
+              <Link href="/auth/forgot-password" style={{ fontSize: "0.8rem", color: "#34d399", textDecoration: "none" }}>
+                Forgot Password?
+              </Link>
+            </div>
             <input
               type="password"
               id="password"

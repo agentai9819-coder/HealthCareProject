@@ -1,22 +1,27 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export function ClinicalCareSection() {
   const points = [
     {
-      title: "Integrated Vitals & Assessment",
-      desc: "Comprehensive blood pressure, pulse oximetry, glucose, and cardiopulmonary evaluation on every visit.",
+      title: "100% Sealed Single-Use Sterile Kits",
+      desc: "Every procedure uses tamper-evident sealed consumable kits opened exclusively at your bedside.",
+      badge: "Infection Control",
     },
     {
-      title: "Sterile Bedside Clinical Protocols",
-      desc: "Strict aseptic techniques for surgical dressing changes, catheter maintenance, and wound therapy.",
+      title: "Digital Vitals & Telemetry Telemetry",
+      desc: "Instant multi-parameter monitoring: blood pressure, pulse oximetry, capillary glucose & temperature.",
+      badge: "Real-Time Telemetry",
     },
     {
-      title: "Mobility & Fall-Risk Evaluation",
-      desc: "Licensed physical therapy protocols tailored to home recovery, safe transfers, and functional rehabilitation.",
+      title: "Active Physician Tele-Supervision",
+      desc: "Continuous physician oversight via encrypted digital charting with immediate escalation protocols.",
+      badge: "Doctor Oversight",
     },
     {
-      title: "Transparent Care Continuity",
-      desc: "Instant post-visit patient summaries provided directly to you and your authorized family care coordinators.",
+      title: "ABHA & DISHA Aligned Care Summary",
+      desc: "Comprehensive digital visit report dispatched to you and your authorized family care coordinators within 30 minutes.",
+      badge: "Digital Health",
     },
   ];
 
@@ -24,41 +29,48 @@ export function ClinicalCareSection() {
     <section style={styles.section} aria-labelledby="clinical-care-heading">
       <div style={styles.container}>
         <div style={styles.row}>
-          {/* Left Column: Rich Medical Graphic */}
+          {/* Left Column: Glass Medical Graphic & Live Telemetry Badge */}
           <div style={styles.imageColumn}>
             <div style={styles.imageWrapper}>
-              <img
+              <Image
                 src="/assets/images/about-img.png"
-                alt="Clinical In-Home Examination and Care"
+                alt="Clinical In-Home Examination and Sterile Care"
+                width={540}
+                height={400}
+                quality={85}
+                loading="lazy"
                 style={styles.image}
               />
               <div style={styles.imageBadge}>
                 <div style={styles.badgePulse} />
-                <span style={styles.badgeText}>Supervisory Nursing Oversight</span>
+                <span style={styles.badgeText}>Live Supervisory Physician Tele-Desk Active</span>
               </div>
             </div>
           </div>
 
           {/* Right Column: Narrative & Checklist */}
           <div style={styles.contentColumn}>
-            <span style={styles.pillBadge}>Hospital-Grade Clinical Standards</span>
-            <h2 id="clinical-care-heading" style={styles.heading}>
+            <span className="section-kicker">Hospital-Grade Clinical Standards</span>
+            <h2 id="clinical-care-heading" className="section-heading" style={{ margin: "16px 0" }}>
               Hospital-Quality Precision, Delivered to Your Living Room
             </h2>
             <p style={styles.lead}>
-              We eliminate the stress of clinic commutes. Our state-licensed nurses and certified physical therapists bring clinical rigor, advanced monitoring, and compassionate care directly to your bedside.
+              We eliminate the anxiety of hospital waiting rooms and clinic commutes. Verified, hospital-trained Registered Nurses and Certified Physiotherapists bring clinical rigor, advanced monitoring, and calm reassurance to your bedside.
             </p>
 
             <div style={styles.pointsList}>
               {points.map((pt, idx) => (
                 <div key={idx} style={styles.pointItem}>
                   <div style={styles.pointIcon}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f766e" strokeWidth="2.5">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
                   <div>
-                    <h3 style={styles.pointTitle}>{pt.title}</h3>
+                    <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
+                      <h3 style={styles.pointTitle}>{pt.title}</h3>
+                      <span style={styles.pointBadge}>{pt.badge}</span>
+                    </div>
                     <p style={styles.pointDesc}>{pt.desc}</p>
                   </div>
                 </div>
@@ -66,11 +78,14 @@ export function ClinicalCareSection() {
             </div>
 
             <div style={styles.ctaRow}>
-              <Link href="/services" style={styles.primaryBtn}>
-                Explore All Clinical Services
+              <Link href="/services" className="shimmer-button" style={{ minHeight: "44px", padding: "0 22px" }}>
+                <span>Explore Clinical Services</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
               </Link>
               <Link href="/about" style={styles.secondaryBtn}>
-                Learn About Our Care Team
+                <span>Our Clinical Standard</span>
               </Link>
             </div>
           </div>
@@ -82,18 +97,19 @@ export function ClinicalCareSection() {
 
 const styles: Record<string, React.CSSProperties> = {
   section: {
-    padding: "6rem 1.5rem",
-    backgroundColor: "#ffffff",
-    borderBottom: "1px solid #e2e8f0",
+    padding: "95px 0",
+    position: "relative",
+    borderTop: "1px solid rgba(255, 255, 255, 0.06)",
+    background: "linear-gradient(180deg, rgba(6, 11, 14, 0) 0%, rgba(12, 20, 26, 0.4) 100%)",
   },
   container: {
-    maxWidth: "1240px",
+    maxWidth: "1320px",
     margin: "0 auto",
   },
   row: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))",
-    gap: "4rem 3rem",
+    gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))",
+    gap: "4rem 3.5rem",
     alignItems: "center",
   },
   imageColumn: {
@@ -106,70 +122,54 @@ const styles: Record<string, React.CSSProperties> = {
     width: "100%",
     borderRadius: "24px",
     overflow: "hidden",
-    boxShadow: "0 20px 40px rgba(15, 23, 42, 0.1), 0 2px 10px rgba(0, 0, 0, 0.04)",
-    border: "1px solid #e2e8f0",
+    boxShadow: "0 24px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12)",
+    border: "1px solid rgba(255, 255, 255, 0.1)",
+    background: "rgba(12, 20, 26, 0.8)",
   },
   image: {
     width: "100%",
     height: "auto",
     display: "block",
     objectFit: "cover",
+    opacity: 0.9,
   },
   imageBadge: {
     position: "absolute",
-    bottom: "1.5rem",
-    left: "1.5rem",
-    backgroundColor: "rgba(255, 255, 255, 0.95)",
+    bottom: "1.25rem",
+    left: "1.25rem",
+    right: "1.25rem",
+    backgroundColor: "rgba(6, 11, 14, 0.88)",
     backdropFilter: "blur(12px)",
-    borderRadius: "9999px",
-    padding: "0.5rem 1.15rem",
-    boxShadow: "0 4px 14px rgba(0, 0, 0, 0.1)",
-    border: "1px solid #ccfbf1",
+    borderRadius: "14px",
+    padding: "0.65rem 1rem",
+    boxShadow: "0 8px 24px rgba(0, 0, 0, 0.4)",
+    border: "1px solid rgba(16, 185, 129, 0.25)",
     display: "inline-flex",
     alignItems: "center",
-    gap: "0.5rem",
+    gap: "0.6rem",
   },
   badgePulse: {
     width: "8px",
     height: "8px",
     borderRadius: "50%",
     backgroundColor: "#10b981",
+    boxShadow: "0 0 8px #10b981",
+    flexShrink: 0,
   },
   badgeText: {
-    fontSize: "0.8125rem",
-    fontWeight: 600,
-    color: "#0f766e",
+    fontSize: "12px",
+    fontWeight: 700,
+    color: "#e2e8f0",
   },
   contentColumn: {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
   },
-  pillBadge: {
-    display: "inline-block",
-    backgroundColor: "#f0fdfa",
-    color: "#0f766e",
-    fontWeight: 600,
-    fontSize: "0.8125rem",
-    padding: "0.35rem 0.85rem",
-    borderRadius: "9999px",
-    textTransform: "uppercase",
-    letterSpacing: "0.05em",
-    marginBottom: "1rem",
-    border: "1px solid #ccfbf1",
-  },
-  heading: {
-    fontSize: "clamp(2rem, 3.8vw, 2.75rem)",
-    fontWeight: 800,
-    color: "#0f172a",
-    lineHeight: 1.2,
-    margin: "0 0 1.25rem 0",
-    letterSpacing: "-0.03em",
-  },
   lead: {
-    fontSize: "1.0625rem",
-    color: "#475569",
-    lineHeight: 1.65,
+    fontSize: "15px",
+    color: "#94a3b8",
+    lineHeight: 1.7,
     margin: "0 0 2rem 0",
   },
   pointsList: {
@@ -183,54 +183,65 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     alignItems: "flex-start",
     gap: "1rem",
+    padding: "12px 14px",
+    borderRadius: "14px",
+    backgroundColor: "rgba(255, 255, 255, 0.02)",
+    border: "1px solid rgba(255, 255, 255, 0.05)",
   },
   pointIcon: {
-    width: "32px",
-    height: "32px",
-    borderRadius: "8px",
-    backgroundColor: "#f0fdfa",
-    border: "1px solid #ccfbf1",
+    width: "34px",
+    height: "34px",
+    borderRadius: "10px",
+    backgroundColor: "rgba(16, 185, 129, 0.12)",
+    border: "1px solid rgba(16, 185, 129, 0.25)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     flexShrink: 0,
-    marginTop: "0.15rem",
+    marginTop: "0.1rem",
   },
   pointTitle: {
-    fontSize: "1rem",
+    fontFamily: "var(--font-display, 'Outfit', sans-serif)",
+    fontSize: "15px",
     fontWeight: 700,
-    color: "#0f172a",
-    margin: "0 0 0.25rem 0",
+    color: "#f8fafc",
+    margin: 0,
+  },
+  pointBadge: {
+    fontSize: "9px",
+    fontWeight: 700,
+    textTransform: "uppercase",
+    letterSpacing: "0.06em",
+    color: "#a7f3d0",
+    backgroundColor: "rgba(16, 185, 129, 0.15)",
+    padding: "2px 6px",
+    borderRadius: "4px",
   },
   pointDesc: {
-    fontSize: "0.875rem",
-    color: "#64748b",
+    fontSize: "13px",
+    color: "#94a3b8",
     lineHeight: 1.5,
-    margin: 0,
+    margin: "4px 0 0 0",
   },
   ctaRow: {
     display: "flex",
     flexWrap: "wrap",
-    gap: "1rem",
-  },
-  primaryBtn: {
-    backgroundColor: "#0f766e",
-    color: "#ffffff",
-    fontWeight: 600,
-    fontSize: "0.9375rem",
-    padding: "0.8rem 1.65rem",
-    borderRadius: "10px",
-    textDecoration: "none",
-    boxShadow: "0 4px 12px rgba(15, 118, 110, 0.25)",
+    alignItems: "center",
+    gap: "12px",
   },
   secondaryBtn: {
-    backgroundColor: "#ffffff",
-    color: "#0f766e",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: "0 18px",
+    minHeight: "44px",
+    borderRadius: "999px",
+    backgroundColor: "rgba(255, 255, 255, 0.04)",
+    color: "#cbd5e1",
+    fontSize: "13px",
     fontWeight: 600,
-    fontSize: "0.9375rem",
-    padding: "0.8rem 1.65rem",
-    borderRadius: "10px",
     textDecoration: "none",
-    border: "1.5px solid #cbd5e1",
+    border: "1px solid rgba(255, 255, 255, 0.12)",
+    transition: "all 0.18s ease",
   },
 };

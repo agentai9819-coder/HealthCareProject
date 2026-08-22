@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 import { query } from "../lib/db";
 import { Role } from "home-healthcare-types";
+import { logger } from "../lib/logger";
 
 export const requireAuth = (
   req: Request,
@@ -44,7 +45,7 @@ export const requireStaffAuth = async (
     req.session.staffRole = result.rows[0].role as Role;
     next();
   } catch (err) {
-    console.error("Error in requireStaffAuth:", err);
+    logger.error("REQUIRE_STAFF_AUTH_ERROR", "Error during staff auth verification", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Internal server error during authorization",
@@ -87,7 +88,7 @@ export const requireAdminAuth = async (
     req.session.staffRole = Role.Admin;
     next();
   } catch (err) {
-    console.error("Error in requireAdminAuth:", err);
+    logger.error("REQUIRE_ADMIN_AUTH_ERROR", "Error during admin auth verification", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Internal server error during authorization",

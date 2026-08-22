@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { HeroSection } from "../components/marketing/HeroSection";
 import { ClinicianSection } from "../components/marketing/ClinicianSection";
+import { ClinicalCareSection } from "../components/marketing/ClinicalCareSection";
 import { WhoWeHelpSection } from "../components/marketing/WhoWeHelpSection";
 import { FeaturedServicesSection } from "../components/marketing/FeaturedServicesSection";
 import { HowItWorksSection } from "../components/marketing/HowItWorksSection";
@@ -25,7 +26,10 @@ export default function HomePage() {
           {/* 2. Clinician Spotlight Section */}
           <ClinicianSection />
 
-          {/* 3. Tailored Clinical Care Pathways */}
+          {/* 3. Hospital Precision & Sterile Bedside Care */}
+          <ClinicalCareSection />
+
+          {/* 4. Tailored Clinical Care Pathways */}
           <WhoWeHelpSection />
 
           {/* 4. Featured Clinical Services with upfront INR Pricing */}

@@ -9,6 +9,8 @@ import {
 } from "home-healthcare-validation";
 import { pool, query } from "../../lib/db";
 import { requireAuth } from "../../middleware/auth";
+import { validateUuidParam } from "../../middleware/validate";
+import { logger } from "../../lib/logger";
 
 export const bookingsRouter = Router();
 
@@ -131,7 +133,7 @@ bookingsRouter.post("/", requireAuth, async (req: Request, res: Response) => {
     });
   } catch (err) {
     await client.query("ROLLBACK");
-    console.error("Booking error:", err);
+    logger.error("CREATE_BOOKING_ERROR", "Failed to create booking", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Booking failed",
@@ -177,7 +179,7 @@ bookingsRouter.get("/", requireAuth, async (req: Request, res: Response) => {
       data: result.rows,
     });
   } catch (err) {
-    console.error("Get customer bookings error:", err);
+    logger.error("GET_CUSTOMER_BOOKINGS_ERROR", "Failed to retrieve customer bookings", { details: { err: String(err) } });
     res.status(500).json({
       success: false,
       error: "Failed to fetch bookings",
@@ -186,7 +188,7 @@ bookingsRouter.get("/", requireAuth, async (req: Request, res: Response) => {
 });
 
 // 3. Get Booking Details (Privacy-safe: returns sanitized customerSummary, strictly omits staff_notes)
-bookingsRouter.get("/:id", requireAuth, async (req: Request, res: Response) => {
+bookingsRouter.get("/:id", requireAuth, validateUuidParam("id"), async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
@@ -232,7 +234,7 @@ bookingsRouter.get("/:id", requireAuth, async (req: Request, res: Response) => {
       data: booking,
     });
   } catch (err) {
-    console.error("Get booking error:", err);
+    logger.error("GET_BOOKING_ERROR", "Failed to retrieve booking", { details: { err: String(err) } });
     res.status(500).json({
       success: false,
       error: "Failed to fetch booking",
@@ -241,7 +243,7 @@ bookingsRouter.get("/:id", requireAuth, async (req: Request, res: Response) => {
 });
 
 // 4. Update Customer Pre-Visit Intake Notes
-bookingsRouter.patch("/:id/intake", requireAuth, async (req: Request, res: Response) => {
+bookingsRouter.patch("/:id/intake", requireAuth, validateUuidParam("id"), async (req: Request, res: Response) => {
   const { id } = req.params;
   const parseResult = updateCustomerIntakeSchema.safeParse(req.body);
 
@@ -324,7 +326,7 @@ bookingsRouter.patch("/:id/intake", requireAuth, async (req: Request, res: Respo
     });
   } catch (err) {
     await client.query("ROLLBACK");
-    console.error("Update intake notes error:", err);
+    logger.error("UPDATE_INTAKE_NOTES_ERROR", "Failed to update intake notes", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to update customer intake notes",
@@ -338,6 +340,7 @@ bookingsRouter.patch("/:id/intake", requireAuth, async (req: Request, res: Respo
 bookingsRouter.patch(
   "/:id/cancel",
   requireAuth,
+  validateUuidParam("id"),
   async (req: Request, res: Response) => {
     const { id } = req.params;
     const client = await pool.connect();
@@ -459,7 +462,7 @@ bookingsRouter.patch(
       });
     } catch (err) {
       await client.query("ROLLBACK");
-      console.error("Cancel booking error:", err);
+      logger.error("CANCEL_BOOKING_ERROR", "Failed to cancel booking", { details: { err: String(err) } });
       return res.status(500).json({
         success: false,
         error: "Failed to cancel booking",
@@ -474,6 +477,7 @@ bookingsRouter.patch(
 bookingsRouter.patch(
   "/:id/reschedule",
   requireAuth,
+  validateUuidParam("id"),
   async (req: Request, res: Response) => {
     const { id } = req.params;
     const parseResult = rescheduleBookingSchema.safeParse(req.body);
@@ -629,7 +633,7 @@ bookingsRouter.patch(
       });
     } catch (err) {
       await client.query("ROLLBACK");
-      console.error("Reschedule booking error:", err);
+      logger.error("RESCHEDULE_BOOKING_ERROR", "Failed to reschedule booking", { details: { err: String(err) } });
       return res.status(500).json({
         success: false,
         error: "Failed to reschedule booking",
@@ -644,6 +648,7 @@ bookingsRouter.patch(
 bookingsRouter.patch(
   "/:id/address",
   requireAuth,
+  validateUuidParam("id"),
   async (req: Request, res: Response) => {
     const { id } = req.params;
     const parseResult = changeBookingAddressSchema.safeParse(req.body);
@@ -764,7 +769,7 @@ bookingsRouter.patch(
       });
     } catch (err) {
       await client.query("ROLLBACK");
-      console.error("Change booking address error:", err);
+      logger.error("CHANGE_BOOKING_ADDRESS_ERROR", "Failed to change booking address", { details: { err: String(err) } });
       return res.status(500).json({
         success: false,
         error: "Failed to change booking address",
@@ -779,6 +784,7 @@ bookingsRouter.patch(
 bookingsRouter.post(
   "/:id/rebook",
   requireAuth,
+  validateUuidParam("id"),
   async (req: Request, res: Response) => {
     const { id } = req.params;
     const parseResult = rebookBookingSchema.safeParse(req.body);
@@ -947,7 +953,7 @@ bookingsRouter.post(
       });
     } catch (err) {
       await client.query("ROLLBACK");
-      console.error("Rebook error:", err);
+      logger.error("REBOOK_ERROR", "Failed to rebook", { details: { err: String(err) } });
       return res.status(500).json({
         success: false,
         error: "Rebooking failed",

@@ -4,6 +4,8 @@ const nextConfig = {
   reactStrictMode: true,
   compress: true,
   poweredByHeader: false,
+  // Explicitly disable source maps in production builds to prevent code structure exposure
+  productionBrowserSourceMaps: false,
   compiler: {
     removeConsole: process.env.NODE_ENV === "production" ? { exclude: ["error"] } : false,
   },

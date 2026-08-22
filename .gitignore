@@ -14,6 +14,16 @@ node_modules/
 .env.test
 .env.production
 !.env.example
+*.pem
+*.key
+*.cert
+*.pfx
+*.p12
+*.crt
+*.id_rsa
+*.id_ed25519
+*.secret
+*.sql.bak
 
 # ==========================================
 # Build Artifacts & Output

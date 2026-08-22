@@ -6,10 +6,13 @@ import {
   assignStaffSchema,
   reassignStaffSchema,
   setElevatedAccessSchema,
+  listVisitsQuerySchema,
 } from "home-healthcare-validation";
 import { VisitStatus, Role } from "home-healthcare-types";
 import { pool, query } from "../../lib/db";
 import { requireStaffAuth, requireAdminAuth } from "../../middleware/auth";
+import { validateUuidParam, validateQuery } from "../../middleware/validate";
+import { logger } from "../../lib/logger";
 
 export const staffVisitsRouter = Router();
 export const adminVisitsRouter = Router();
@@ -19,7 +22,7 @@ export const adminVisitsRouter = Router();
 // ===========================================================================
 
 // 1. List assigned visits for authenticated staff
-staffVisitsRouter.get("/", requireStaffAuth, async (req: Request, res: Response) => {
+staffVisitsRouter.get("/", requireStaffAuth, validateQuery(listVisitsQuerySchema), async (req: Request, res: Response) => {
   const staffId = req.session.staffId;
   const statusFilter = req.query.status as string | undefined;
   const dateFilter = req.query.date as string | undefined;
@@ -83,7 +86,7 @@ staffVisitsRouter.get("/", requireStaffAuth, async (req: Request, res: Response)
       data: result.rows,
     });
   } catch (err) {
-    console.error("List staff visits error:", err);
+    logger.error("LIST_STAFF_VISITS_ERROR", "Failed to list staff visits", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to fetch assigned visits",
@@ -92,7 +95,7 @@ staffVisitsRouter.get("/", requireStaffAuth, async (req: Request, res: Response)
 });
 
 // 2. Get specific visit details for authenticated staff
-staffVisitsRouter.get("/:id", requireStaffAuth, async (req: Request, res: Response) => {
+staffVisitsRouter.get("/:id", requireStaffAuth, validateUuidParam("id"), async (req: Request, res: Response) => {
   const visitId = req.params.id;
   const staffId = req.session.staffId;
 
@@ -182,7 +185,7 @@ staffVisitsRouter.get("/:id", requireStaffAuth, async (req: Request, res: Respon
       },
     });
   } catch (err) {
-    console.error("Get visit details error:", err);
+    logger.error("GET_VISIT_DETAILS_ERROR", "Failed to get visit details", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to fetch visit details",
@@ -190,8 +193,8 @@ staffVisitsRouter.get("/:id", requireStaffAuth, async (req: Request, res: Respon
   }
 });
 
-// 3. Progress visit operational status (EN_ROUTE, IN_PROGRESS)
-staffVisitsRouter.patch("/:id/status", requireStaffAuth, async (req: Request, res: Response) => {
+// 3. Transition visit status (EN_ROUTE, IN_PROGRESS) by staff caregiver
+staffVisitsRouter.patch("/:id/status", requireStaffAuth, validateUuidParam("id"), async (req: Request, res: Response) => {
   const visitId = req.params.id;
   const staffId = req.session.staffId;
   const parseResult = transitionVisitStatusSchema.safeParse(req.body);
@@ -287,7 +290,7 @@ staffVisitsRouter.patch("/:id/status", requireStaffAuth, async (req: Request, re
     });
   } catch (err) {
     await client.query("ROLLBACK");
-    console.error("Transition visit status error:", err);
+    logger.error("TRANSITION_VISIT_STATUS_ERROR", "Failed to transition visit status", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to transition visit status",
@@ -298,7 +301,7 @@ staffVisitsRouter.patch("/:id/status", requireStaffAuth, async (req: Request, re
 });
 
 // 4. Complete visit by staff caregiver
-staffVisitsRouter.post("/:id/complete", requireStaffAuth, async (req: Request, res: Response) => {
+staffVisitsRouter.post("/:id/complete", requireStaffAuth, validateUuidParam("id"), async (req: Request, res: Response) => {
   const visitId = req.params.id;
   const staffId = req.session.staffId;
   const parseResult = completeVisitSchema.safeParse(req.body);
@@ -422,7 +425,7 @@ staffVisitsRouter.post("/:id/complete", requireStaffAuth, async (req: Request, r
     });
   } catch (err) {
     await client.query("ROLLBACK");
-    console.error("Complete visit error:", err);
+    logger.error("COMPLETE_VISIT_ERROR", "Failed to complete visit", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to complete visit",
@@ -514,7 +517,7 @@ adminVisitsRouter.get("/", async (req: Request, res: Response) => {
       data,
     });
   } catch (err) {
-    console.error("Admin list visits error:", err);
+    logger.error("ADMIN_LIST_VISITS_ERROR", "Failed to list admin visits", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to fetch visits overview",
@@ -523,7 +526,7 @@ adminVisitsRouter.get("/", async (req: Request, res: Response) => {
 });
 
 // 2. Assign staff to visit (Add active staff)
-adminVisitsRouter.post("/:id/assign", async (req: Request, res: Response) => {
+adminVisitsRouter.post("/:id/assign", validateUuidParam("id"), async (req: Request, res: Response) => {
   const visitId = req.params.id;
   const adminId = req.session.staffId;
   const parseResult = assignStaffSchema.safeParse(req.body);
@@ -629,7 +632,7 @@ adminVisitsRouter.post("/:id/assign", async (req: Request, res: Response) => {
     });
   } catch (err) {
     await client.query("ROLLBACK");
-    console.error("Assign staff error:", err);
+    logger.error("ASSIGN_STAFF_ERROR", "Failed to assign staff to visit", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to assign staff to visit",
@@ -640,7 +643,7 @@ adminVisitsRouter.post("/:id/assign", async (req: Request, res: Response) => {
 });
 
 // 3. Reassign staff on visit (Replace staff with audit trail)
-adminVisitsRouter.post("/:id/reassign", async (req: Request, res: Response) => {
+adminVisitsRouter.post("/:id/reassign", validateUuidParam("id"), async (req: Request, res: Response) => {
   const visitId = req.params.id;
   const adminId = req.session.staffId;
   const parseResult = reassignStaffSchema.safeParse(req.body);
@@ -780,7 +783,7 @@ adminVisitsRouter.post("/:id/reassign", async (req: Request, res: Response) => {
     });
   } catch (err) {
     await client.query("ROLLBACK");
-    console.error("Reassign staff error:", err);
+    logger.error("REASSIGN_STAFF_ERROR", "Failed to reassign staff", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to reassign visit staff",
@@ -791,7 +794,7 @@ adminVisitsRouter.post("/:id/reassign", async (req: Request, res: Response) => {
 });
 
 // 4. Update elevated sensitive-information access on an active assignment
-adminVisitsRouter.patch("/:id/assignments/:staffId/access", async (req: Request, res: Response) => {
+adminVisitsRouter.patch("/:id/assignments/:staffId/access", validateUuidParam("id", "staffId"), async (req: Request, res: Response) => {
   const visitId = req.params.id;
   const staffId = req.params.staffId;
   const parseResult = setElevatedAccessSchema.safeParse(req.body);
@@ -827,7 +830,7 @@ adminVisitsRouter.patch("/:id/assignments/:staffId/access", async (req: Request,
       data: result.rows[0],
     });
   } catch (err) {
-    console.error("Update elevated access error:", err);
+    logger.error("UPDATE_ELEVATED_ACCESS_ERROR", "Failed to update elevated access", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to update elevated access",
@@ -836,7 +839,7 @@ adminVisitsRouter.patch("/:id/assignments/:staffId/access", async (req: Request,
 });
 
 // 5. Admin visit completion override
-adminVisitsRouter.post("/:id/complete", async (req: Request, res: Response) => {
+adminVisitsRouter.post("/:id/complete", validateUuidParam("id"), async (req: Request, res: Response) => {
   const visitId = req.params.id;
   const adminId = req.session.staffId;
   const parseResult = completeVisitSchema.safeParse(req.body);
@@ -942,7 +945,7 @@ adminVisitsRouter.post("/:id/complete", async (req: Request, res: Response) => {
     });
   } catch (err) {
     await client.query("ROLLBACK");
-    console.error("Admin complete visit error:", err);
+    logger.error("ADMIN_COMPLETE_VISIT_ERROR", "Failed to admin-complete visit", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to complete visit",

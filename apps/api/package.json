@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc -b",
-    "test": "node __tests__/booking-concurrency.test.js && node __tests__/auth-security.test.js",
+    "test": "node __tests__/booking-concurrency.test.js && node __tests__/auth-security.test.js && node __tests__/injection-defense.test.js && node __tests__/idor-ownership.test.js && node __tests__/abuse-protection.test.js && node __tests__/security-logging-transport.test.js",
     "start": "node --env-file=.env dist/index.js",
     "dev": "tsx watch --env-file=.env src/index.ts"
   },

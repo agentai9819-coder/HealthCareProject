@@ -4,11 +4,14 @@ import { Workbook } from "exceljs";
 import {
   createStaffSchema,
   updateStaffStatusSchema,
+  sanitizeFormulaCell,
 } from "home-healthcare-validation";
 import { Role } from "home-healthcare-types";
 import { pool, query } from "../../lib/db";
 import { hashPassword } from "../../lib/bcrypt";
 import { requireAdminAuth } from "../../middleware/auth";
+import { validateUuidParam } from "../../middleware/validate";
+import { logger } from "../../lib/logger";
 
 export const adminStaffRouter = Router();
 
@@ -29,7 +32,7 @@ adminStaffRouter.get("/", async (req: Request, res: Response) => {
       data: result.rows,
     });
   } catch (err) {
-    console.error("List staff error:", err);
+    logger.error("LIST_STAFF_ERROR", "Failed to list staff", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to fetch staff list",
@@ -75,7 +78,7 @@ adminStaffRouter.post("/", async (req: Request, res: Response) => {
       data: insertResult.rows[0],
     });
   } catch (err) {
-    console.error("Create staff error:", err);
+    logger.error("CREATE_STAFF_ERROR", "Failed to create staff account", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to create staff account",
@@ -84,7 +87,7 @@ adminStaffRouter.post("/", async (req: Request, res: Response) => {
 });
 
 // 3. Activate or deactivate staff account (with atomic assignment deactivation)
-adminStaffRouter.patch("/:id/status", async (req: Request, res: Response) => {
+adminStaffRouter.patch("/:id/status", validateUuidParam("id"), async (req: Request, res: Response) => {
   const staffId = req.params.id;
   const parseResult = updateStaffStatusSchema.safeParse(req.body);
 
@@ -143,7 +146,7 @@ adminStaffRouter.patch("/:id/status", async (req: Request, res: Response) => {
     });
   } catch (err) {
     await client.query("ROLLBACK");
-    console.error("Update staff status error:", err);
+    logger.error("UPDATE_STAFF_STATUS_ERROR", "Failed to update staff status", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to update staff status",
@@ -220,11 +223,11 @@ adminStaffRouter.get("/export/history", async (req: Request, res: Response) => {
     for (const row of staffRes.rows) {
       staffSheet.addRow({
         id: row.id,
-        name: row.name,
-        email: row.email,
+        name: sanitizeFormulaCell(row.name),
+        email: sanitizeFormulaCell(row.email),
         role: row.role,
-        specialty: row.specialty || "General",
-        phone: row.phone || "N/A",
+        specialty: sanitizeFormulaCell(row.specialty || "General"),
+        phone: sanitizeFormulaCell(row.phone || "N/A"),
         status: row.isActive ? "Active" : "Inactive",
         totalAssignments: Number(row.totalAssignments || 0),
         completedVisits: Number(row.completedVisits || 0),
@@ -253,7 +256,7 @@ adminStaffRouter.get("/export/history", async (req: Request, res: Response) => {
       assignmentSheet.addRow({
         assignmentId: row.assignmentId,
         staffId: row.staffId,
-        staffName: row.staffName,
+        staffName: sanitizeFormulaCell(row.staffName),
         visitId: row.visitId,
         bookingId: row.bookingId,
         visitStatus: row.visitStatus,
@@ -262,7 +265,7 @@ adminStaffRouter.get("/export/history", async (req: Request, res: Response) => {
         hasElevatedAccess: row.hasElevatedAccess ? "Yes" : "No",
         assignedAt: new Date(row.assignedAt).toISOString(),
         unassignedAt: row.unassignedAt ? new Date(row.unassignedAt).toISOString() : "N/A",
-        reassignmentReason: row.reassignmentReason || "N/A",
+        reassignmentReason: sanitizeFormulaCell(row.reassignmentReason || "N/A"),
       });
     }
 
@@ -278,7 +281,7 @@ adminStaffRouter.get("/export/history", async (req: Request, res: Response) => {
     await workbook.xlsx.write(res);
     res.end();
   } catch (err) {
-    console.error("Export staff history error:", err);
+    logger.error("EXPORT_STAFF_HISTORY_ERROR", "Failed to export staff history", { details: { err: String(err) } });
     if (!res.headersSent) {
       return res.status(500).json({
         success: false,

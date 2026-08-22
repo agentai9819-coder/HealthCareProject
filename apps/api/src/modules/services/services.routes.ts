@@ -1,5 +1,7 @@
 import { Router, Request, Response } from "express";
 import { query } from "../../lib/db";
+import { validateUuidParam } from "../../middleware/validate";
+import { logger } from "../../lib/logger";
 
 export const servicesRouter = Router();
 
@@ -16,7 +18,7 @@ servicesRouter.get("/", async (_req: Request, res: Response) => {
       data: result.rows,
     });
   } catch (err) {
-    console.error("Get services error:", err);
+    logger.error("GET_SERVICES_ERROR", "Failed to retrieve services list", { details: { err: String(err) } });
     res.status(500).json({
       success: false,
       error: "Failed to fetch services",
@@ -24,7 +26,7 @@ servicesRouter.get("/", async (_req: Request, res: Response) => {
   }
 });
 
-servicesRouter.get("/:id", async (req: Request, res: Response) => {
+servicesRouter.get("/:id", validateUuidParam("id"), async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
@@ -47,7 +49,7 @@ servicesRouter.get("/:id", async (req: Request, res: Response) => {
       data: result.rows[0],
     });
   } catch (err) {
-    console.error("Get service error:", err);
+    logger.error("GET_SERVICE_ERROR", "Failed to retrieve service", { details: { err: String(err) } });
     res.status(500).json({
       success: false,
       error: "Failed to fetch service",
@@ -55,7 +57,7 @@ servicesRouter.get("/:id", async (req: Request, res: Response) => {
   }
 });
 
-servicesRouter.get("/:id/slots", async (req: Request, res: Response) => {
+servicesRouter.get("/:id/slots", validateUuidParam("id"), async (req: Request, res: Response) => {
   const { id } = req.params;
 
   try {
@@ -83,7 +85,7 @@ servicesRouter.get("/:id/slots", async (req: Request, res: Response) => {
       data: slotsResult.rows,
     });
   } catch (err) {
-    console.error("Get slots error:", err);
+    logger.error("GET_SLOTS_ERROR", "Failed to retrieve appointment slots", { details: { err: String(err) } });
     res.status(500).json({
       success: false,
       error: "Failed to fetch appointment slots",

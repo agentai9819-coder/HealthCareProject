@@ -11,13 +11,24 @@ This skill encapsulates all architectural patterns, security defenses, design cr
 
 ## 📁 Blueprint Contents & Quick Links
 
-1. [01. Pre-Launch Security & CVE Defense](file:///c:/Users/dell/Documents/myproject/skills-and-instructions/01-SECURITY-AND-HARDENING.md)
-   - 20-Point Emergent & Aikido Security Checklist
-   - Express & Next.js Security Headers (CSP, HSTS, Permissions-Policy)
-   - In-Memory Sliding Window Rate Limiter
-   - Constant-Time Bcrypt Timing Attack Defense
-   - Safe Cloud Database (PostgreSQL SSL & Circuit Breaker)
-   - Zero-Vulnerability Package Overrides (`zod`, `uuid`, `sharp`, `raw-body`, `body-parser`)
+1. [01. Complete Security & Hardening Playbook](file:///c:/Users/dell/Documents/myproject/skills-and-instructions/01-SECURITY-AND-HARDENING.md)
+   - Express Security Headers (CSP, HSTS, Permissions-Policy, Helmet)
+   - Multi-Tier Rate Limiting (Registration, Auth, Export, AI, API)
+   - Anti-Bot & Malicious Scanner Blocking (`botDetectionMiddleware`)
+   - HTTPS Transport Enforcement & Request ID Correlation
+   - Structured JSON Security Logger with PII / Healthcare Data Redaction
+   - Input Validation, XSS Sanitization & Formula Injection Defense (CWE-1236)
+   - IDOR / Multi-Tenant Ownership & Server-Side Pricing Invariants
+   - Login Timing Attack & Account Enumeration Defense (DUMMY_HASH)
+   - Account Lockout & Brute-Force Defense (DB attempt counters)
+   - Webhook Cryptographic Signature Verification (HMAC / Stripe / Razorpay)
+   - Safe File Uploads, MIME Whitelisting & Path Traversal Defense
+   - AI / LLM Guardrails, Token Cost Caps & Prompt Injection Sanitization
+   - Production Source Map & Debug Output Disabling
+   - PostgreSQL Strict TLS Peer Verification
+   - Package CVE Overrides (`zod`, `uuid`, `sharp`, `raw-body`, `body-parser`)
+   - Vercel & Reverse-Proxy Security Headers Configuration
+   - **Full 40-Point Pre-Launch Security Checklist** (copy & tick before every launch)
 
 2. [02. Anti-AI-Slop UI/UX & Motion Engineering](file:///c:/Users/dell/Documents/myproject/skills-and-instructions/02-DESIGN-AND-MOTION.md)
    - Emil Kowalski Motion Tokens (`cubic-bezier(0.16, 1, 0.3, 1)`)
@@ -39,12 +50,21 @@ This skill encapsulates all architectural patterns, security defenses, design cr
    - Social Share OpenGraph (`og:image`, `og:title`) metadata
 
 5. [05. Automated Verification & Karpathy Engineering Rails](file:///c:/Users/dell/Documents/myproject/skills-and-instructions/05-VERIFICATION-AND-RAILS.md)
-   - 7-Step Automated Verification Script (`scripts/verify-all.js`)
+   - Full 12-Step Automated Verification Script (`scripts/verify-all.js`)
+   - Individual Test Suite Templates (Auth, IDOR, Abuse Protection, Logging)
    - Andrej Karpathy Engineering Rules (Think before coding, surgical changes, no patch-on-patch)
    - Git commit & release standards
 
 ---
 
 ## ⚡ How to Initialize a New Project with this Skill
+
 When prompting an AI assistant on a fresh repository, provide this one instruction:
 > *"Load and follow all guidelines, security configurations, and design tokens from `skills-and-instructions/SKILL.md`."*
+
+## 🔒 Security-First Workflow for Every New Project
+
+1. Apply all items from **Section 1** before writing any business logic
+2. Run `scripts/secret-scanner.js` after every env var change
+3. Run `scripts/verify-all.js` before every git commit
+4. Tick the 40-point checklist in `01-SECURITY-AND-HARDENING.md` before launch

@@ -6,6 +6,8 @@ import {
 } from "home-healthcare-validation";
 import { pool, query } from "../../lib/db";
 import { requireAuth } from "../../middleware/auth";
+import { validateUuidParam } from "../../middleware/validate";
+import { logger } from "../../lib/logger";
 
 export const addressesRouter = Router();
 
@@ -27,10 +29,44 @@ addressesRouter.get("/", requireAuth, async (req: Request, res: Response) => {
       data: result.rows,
     });
   } catch (err) {
-    console.error("Get addresses error:", err);
+    logger.error("GET_ADDRESSES_ERROR", "Failed to retrieve customer addresses", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to fetch saved addresses",
+    });
+  }
+});
+
+// GET /api/v1/customers/me/addresses/:id
+addressesRouter.get("/:id", requireAuth, validateUuidParam("id"), async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  try {
+    const result = await query(
+      `SELECT id, customer_id as "customerId", label, street, city, state,
+              postal_code as "postalCode", is_default as "isDefault",
+              created_at as "createdAt", updated_at as "updatedAt"
+       FROM customer_addresses
+       WHERE id = $1 AND customer_id = $2`,
+      [id, req.session.customerId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({
+        success: false,
+        error: "Address not found",
+      });
+    }
+
+    return res.json({
+      success: true,
+      data: result.rows[0],
+    });
+  } catch (err) {
+    logger.error("GET_ADDRESS_ERROR", "Failed to retrieve address", { details: { err: String(err) } });
+    return res.status(500).json({
+      success: false,
+      error: "Failed to fetch address",
     });
   }
 });
@@ -107,7 +143,7 @@ addressesRouter.post("/", requireAuth, async (req: Request, res: Response) => {
     });
   } catch (err) {
     await client.query("ROLLBACK");
-    console.error("Create address error:", err);
+    logger.error("CREATE_ADDRESS_ERROR", "Failed to create address", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to create address",
@@ -118,7 +154,7 @@ addressesRouter.post("/", requireAuth, async (req: Request, res: Response) => {
 });
 
 // PATCH /api/v1/customers/me/addresses/:id
-addressesRouter.patch("/:id", requireAuth, async (req: Request, res: Response) => {
+addressesRouter.patch("/:id", requireAuth, validateUuidParam("id"), async (req: Request, res: Response) => {
   const { id } = req.params;
   const parse = updateCustomerAddressSchema.safeParse(req.body);
 
@@ -205,7 +241,7 @@ addressesRouter.patch("/:id", requireAuth, async (req: Request, res: Response) =
     });
   } catch (err) {
     await client.query("ROLLBACK");
-    console.error("Update address error:", err);
+    logger.error("UPDATE_ADDRESS_ERROR", "Failed to update address", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to update address",
@@ -216,7 +252,7 @@ addressesRouter.patch("/:id", requireAuth, async (req: Request, res: Response) =
 });
 
 // DELETE /api/v1/customers/me/addresses/:id
-addressesRouter.delete("/:id", requireAuth, async (req: Request, res: Response) => {
+addressesRouter.delete("/:id", requireAuth, validateUuidParam("id"), async (req: Request, res: Response) => {
   const { id } = req.params;
   const client = await pool.connect();
 
@@ -275,7 +311,7 @@ addressesRouter.delete("/:id", requireAuth, async (req: Request, res: Response) 
     });
   } catch (err) {
     await client.query("ROLLBACK");
-    console.error("Delete address error:", err);
+    logger.error("DELETE_ADDRESS_ERROR", "Failed to delete address", { details: { err: String(err) } });
     return res.status(500).json({
       success: false,
       error: "Failed to delete address",

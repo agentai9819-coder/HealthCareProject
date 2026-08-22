@@ -12,9 +12,26 @@ import { addressesRouter } from "./modules/addresses/addresses.routes";
 import { staffRouter } from "./modules/staff/staff.routes";
 import { adminStaffRouter } from "./modules/staff/admin.routes";
 import { staffVisitsRouter, adminVisitsRouter } from "./modules/visits/visits.routes";
-import { apiRateLimiter, authRateLimiter } from "./middleware/rate-limiter";
+import {
+  apiRateLimiter,
+  authRateLimiter,
+  registrationRateLimiter,
+  exportScrapingLimiter,
+  botDetectionMiddleware,
+} from "./middleware/rate-limiter";
+import {
+  requestIdMiddleware,
+  enforceHttpsMiddleware,
+  securityAuditMiddleware,
+} from "./middleware/security-transport";
 
 const app = express();
+
+app.set("trust proxy", 1);
+
+// Attach unique Correlation / Request ID and enforce HTTPS data-in-transit
+app.use(requestIdMiddleware);
+app.use(enforceHttpsMiddleware);
 
 app.disable("x-powered-by");
 
@@ -78,11 +95,18 @@ app.get("/health", (_req, res) => {
   res.json({ status: "ok" });
 });
 
-// Rate limiting & Bot Protection
+// Rate limiting, Anti-Bot & Abuse Protection
+app.use("/api", botDetectionMiddleware);
+app.use("/api", securityAuditMiddleware);
 app.use("/api/v1", apiRateLimiter);
-app.use("/api/v1/customers/register", authRateLimiter);
+app.use("/api/v1/customers/register", registrationRateLimiter);
 app.use("/api/v1/customers/login", authRateLimiter);
+app.use("/api/v1/customers/forgot-password", authRateLimiter);
+app.use("/api/v1/customers/reset-password", authRateLimiter);
+app.use("/api/v1/customers/verify-email", authRateLimiter);
+app.use("/api/v1/customers/resend-verification", authRateLimiter);
 app.use("/api/v1/staff/login", authRateLimiter);
+app.use("/api/v1/admin/staff/export/history", exportScrapingLimiter);
 
 // Customer Endpoints
 app.use("/api/v1/customers/me/addresses", addressesRouter);

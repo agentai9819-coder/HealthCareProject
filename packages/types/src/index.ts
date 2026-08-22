@@ -33,6 +33,7 @@ export interface Customer {
   id: string;
   name: string;
   email: string;
+  isEmailVerified?: boolean;
   created_at: string;
 }
 
@@ -100,6 +101,7 @@ export interface CustomerProfile {
   id: string;
   name: CustomerName | string;
   email: string;
+  isEmailVerified?: boolean;
   createdAt: string;
 }
 
@@ -110,6 +112,24 @@ export interface UpdateProfilePayload {
 export interface ChangePasswordPayload {
   currentPassword: string;
   newPassword: string;
+}
+
+export interface ForgotPasswordPayload {
+  email: string;
+}
+
+export interface ResetPasswordPayload {
+  token: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+export interface VerifyEmailPayload {
+  token: string;
+}
+
+export interface ResendVerificationPayload {
+  email: string;
 }
 
 export interface CustomerAddress {
