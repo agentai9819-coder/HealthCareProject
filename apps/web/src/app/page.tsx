@@ -79,7 +79,7 @@ export default function HomePage() {
 
 const styles: Record<string, React.CSSProperties> = {
   faqSection: {
-    padding: "80px 0 60px",
+    padding: "90px 0 60px",
     position: "relative",
   },
   container: {
@@ -93,7 +93,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   faqSubtitle: {
     fontSize: "15px",
-    color: "#94a3b8",
+    color: "#475569",
     lineHeight: 1.6,
     margin: "0 auto",
   },
@@ -105,13 +105,14 @@ const styles: Record<string, React.CSSProperties> = {
     display: "inline-flex",
     alignItems: "center",
     gap: "0.5rem",
-    color: "#a7f3d0",
-    fontWeight: 700,
+    color: "#059669",
+    fontWeight: 800,
     fontSize: "14px",
     textDecoration: "none",
     padding: "0.75rem 1.75rem",
-    backgroundColor: "rgba(255, 255, 255, 0.04)",
-    border: "1px solid rgba(255, 255, 255, 0.12)",
+    backgroundColor: "#ffffff",
+    border: "1px solid rgba(226, 232, 240, 0.9)",
     borderRadius: "9999px",
+    boxShadow: "0 2px 8px rgba(15, 23, 42, 0.04)",
   },
 };

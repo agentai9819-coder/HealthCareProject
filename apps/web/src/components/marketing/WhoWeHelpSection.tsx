@@ -88,8 +88,8 @@ export function WhoWeHelpSection() {
                 className="service-card"
                 style={{
                   ...styles.card,
-                  borderColor: isSelected ? "rgba(52, 211, 153, 0.4)" : "rgba(255, 255, 255, 0.08)",
-                  background: isSelected ? "linear-gradient(145deg, rgba(16, 185, 129, 0.08), rgba(12, 20, 26, 0.8))" : "rgba(12, 20, 26, 0.72)",
+                  borderColor: isSelected ? "var(--color-emerald)" : "rgba(226, 232, 240, 0.9)",
+                  boxShadow: isSelected ? "0 16px 36px -10px rgba(16, 185, 129, 0.15)" : "0 8px 24px -8px rgba(15, 23, 42, 0.05)",
                 }}
                 onClick={() => setActiveTab(item.id)}
               >
@@ -104,19 +104,19 @@ export function WhoWeHelpSection() {
                 <p style={styles.cardSubtitle}>{item.subtitle}</p>
 
                 <div style={styles.protocolBox}>
-                  <strong style={{ display: "block", fontSize: "11px", color: "#a7f3d0", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "6px" }}>
+                  <strong style={{ display: "block", fontSize: "11px", color: "#047857", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "6px" }}>
                     Clinical Protocol
                   </strong>
-                  <p style={{ margin: 0, fontSize: "13px", color: "#cbd5e1", lineHeight: 1.55 }}>
+                  <p style={{ margin: 0, fontSize: "13px", color: "#334155", lineHeight: 1.55 }}>
                     {item.protocol}
                   </p>
                 </div>
 
-                <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "14px", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-                  <span style={{ fontSize: "12px", color: "#94a3b8", fontWeight: 600 }}>{item.duration}</span>
+                <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "14px", borderTop: "1px solid rgba(226, 232, 240, 0.8)" }}>
+                  <span style={{ fontSize: "12px", color: "#64748b", fontWeight: 700 }}>{item.duration}</span>
                   <Link
                     href="/services"
-                    style={{ fontSize: "12px", color: "#34d399", fontWeight: 700, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px" }}
+                    style={{ fontSize: "13px", color: "#059669", fontWeight: 800, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px" }}
                   >
                     <span>View Pathway</span>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -135,8 +135,9 @@ export function WhoWeHelpSection() {
 
 const styles: Record<string, React.CSSProperties> = {
   section: {
-    padding: "90px 0",
+    padding: "95px 0",
     position: "relative",
+    background: "#f8fafc",
   },
   container: {
     maxWidth: "1320px",
@@ -149,7 +150,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   subtitle: {
     fontSize: "15px",
-    color: "#94a3b8",
+    color: "#475569",
     lineHeight: 1.65,
     margin: 0,
   },
@@ -159,11 +160,13 @@ const styles: Record<string, React.CSSProperties> = {
     gap: "1.5rem",
   },
   card: {
-    padding: "24px",
+    padding: "26px",
     display: "flex",
     flexDirection: "column",
     cursor: "pointer",
-    borderRadius: "20px",
+    borderRadius: "22px",
+    backgroundColor: "#ffffff",
+    transition: "all 0.2s cubic-bezier(0.16, 1, 0.3, 1)",
   },
   cardTop: {
     display: "flex",
@@ -175,43 +178,43 @@ const styles: Record<string, React.CSSProperties> = {
     width: "44px",
     height: "44px",
     borderRadius: "12px",
-    backgroundColor: "rgba(16, 185, 129, 0.12)",
-    color: "#34d399",
+    backgroundColor: "#ecfdf5",
+    color: "#059669",
     border: "1px solid rgba(16, 185, 129, 0.25)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
   cardTag: {
-    fontSize: "11px",
-    fontWeight: 700,
+    fontSize: "10px",
+    fontWeight: 800,
     textTransform: "uppercase",
     letterSpacing: "0.06em",
-    color: "#a7f3d0",
-    backgroundColor: "rgba(16, 185, 129, 0.12)",
+    color: "#047857",
+    backgroundColor: "#ecfdf5",
     padding: "3px 8px",
     borderRadius: "6px",
-    border: "1px solid rgba(16, 185, 129, 0.25)",
+    border: "1px solid rgba(16, 185, 129, 0.2)",
   },
   cardTitle: {
     fontFamily: "var(--font-display, 'Outfit', sans-serif)",
-    fontSize: "1.2rem",
-    fontWeight: 700,
-    color: "#f8fafc",
+    fontSize: "1.25rem",
+    fontWeight: 800,
+    color: "#0f172a",
     margin: "0 0 0.5rem 0",
     lineHeight: 1.3,
   },
   cardSubtitle: {
     fontSize: "13px",
-    color: "#94a3b8",
+    color: "#475569",
     lineHeight: 1.5,
-    margin: "0 0 1rem 0",
+    margin: "0 0 1.25rem 0",
   },
   protocolBox: {
-    backgroundColor: "rgba(255, 255, 255, 0.03)",
-    border: "1px solid rgba(255, 255, 255, 0.06)",
-    borderRadius: "12px",
-    padding: "12px 14px",
-    marginBottom: "1rem",
+    backgroundColor: "#f8fafc",
+    border: "1px solid rgba(226, 232, 240, 0.8)",
+    borderRadius: "14px",
+    padding: "14px 16px",
+    marginBottom: "1.25rem",
   },
 };

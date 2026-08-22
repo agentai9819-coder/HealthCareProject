@@ -89,7 +89,7 @@ export function HeroSection() {
   const activeHub = cityHubs.find((c) => c.id === selectedCity) || cityHubs[0];
   const activeSpec = specialties.find((s) => s.id === selectedSpecialty) || specialties[0];
 
-  // Interactive 3D Medical Radar Background Effect
+  // Luminous 3D Medical Radar Background Effect (Subtle Azure & Mint Nodes)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -108,18 +108,17 @@ export function HeroSection() {
 
     window.addEventListener("resize", handleResize);
 
-    // Particle nodes simulating clinical telemetry network
     const nodes: { x: number; y: number; vx: number; vy: number; radius: number; alpha: number }[] = [];
-    const nodeCount = Math.min(28, Math.floor(width / 45));
+    const nodeCount = Math.min(26, Math.floor(width / 50));
 
     for (let i = 0; i < nodeCount; i++) {
       nodes.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        radius: Math.random() * 2 + 1,
-        alpha: Math.random() * 0.4 + 0.2,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        radius: Math.random() * 2 + 1.2,
+        alpha: Math.random() * 0.35 + 0.15,
       });
     }
 
@@ -128,19 +127,17 @@ export function HeroSection() {
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Radar focal coordinate center
-      const centerX = width * 0.82;
+      const centerX = width * 0.84;
       const centerY = height * 0.38;
 
-      // Draw subtle radar sweep pulse
-      angle += 0.008;
-      const radarRadius = Math.min(width * 0.25, 220);
+      angle += 0.007;
+      const radarRadius = Math.min(width * 0.25, 230);
 
-      // Concentric telemetry rings
+      // Concentric telemetry circles
       for (let r = 50; r <= radarRadius; r += 55) {
         ctx.beginPath();
         ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(16, 185, 129, 0.05)";
+        ctx.strokeStyle = "rgba(37, 99, 235, 0.04)";
         ctx.lineWidth = 1;
         ctx.stroke();
       }
@@ -150,7 +147,7 @@ export function HeroSection() {
       ctx.translate(centerX, centerY);
       ctx.rotate(angle);
       const gradient = ctx.createLinearGradient(0, 0, radarRadius, 0);
-      gradient.addColorStop(0, "rgba(16, 185, 129, 0.2)");
+      gradient.addColorStop(0, "rgba(16, 185, 129, 0.14)");
       gradient.addColorStop(1, "rgba(16, 185, 129, 0)");
       ctx.beginPath();
       ctx.moveTo(0, 0);
@@ -160,7 +157,7 @@ export function HeroSection() {
       ctx.fill();
       ctx.restore();
 
-      // Draw connected telemetry nodes
+      // Telemetry nodes with subtle azure & emerald links
       for (let i = 0; i < nodes.length; i++) {
         const node = nodes[i];
         node.x += node.vx;
@@ -171,7 +168,7 @@ export function HeroSection() {
 
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(52, 211, 153, ${node.alpha})`;
+        ctx.fillStyle = `rgba(16, 185, 129, ${node.alpha})`;
         ctx.fill();
 
         for (let j = i + 1; j < nodes.length; j++) {
@@ -181,7 +178,7 @@ export function HeroSection() {
             ctx.beginPath();
             ctx.moveTo(node.x, node.y);
             ctx.lineTo(other.x, other.y);
-            ctx.strokeStyle = `rgba(16, 185, 129, ${0.12 * (1 - dist / 110)})`;
+            ctx.strokeStyle = `rgba(37, 99, 235, ${0.08 * (1 - dist / 110)})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
@@ -201,10 +198,9 @@ export function HeroSection() {
 
   return (
     <section className="hero" aria-labelledby="hero-title">
-      {/* Interactive Medical Telemetry Canvas */}
+      {/* Telemetry Radar Background Canvas */}
       <canvas
         ref={canvasRef}
-        className="hero-radar-canvas"
         style={{
           position: "absolute",
           top: 0,
@@ -213,7 +209,7 @@ export function HeroSection() {
           height: "100%",
           pointerEvents: "none",
           zIndex: 1,
-          opacity: 0.85,
+          opacity: 0.9,
         }}
         aria-hidden="true"
       />
@@ -223,7 +219,7 @@ export function HeroSection() {
           <div className="eyebrow fade-in">
             <span className="live-dot" />
             <span>NABH Aligned Clinical Protocol</span>
-            <span style={{ opacity: 0.4 }}>•</span>
+            <span style={{ opacity: 0.35 }}>•</span>
             <span>ABHA Digital Health Connected</span>
           </div>
 
@@ -235,23 +231,23 @@ export function HeroSection() {
             Verified Registered Nurses (B.Sc / GNM) and Certified Physiotherapists dispatched to your home. Single-use sterile kits, transparent INR pricing, and continuous physician oversight.
           </p>
 
-          {/* Quick Credential Badges */}
-          <div className="hero-trust-badges fade-in delay-2" style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "24px" }}>
+          {/* Trust Badges with Soft Jewel Accents */}
+          <div className="hero-trust-badges fade-in delay-2" style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginTop: "24px" }}>
             <span style={styles.trustPill}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
               <span>100% NMC & INC Registered Clinicians</span>
             </span>
             <span style={styles.trustPill}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#2563eb" strokeWidth="2.5">
                 <circle cx="12" cy="12" r="10" />
                 <polyline points="12 6 12 12 16 14" />
               </svg>
               <span>Avg {activeHub.dispatchTime} Doorstep Arrival</span>
             </span>
             <span style={styles.trustPill}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5">
                 <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span>Tamper-Sealed Consumable Kits</span>
@@ -259,7 +255,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* Live Dispatch Window Radar Aside */}
+        {/* Live Dispatch Window Aside */}
         <aside className="hero-aside fade-in delay-3" aria-label="Live dispatch status">
           <span className="aside-label">Live Dispatch Window</span>
           <span className="aside-big">{activeHub.name} · {activeHub.dispatchTime}</span>
@@ -269,7 +265,7 @@ export function HeroSection() {
         </aside>
       </div>
 
-      {/* Direct Interactive Care Dispatch Console */}
+      {/* Luminous Care Dispatch Console */}
       <section id="care-console" className="booking-console" aria-labelledby="booking-title" style={{ position: "relative", zIndex: 3 }}>
         <div className="console-top">
           <div>
@@ -279,7 +275,7 @@ export function HeroSection() {
 
           {/* City Hub Switcher */}
           <div style={{ display: "flex", alignItems: "center", gap: "6px", flexWrap: "wrap" }}>
-            <span style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginRight: "4px" }}>
+            <span style={{ fontSize: "11px", color: "#64748b", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", marginRight: "4px" }}>
               Coverage:
             </span>
             {cityHubs.map((hub) => (
@@ -316,12 +312,12 @@ export function HeroSection() {
                 </div>
                 <span className="specialty-name">{specialty.name}</span>
                 <span className="specialty-sub">{specialty.sub}</span>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", marginTop: "14px", borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "10px" }}>
-                  <span style={{ fontSize: "16px", fontWeight: 800, color: "#34d399", fontFamily: "var(--font-display)" }}>{specialty.price}</span>
-                  <span style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 600 }}>{specialty.duration}</span>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", marginTop: "14px", borderTop: "1px solid rgba(226,232,240,0.8)", paddingTop: "10px" }}>
+                  <span style={{ fontSize: "17px", fontWeight: 800, color: "#0f172a", fontFamily: "var(--font-display)" }}>{specialty.price}</span>
+                  <span style={{ fontSize: "11px", color: "#64748b", fontWeight: 700 }}>{specialty.duration}</span>
                 </div>
                 <span className="selection-check">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a7f3d0" strokeWidth="3">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="3">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </span>
@@ -333,7 +329,7 @@ export function HeroSection() {
         {/* Console Summary & Actions */}
         <div className="console-bottom">
           <div className="time-list" aria-label="Available appointment times">
-            <span style={{ fontSize: "12px", color: "#94a3b8", fontWeight: 600, display: "flex", alignItems: "center", marginRight: "6px" }}>
+            <span style={{ fontSize: "12px", color: "#64748b", fontWeight: 700, display: "flex", alignItems: "center", marginRight: "6px" }}>
               Slot:
             </span>
             {timeSlots.map((time) => (
@@ -350,12 +346,12 @@ export function HeroSection() {
           </div>
 
           <div className="hero-btn-group" style={{ display: "flex", gap: "14px", flexWrap: "wrap", alignItems: "center" }}>
-            <div style={{ marginRight: "10px" }}>
-              <div style={{ fontSize: "10px", color: "#94a3b8", textTransform: "uppercase", fontWeight: 700, letterSpacing: "0.1em" }}>
+            <div style={{ marginRight: "8px" }}>
+              <div style={{ fontSize: "10px", color: "#64748b", textTransform: "uppercase", fontWeight: 800, letterSpacing: "0.08em" }}>
                 Total Visit Fee
               </div>
-              <div style={{ fontSize: "19px", fontWeight: 800, color: "#f8fafc", fontFamily: "var(--font-display)" }}>
-                {activeSpec.price} <span style={{ fontSize: "11px", fontWeight: 600, color: "#34d399" }}>incl. GST</span>
+              <div style={{ fontSize: "20px", fontWeight: 800, color: "#0f172a", fontFamily: "var(--font-display)" }}>
+                {activeSpec.price} <span style={{ fontSize: "11px", fontWeight: 700, color: "#059669" }}>incl. GST</span>
               </div>
             </div>
 
@@ -408,37 +404,37 @@ const styles: Record<string, React.CSSProperties> = {
     alignItems: "center",
     gap: "7px",
     fontSize: "12px",
-    fontWeight: 600,
-    color: "#cbd5e1",
-    padding: "6px 12px",
+    fontWeight: 700,
+    color: "#334155",
+    padding: "6px 14px",
     borderRadius: "999px",
-    backgroundColor: "rgba(255, 255, 255, 0.04)",
-    border: "1px solid rgba(255, 255, 255, 0.09)",
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
+    backgroundColor: "#ffffff",
+    border: "1px solid rgba(226, 232, 240, 0.9)",
+    boxShadow: "0 2px 8px rgba(15, 23, 42, 0.04)",
   },
   cityChip: {
     padding: "6px 14px",
     fontSize: "12px",
     fontWeight: 700,
-    color: "#94a3b8",
-    backgroundColor: "rgba(255, 255, 255, 0.04)",
-    border: "1px solid rgba(255, 255, 255, 0.09)",
+    color: "#64748b",
+    backgroundColor: "#ffffff",
+    border: "1px solid rgba(226, 232, 240, 0.9)",
     borderRadius: "999px",
     cursor: "pointer",
     transition: "all 0.18s cubic-bezier(0.16, 1, 0.3, 1)",
   },
   cityChipActive: {
-    backgroundColor: "rgba(16, 185, 129, 0.2)",
-    color: "#a7f3d0",
-    borderColor: "rgba(52, 211, 153, 0.5)",
-    boxShadow: "0 0 16px rgba(16, 185, 129, 0.25)",
+    backgroundColor: "#ecfdf5",
+    color: "#047857",
+    borderColor: "rgba(16, 185, 129, 0.6)",
+    boxShadow: "0 2px 10px rgba(16, 185, 129, 0.15)",
   },
   cardTag: {
     fontSize: "10px",
-    fontWeight: 700,
-    color: "#a7f3d0",
-    backgroundColor: "rgba(16, 185, 129, 0.15)",
-    border: "1px solid rgba(16, 185, 129, 0.3)",
+    fontWeight: 800,
+    color: "#047857",
+    backgroundColor: "#ecfdf5",
+    border: "1px solid rgba(16, 185, 129, 0.25)",
     padding: "3px 8px",
     borderRadius: "6px",
     letterSpacing: "0.05em",
@@ -451,12 +447,13 @@ const styles: Record<string, React.CSSProperties> = {
     padding: "0 18px",
     minHeight: "44px",
     borderRadius: "999px",
-    backgroundColor: "rgba(255, 255, 255, 0.04)",
-    color: "#cbd5e1",
+    backgroundColor: "#ffffff",
+    color: "#334155",
     fontSize: "13px",
-    fontWeight: 600,
+    fontWeight: 700,
     textDecoration: "none",
-    border: "1px solid rgba(255, 255, 255, 0.12)",
+    border: "1px solid rgba(226, 232, 240, 0.9)",
+    boxShadow: "0 2px 6px rgba(15, 23, 42, 0.04)",
     transition: "all 0.18s ease",
   },
 };

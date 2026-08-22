@@ -29,7 +29,7 @@ export function ClinicalCareSection() {
     <section style={styles.section} aria-labelledby="clinical-care-heading">
       <div style={styles.container}>
         <div style={styles.row}>
-          {/* Left Column: Glass Medical Graphic & Live Telemetry Badge */}
+          {/* Left Column: Clinical Photo & Telemetry Badge */}
           <div style={styles.imageColumn}>
             <div style={styles.imageWrapper}>
               <Image
@@ -62,7 +62,7 @@ export function ClinicalCareSection() {
               {points.map((pt, idx) => (
                 <div key={idx} style={styles.pointItem}>
                   <div style={styles.pointIcon}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#059669" strokeWidth="2.5">
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </div>
@@ -99,8 +99,8 @@ const styles: Record<string, React.CSSProperties> = {
   section: {
     padding: "95px 0",
     position: "relative",
-    borderTop: "1px solid rgba(255, 255, 255, 0.06)",
-    background: "linear-gradient(180deg, rgba(6, 11, 14, 0) 0%, rgba(12, 20, 26, 0.4) 100%)",
+    borderTop: "1px solid rgba(226, 232, 240, 0.8)",
+    background: "linear-gradient(180deg, #f8fafc 0%, #ffffff 100%)",
   },
   container: {
     maxWidth: "1320px",
@@ -120,46 +120,45 @@ const styles: Record<string, React.CSSProperties> = {
     position: "relative",
     maxWidth: "540px",
     width: "100%",
-    borderRadius: "24px",
+    borderRadius: "26px",
     overflow: "hidden",
-    boxShadow: "0 24px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12)",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    background: "rgba(12, 20, 26, 0.8)",
+    boxShadow: "0 20px 45px -10px rgba(15, 23, 42, 0.12)",
+    border: "1px solid rgba(226, 232, 240, 0.9)",
+    background: "#ffffff",
   },
   image: {
     width: "100%",
     height: "auto",
     display: "block",
     objectFit: "cover",
-    opacity: 0.9,
   },
   imageBadge: {
     position: "absolute",
     bottom: "1.25rem",
     left: "1.25rem",
     right: "1.25rem",
-    backgroundColor: "rgba(6, 11, 14, 0.88)",
+    backgroundColor: "rgba(255, 255, 255, 0.95)",
     backdropFilter: "blur(12px)",
     borderRadius: "14px",
-    padding: "0.65rem 1rem",
-    boxShadow: "0 8px 24px rgba(0, 0, 0, 0.4)",
-    border: "1px solid rgba(16, 185, 129, 0.25)",
+    padding: "0.75rem 1.1rem",
+    boxShadow: "0 8px 24px rgba(15, 23, 42, 0.08)",
+    border: "1px solid rgba(16, 185, 129, 0.3)",
     display: "inline-flex",
     alignItems: "center",
-    gap: "0.6rem",
+    gap: "0.65rem",
   },
   badgePulse: {
     width: "8px",
     height: "8px",
     borderRadius: "50%",
-    backgroundColor: "#10b981",
-    boxShadow: "0 0 8px #10b981",
+    backgroundColor: "#059669",
+    boxShadow: "0 0 8px #059669",
     flexShrink: 0,
   },
   badgeText: {
     fontSize: "12px",
     fontWeight: 700,
-    color: "#e2e8f0",
+    color: "#0f172a",
   },
   contentColumn: {
     display: "flex",
@@ -168,7 +167,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   lead: {
     fontSize: "15px",
-    color: "#94a3b8",
+    color: "#475569",
     lineHeight: 1.7,
     margin: "0 0 2rem 0",
   },
@@ -183,16 +182,17 @@ const styles: Record<string, React.CSSProperties> = {
     display: "flex",
     alignItems: "flex-start",
     gap: "1rem",
-    padding: "12px 14px",
-    borderRadius: "14px",
-    backgroundColor: "rgba(255, 255, 255, 0.02)",
-    border: "1px solid rgba(255, 255, 255, 0.05)",
+    padding: "14px 16px",
+    borderRadius: "16px",
+    backgroundColor: "#ffffff",
+    border: "1px solid rgba(226, 232, 240, 0.9)",
+    boxShadow: "0 2px 6px rgba(15, 23, 42, 0.03)",
   },
   pointIcon: {
-    width: "34px",
-    height: "34px",
+    width: "36px",
+    height: "36px",
     borderRadius: "10px",
-    backgroundColor: "rgba(16, 185, 129, 0.12)",
+    backgroundColor: "#ecfdf5",
     border: "1px solid rgba(16, 185, 129, 0.25)",
     display: "flex",
     alignItems: "center",
@@ -203,23 +203,24 @@ const styles: Record<string, React.CSSProperties> = {
   pointTitle: {
     fontFamily: "var(--font-display, 'Outfit', sans-serif)",
     fontSize: "15px",
-    fontWeight: 700,
-    color: "#f8fafc",
+    fontWeight: 800,
+    color: "#0f172a",
     margin: 0,
   },
   pointBadge: {
     fontSize: "9px",
-    fontWeight: 700,
+    fontWeight: 800,
     textTransform: "uppercase",
     letterSpacing: "0.06em",
-    color: "#a7f3d0",
-    backgroundColor: "rgba(16, 185, 129, 0.15)",
+    color: "#047857",
+    backgroundColor: "#ecfdf5",
+    border: "1px solid rgba(16, 185, 129, 0.2)",
     padding: "2px 6px",
     borderRadius: "4px",
   },
   pointDesc: {
     fontSize: "13px",
-    color: "#94a3b8",
+    color: "#64748b",
     lineHeight: 1.5,
     margin: "4px 0 0 0",
   },
@@ -236,12 +237,13 @@ const styles: Record<string, React.CSSProperties> = {
     padding: "0 18px",
     minHeight: "44px",
     borderRadius: "999px",
-    backgroundColor: "rgba(255, 255, 255, 0.04)",
-    color: "#cbd5e1",
+    backgroundColor: "#ffffff",
+    color: "#334155",
     fontSize: "13px",
-    fontWeight: 600,
+    fontWeight: 700,
     textDecoration: "none",
-    border: "1px solid rgba(255, 255, 255, 0.12)",
+    border: "1px solid rgba(226, 232, 240, 0.9)",
+    boxShadow: "0 2px 6px rgba(15, 23, 42, 0.04)",
     transition: "all 0.18s ease",
   },
 };
