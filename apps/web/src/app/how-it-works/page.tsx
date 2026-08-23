@@ -6,188 +6,114 @@ export default function HowItWorksPage() {
   const { header, steps, safetyNotice } = howItWorksContent;
 
   return (
-    <main style={styles.main}>
-      {/* Header */}
-      <section style={styles.headerSection}>
-        <div style={styles.container}>
-          <span style={styles.badge}>{header.badge}</span>
-          <h1 style={styles.title}>{header.title}</h1>
-          <p style={styles.subtitle}>{header.subtitle}</p>
+    <main style={{ backgroundColor: "#000000", color: "#ffffff", minHeight: "100vh" }}>
+      {/* Dark Cinematic Header */}
+      <section className="sp-section" style={{ padding: "90px 0 70px", borderBottom: "1px solid rgba(255, 255, 255, 0.08)" }}>
+        <div className="sp-container">
+          <div className="sp-section-header" style={{ marginBottom: "0" }}>
+            <span className="sp-kicker">{header.badge}</span>
+            <h1 className="sp-section-title">
+              {header.title.split(":")[0]}: <br />
+              <span className="sp-gradient-text">{header.title.split(":")[1] || "From First Call to Bedside Care."}</span>
+            </h1>
+            <p className="sp-section-desc">{header.subtitle}</p>
+          </div>
         </div>
       </section>
 
-      {/* Steps List */}
-      <section style={styles.stepsSection}>
-        <div style={styles.container}>
-          <div style={styles.stepsList}>
+      {/* Light Cream Steps Section */}
+      <section className="light-services-section" style={{ padding: "90px 0" }}>
+        <div className="light-services-container">
+          <div style={{ display: "flex", flexDirection: "column", gap: "28px", maxWidth: "920px", margin: "0 auto" }}>
             {steps.map((step, idx) => (
-              <div key={idx} style={styles.stepCard}>
-                <div style={styles.stepNumberCol}>
-                  <div style={styles.numberCircle}>{step.number}</div>
+              <article
+                key={idx}
+                style={{
+                  backgroundColor: "#ffffff",
+                  borderRadius: "24px",
+                  padding: "36px",
+                  border: "1px solid rgba(0, 0, 0, 0.08)",
+                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
+                  display: "grid",
+                  gridTemplateColumns: "80px 1fr",
+                  gap: "28px",
+                  alignItems: "flex-start",
+                }}
+              >
+                <div
+                  style={{
+                    width: "70px",
+                    height: "70px",
+                    borderRadius: "20px",
+                    backgroundColor: "#ffedd5",
+                    border: "1px solid #fdba74",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "24px",
+                    fontWeight: 800,
+                    color: "#ea580c",
+                  }}
+                >
+                  {step.number}
                 </div>
-                <div style={styles.stepBody}>
-                  <h2 style={styles.stepTitle}>{step.title}</h2>
-                  <p style={styles.stepSummary}>{step.summary}</p>
-                  <ul style={styles.detailList}>
+
+                <div>
+                  <h2 style={{ fontFamily: "var(--font-display)", fontSize: "22px", fontWeight: 800, color: "#0f172a", margin: "0 0 8px" }}>
+                    {step.title}
+                  </h2>
+                  <p style={{ fontSize: "15px", color: "#475569", lineHeight: 1.65, margin: "0 0 18px" }}>
+                    {step.summary}
+                  </p>
+
+                  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "8px" }}>
                     {step.details.map((detail, dIdx) => (
-                      <li key={dIdx} style={styles.detailItem}>
-                        <span style={styles.check}>✓</span>
+                      <li key={dIdx} style={{ display: "flex", alignItems: "flex-start", gap: "9px", fontSize: "13px", color: "#334155" }}>
+                        <span style={{ color: "#ff6b2c", fontWeight: 800 }}>✓</span>
                         <span>{detail}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-              </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Safety Notice */}
-      <section style={styles.safetySection}>
-        <div style={styles.container}>
-          <div style={styles.safetyBox}>
-            <h2 style={styles.safetyTitle}>{safetyNotice.title}</h2>
-            <p style={styles.safetyText}>{safetyNotice.content}</p>
+      {/* Dark Safety & Protocol Notice */}
+      <section className="sp-section" style={{ padding: "80px 0" }}>
+        <div className="sp-container">
+          <div
+            style={{
+              maxWidth: "860px",
+              margin: "0 auto",
+              backgroundColor: "#080808",
+              borderRadius: "24px",
+              padding: "36px",
+              border: "1px solid rgba(255, 107, 44, 0.3)",
+              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.6)",
+            }}
+          >
+            <span className="sp-kicker">Clinical Governance</span>
+            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "24px", fontWeight: 800, color: "#ffffff", margin: "8px 0 14px" }}>
+              {safetyNotice.title}
+            </h2>
+            <p style={{ fontSize: "14px", color: "#94a3b8", lineHeight: 1.7, margin: "0 0 24px" }}>
+              {safetyNotice.content}
+            </p>
+            <Link href="/services" className="sp-btn-primary">
+              <span>Schedule an In-Home Visit</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
       <CtaBanner />
     </main>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  main: {
-    backgroundColor: "#f8fafc",
-    minHeight: "100vh",
-  },
-  headerSection: {
-    backgroundColor: "#ffffff",
-    padding: "4.5rem 1.5rem 3.5rem",
-    borderBottom: "1px solid #e2e8f0",
-    background: "linear-gradient(180deg, #f0fdfa 0%, #ffffff 100%)",
-    textAlign: "center",
-  },
-  container: {
-    maxWidth: "960px",
-    margin: "0 auto",
-  },
-  badge: {
-    display: "inline-block",
-    backgroundColor: "#ccfbf1",
-    color: "#0f766e",
-    fontWeight: 600,
-    fontSize: "0.875rem",
-    padding: "0.35rem 0.85rem",
-    borderRadius: "9999px",
-    marginBottom: "1rem",
-  },
-  title: {
-    fontSize: "clamp(2rem, 4vw, 2.75rem)",
-    fontWeight: 800,
-    color: "#0f172a",
-    margin: "0 0 1rem 0",
-    letterSpacing: "-0.03em",
-  },
-  subtitle: {
-    fontSize: "1.125rem",
-    color: "#475569",
-    lineHeight: 1.6,
-    maxWidth: "720px",
-    margin: "0 auto",
-  },
-  stepsSection: {
-    padding: "4.5rem 1.5rem",
-  },
-  stepsList: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "2.5rem",
-  },
-  stepCard: {
-    backgroundColor: "#ffffff",
-    borderRadius: "18px",
-    border: "1px solid #e2e8f0",
-    padding: "2.5rem",
-    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.03)",
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "1.5rem",
-    alignItems: "flex-start",
-  },
-  stepNumberCol: {
-    flexShrink: 0,
-  },
-  numberCircle: {
-    width: "56px",
-    height: "56px",
-    borderRadius: "16px",
-    backgroundColor: "#0f766e",
-    color: "#ffffff",
-    fontSize: "1.375rem",
-    fontWeight: 800,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  stepBody: {
-    flex: 1,
-  },
-  stepTitle: {
-    fontSize: "1.375rem",
-    fontWeight: 700,
-    color: "#0f172a",
-    margin: "0 0 0.5rem 0",
-  },
-  stepSummary: {
-    fontSize: "1.0625rem",
-    color: "#0f766e",
-    fontWeight: 500,
-    margin: "0 0 1.25rem 0",
-  },
-  detailList: {
-    listStyle: "none",
-    padding: 0,
-    margin: 0,
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.75rem",
-  },
-  detailItem: {
-    display: "flex",
-    alignItems: "flex-start",
-    gap: "0.625rem",
-    fontSize: "0.9375rem",
-    color: "#334155",
-    lineHeight: 1.5,
-  },
-  check: {
-    color: "#0f766e",
-    fontWeight: 700,
-    flexShrink: 0,
-  },
-  safetySection: {
-    padding: "0 1.5rem 4rem",
-  },
-  safetyBox: {
-    backgroundColor: "#fffbeb",
-    border: "1px solid #fde68a",
-    borderRadius: "14px",
-    padding: "2rem",
-  },
-  safetyTitle: {
-    fontSize: "1.125rem",
-    fontWeight: 700,
-    color: "#92400e",
-    margin: "0 0 0.5rem 0",
-  },
-  safetyText: {
-    fontSize: "0.9375rem",
-    color: "#b45309",
-    lineHeight: 1.6,
-    margin: 0,
-  },
-};

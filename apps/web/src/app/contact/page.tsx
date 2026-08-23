@@ -11,7 +11,7 @@ export default function ContactPage() {
     name: "",
     email: "",
     phone: "",
-    serviceInterest: "Home Health Assessment",
+    serviceInterest: "Skilled Bedside Nursing",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -22,42 +22,66 @@ export default function ContactPage() {
   };
 
   return (
-    <main style={styles.main}>
-      {/* Header */}
-      <section style={styles.headerSection}>
-        <div style={styles.container}>
-          <span style={styles.badge}>{header.badge}</span>
-          <h1 style={styles.title}>{header.title}</h1>
-          <p style={styles.subtitle}>{header.subtitle}</p>
+    <main style={{ backgroundColor: "#000000", color: "#ffffff", minHeight: "100vh" }}>
+      {/* Dark Cinematic Header */}
+      <section className="sp-section" style={{ padding: "90px 0 70px", borderBottom: "1px solid rgba(255, 255, 255, 0.08)" }}>
+        <div className="sp-container">
+          <div className="sp-section-header" style={{ marginBottom: "0" }}>
+            <span className="sp-kicker">{header.badge}</span>
+            <h1 className="sp-section-title">
+              {header.title.split(":")[0]}: <br />
+              <span className="sp-gradient-text">{header.title.split(":")[1] || "Clinical Concierge Support."}</span>
+            </h1>
+            <p className="sp-section-desc">{header.subtitle}</p>
+          </div>
         </div>
       </section>
 
-      {/* Main Content Layout */}
-      <section style={styles.contentSection}>
-        <div style={styles.container}>
-          <div style={styles.grid}>
-            {/* Left: Contact Form */}
-            <div style={styles.formCard}>
-              <h2 style={styles.cardHeading}>Send Our Care Team a Message</h2>
-              <p style={styles.cardSubtext}>
-                Fill out the form below and a care coordinator will contact you directly to answer your questions.
+      {/* Light Cream Form & Contact Channels Section */}
+      <section className="light-services-section" style={{ padding: "90px 0" }}>
+        <div className="light-services-container">
+          <div style={{ display: "grid", gridTemplateColumns: "1.2fr 1fr", gap: "48px", alignItems: "flex-start" }}>
+            {/* Left: Contact Form Card */}
+            <div
+              style={{
+                backgroundColor: "#ffffff",
+                borderRadius: "24px",
+                padding: "40px",
+                border: "1px solid rgba(0, 0, 0, 0.08)",
+                boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
+              }}
+            >
+              <h2 style={{ fontFamily: "var(--font-display)", fontSize: "24px", fontWeight: 800, color: "#0f172a", margin: "0 0 8px" }}>
+                Send Our Care Team a Message
+              </h2>
+              <p style={{ fontSize: "14px", color: "#475569", lineHeight: 1.6, margin: "0 0 28px" }}>
+                Fill out the form below and a clinical care coordinator will contact you directly to answer your questions.
               </p>
 
               {submitted ? (
-                <div style={styles.successBox}>
-                  <div style={styles.successIcon}>✓</div>
-                  <h3 style={styles.successTitle}>Inquiry Received</h3>
-                  <p style={styles.successText}>
-                    Thank you for reaching out. A HomeCare clinical coordinator will review your request and contact you within 1 business day.
+                <div style={{ padding: "32px", borderRadius: "18px", backgroundColor: "#f0fdf4", border: "1px solid #bbf7d0", textAlign: "center" }}>
+                  <div style={{ width: "48px", height: "48px", borderRadius: "50%", backgroundColor: "#22c55e", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: "20px", fontWeight: 800, margin: "0 auto 16px" }}>
+                    ✓
+                  </div>
+                  <h3 style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 800, color: "#166534", margin: "0 0 8px" }}>
+                    Inquiry Received
+                  </h3>
+                  <p style={{ fontSize: "14px", color: "#15803d", margin: "0 0 20px", lineHeight: 1.6 }}>
+                    Thank you for reaching out. A Veridian Care clinical coordinator will review your request and contact you within 30 minutes.
                   </p>
-                  <button onClick={() => setSubmitted(false)} style={styles.resetButton}>
+                  <button
+                    type="button"
+                    onClick={() => setSubmitted(false)}
+                    className="light-book-btn"
+                    style={{ margin: "0 auto", cursor: "pointer", border: "none" }}
+                  >
                     Send Another Message
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} style={styles.form}>
-                  <div style={styles.formGroup}>
-                    <label htmlFor="contact-name" style={styles.label}>
+                <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                  <div>
+                    <label htmlFor="contact-name" style={{ display: "block", fontSize: "13px", fontWeight: 700, color: "#0f172a", marginBottom: "6px" }}>
                       Full Name *
                     </label>
                     <input
@@ -66,14 +90,14 @@ export default function ContactPage() {
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="e.g. Eleanor Vance"
-                      style={styles.input}
+                      placeholder="e.g. Ananya Deshmukh"
+                      style={{ width: "100%", height: "46px", padding: "0 16px", borderRadius: "12px", border: "1px solid #cbd5e1", fontSize: "14px", color: "#0f172a", outline: "none" }}
                     />
                   </div>
 
-                  <div style={styles.formRow}>
-                    <div style={styles.formGroup}>
-                      <label htmlFor="contact-email" style={styles.label}>
+                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+                    <div>
+                      <label htmlFor="contact-email" style={{ display: "block", fontSize: "13px", fontWeight: 700, color: "#0f172a", marginBottom: "6px" }}>
                         Email Address *
                       </label>
                       <input
@@ -83,44 +107,46 @@ export default function ContactPage() {
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="you@example.com"
-                        style={styles.input}
+                        style={{ width: "100%", height: "46px", padding: "0 16px", borderRadius: "12px", border: "1px solid #cbd5e1", fontSize: "14px", color: "#0f172a", outline: "none" }}
                       />
                     </div>
-                    <div style={styles.formGroup}>
-                      <label htmlFor="contact-phone" style={styles.label}>
-                        Phone Number
+                    <div>
+                      <label htmlFor="contact-phone" style={{ display: "block", fontSize: "13px", fontWeight: 700, color: "#0f172a", marginBottom: "6px" }}>
+                        Phone Number *
                       </label>
                       <input
                         id="contact-phone"
                         type="tel"
+                        required
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         placeholder="+91 98765 43210"
-                        style={styles.input}
+                        style={{ width: "100%", height: "46px", padding: "0 16px", borderRadius: "12px", border: "1px solid #cbd5e1", fontSize: "14px", color: "#0f172a", outline: "none" }}
                       />
                     </div>
                   </div>
 
-                  <div style={styles.formGroup}>
-                    <label htmlFor="contact-service" style={styles.label}>
+                  <div>
+                    <label htmlFor="contact-service" style={{ display: "block", fontSize: "13px", fontWeight: 700, color: "#0f172a", marginBottom: "6px" }}>
                       Service of Interest
                     </label>
                     <select
                       id="contact-service"
                       value={formData.serviceInterest}
                       onChange={(e) => setFormData({ ...formData, serviceInterest: e.target.value })}
-                      style={styles.select}
+                      style={{ width: "100%", height: "46px", padding: "0 16px", borderRadius: "12px", border: "1px solid #cbd5e1", fontSize: "14px", color: "#0f172a", outline: "none", backgroundColor: "#fff" }}
                     >
-                      <option value="Home Health Assessment">Home Health Assessment</option>
-                      <option value="Physical Therapy & Mobility">Physical Therapy & Mobility</option>
-                      <option value="Wound Care & Dressing">Wound Care & Dressing</option>
-                      <option value="General Inquiry">General Inquiry / Other</option>
+                      <option value="Skilled Bedside Nursing">Skilled Bedside Nursing & IV Infusion</option>
+                      <option value="Post-Surgical Recovery">Post-Surgical Hospital Recovery</option>
+                      <option value="Physical & Neuro Rehab">Physical & Neuro Rehabilitation</option>
+                      <option value="Elder Wellness Check">Elder Wellness & Vitals Check</option>
+                      <option value="General Inquiry">General Clinical Inquiry / Other</option>
                     </select>
                   </div>
 
-                  <div style={styles.formGroup}>
-                    <label htmlFor="contact-message" style={styles.label}>
-                      How can we help? *
+                  <div>
+                    <label htmlFor="contact-message" style={{ display: "block", fontSize: "13px", fontWeight: 700, color: "#0f172a", marginBottom: "6px" }}>
+                      How can we assist your family? *
                     </label>
                     <textarea
                       id="contact-message"
@@ -128,338 +154,99 @@ export default function ContactPage() {
                       rows={4}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Please share details about your care needs or questions..."
-                      style={styles.textarea}
+                      placeholder="Please share details about your clinical needs or questions..."
+                      style={{ width: "100%", padding: "14px 16px", borderRadius: "12px", border: "1px solid #cbd5e1", fontSize: "14px", color: "#0f172a", outline: "none", resize: "vertical" }}
                     />
                   </div>
 
-                  <button type="submit" style={styles.submitButton}>
-                    Submit Care Inquiry
+                  <button type="submit" className="sp-btn-primary" style={{ width: "100%", justifyContent: "center", minHeight: "48px" }}>
+                    <span>Submit Clinical Inquiry</span>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
                   </button>
                 </form>
               )}
             </div>
 
-            {/* Right: Contact Information & Channels */}
-            <div style={styles.infoCol}>
-              <div style={styles.channelsCard}>
-                <h2 style={styles.channelsTitle}>Direct Contact Channels</h2>
-                <div style={styles.channelList}>
+            {/* Right: Direct Channels & Information */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+              <div
+                style={{
+                  backgroundColor: "#ffffff",
+                  borderRadius: "24px",
+                  padding: "32px",
+                  border: "1px solid rgba(0, 0, 0, 0.08)",
+                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
+                }}
+              >
+                <span className="light-kicker">Direct Contact Channels</span>
+                <div style={{ display: "flex", flexDirection: "column", gap: "18px", marginTop: "16px" }}>
                   {channels.map((ch, idx) => (
-                    <div key={idx} style={styles.channelItem}>
-                      <div style={styles.channelIcon}>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          {ch.icon === "phone" && (
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                          )}
-                          {ch.icon === "mail" && (
-                            <>
-                              <rect width="20" height="16" x="2" y="4" rx="2" />
-                              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                            </>
-                          )}
-                          {ch.icon === "map-pin" && (
-                            <>
-                              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
-                              <circle cx="12" cy="10" r="3" />
-                            </>
-                          )}
-                        </svg>
+                    <div key={idx} style={{ paddingBottom: "14px", borderBottom: idx < channels.length - 1 ? "1px solid #f1f5f9" : "none" }}>
+                      <span style={{ fontSize: "11px", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.08em", color: "#ea580c", fontFamily: "var(--font-mono)" }}>
+                        {ch.title}
+                      </span>
+                      <div style={{ fontSize: "16px", fontWeight: 800, color: "#0f172a", margin: "3px 0" }}>
+                        {ch.value}
                       </div>
-                      <div>
-                        <h3 style={styles.chTitle}>{ch.title}</h3>
-                        <p style={styles.chValue}>{ch.value}</p>
-                        <p style={styles.chSub}>{ch.subtext}</p>
-                      </div>
+                      <p style={{ fontSize: "13px", color: "#64748b", margin: 0 }}>
+                        {ch.subtext}
+                      </p>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* Service Areas Box */}
-              <div style={styles.areaBox}>
-                <h3 style={styles.areaTitle}>{serviceAreasNotice.title}</h3>
-                <p style={styles.areaText}>{serviceAreasNotice.summary}</p>
-                <Link href={serviceAreasNotice.cta.href} style={styles.areaLink}>
-                  {serviceAreasNotice.cta.text} →
+              <div
+                style={{
+                  backgroundColor: "#ffffff",
+                  borderRadius: "24px",
+                  padding: "32px",
+                  border: "1px solid rgba(0, 0, 0, 0.08)",
+                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
+                }}
+              >
+                <span className="light-kicker">Active Coverage Hubs</span>
+                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 800, color: "#0f172a", margin: "8px 0 10px" }}>
+                  {serviceAreasNotice.title}
+                </h3>
+                <p style={{ fontSize: "13px", color: "#475569", lineHeight: 1.6, margin: "0 0 16px" }}>
+                  {serviceAreasNotice.summary}
+                </p>
+                <Link href="/service-areas" style={{ fontSize: "13px", color: "#ea580c", fontWeight: 700, textDecoration: "none" }}>
+                  View All Metropolitan Coverage Zones →
                 </Link>
               </div>
-
-              {/* Emergency Guidance Box */}
-              <div style={styles.emergencyCard}>
-                <h3 style={styles.emergencyTitle}>{emergencyNotice.title}</h3>
-                <p style={styles.emergencyText}>{emergencyNotice.text}</p>
-              </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Dark Emergency Notice */}
+      <section className="sp-section" style={{ padding: "80px 0" }}>
+        <div className="sp-container">
+          <div
+            style={{
+              maxWidth: "860px",
+              margin: "0 auto",
+              backgroundColor: "#080808",
+              borderRadius: "24px",
+              padding: "36px",
+              border: "1px solid rgba(255, 107, 44, 0.3)",
+              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.6)",
+            }}
+          >
+            <span className="sp-kicker">Emergency Governance</span>
+            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "22px", fontWeight: 800, color: "#ffffff", margin: "8px 0 12px" }}>
+              {emergencyNotice.title}
+            </h2>
+            <p style={{ fontSize: "14px", color: "#94a3b8", lineHeight: 1.7, margin: 0 }}>
+              {emergencyNotice.text}
+            </p>
           </div>
         </div>
       </section>
     </main>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  main: {
-    backgroundColor: "#f8fafc",
-    minHeight: "100vh",
-  },
-  headerSection: {
-    backgroundColor: "#ffffff",
-    padding: "4.5rem 1.5rem 3.5rem",
-    borderBottom: "1px solid #e2e8f0",
-    background: "linear-gradient(180deg, #f0fdfa 0%, #ffffff 100%)",
-    textAlign: "center",
-  },
-  container: {
-    maxWidth: "1120px",
-    margin: "0 auto",
-  },
-  badge: {
-    display: "inline-block",
-    backgroundColor: "#ccfbf1",
-    color: "#0f766e",
-    fontWeight: 600,
-    fontSize: "0.875rem",
-    padding: "0.35rem 0.85rem",
-    borderRadius: "9999px",
-    marginBottom: "1rem",
-  },
-  title: {
-    fontSize: "clamp(2rem, 4vw, 2.75rem)",
-    fontWeight: 800,
-    color: "#0f172a",
-    margin: "0 0 1rem 0",
-    letterSpacing: "-0.03em",
-  },
-  subtitle: {
-    fontSize: "1.125rem",
-    color: "#475569",
-    lineHeight: 1.6,
-    maxWidth: "720px",
-    margin: "0 auto",
-  },
-  contentSection: {
-    padding: "4.5rem 1.5rem",
-  },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(340px, 1fr))",
-    gap: "3rem",
-    alignItems: "flex-start",
-  },
-  formCard: {
-    backgroundColor: "#ffffff",
-    borderRadius: "18px",
-    border: "1px solid #e2e8f0",
-    padding: "2.5rem",
-    boxShadow: "0 4px 14px rgba(0, 0, 0, 0.03)",
-  },
-  cardHeading: {
-    fontSize: "1.5rem",
-    fontWeight: 700,
-    color: "#0f172a",
-    margin: "0 0 0.5rem 0",
-  },
-  cardSubtext: {
-    fontSize: "0.9375rem",
-    color: "#64748b",
-    lineHeight: 1.5,
-    margin: "0 0 2rem 0",
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "1.25rem",
-  },
-  formRow: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: "1rem",
-  },
-  formGroup: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "0.375rem",
-  },
-  label: {
-    fontSize: "0.875rem",
-    fontWeight: 600,
-    color: "#334155",
-  },
-  input: {
-    padding: "0.75rem 1rem",
-    borderRadius: "8px",
-    border: "1px solid #cbd5e1",
-    fontSize: "0.9375rem",
-    color: "#0f172a",
-    outline: "none",
-  },
-  select: {
-    padding: "0.75rem 1rem",
-    borderRadius: "8px",
-    border: "1px solid #cbd5e1",
-    fontSize: "0.9375rem",
-    color: "#0f172a",
-    backgroundColor: "#ffffff",
-  },
-  textarea: {
-    padding: "0.75rem 1rem",
-    borderRadius: "8px",
-    border: "1px solid #cbd5e1",
-    fontSize: "0.9375rem",
-    color: "#0f172a",
-    fontFamily: "inherit",
-    resize: "vertical",
-  },
-  submitButton: {
-    marginTop: "0.5rem",
-    padding: "0.875rem",
-    backgroundColor: "#0f766e",
-    color: "#ffffff",
-    fontWeight: 600,
-    fontSize: "1rem",
-    borderRadius: "8px",
-    border: "none",
-    cursor: "pointer",
-  },
-  successBox: {
-    backgroundColor: "#f0fdfa",
-    border: "1px solid #ccfbf1",
-    borderRadius: "12px",
-    padding: "2rem",
-    textAlign: "center",
-  },
-  successIcon: {
-    width: "48px",
-    height: "48px",
-    borderRadius: "50%",
-    backgroundColor: "#0f766e",
-    color: "#ffffff",
-    fontSize: "1.5rem",
-    fontWeight: 700,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    margin: "0 auto 1rem",
-  },
-  successTitle: {
-    fontSize: "1.25rem",
-    fontWeight: 700,
-    color: "#0f766e",
-    margin: "0 0 0.5rem 0",
-  },
-  successText: {
-    fontSize: "0.9375rem",
-    color: "#334155",
-    lineHeight: 1.5,
-    margin: "0 0 1.5rem 0",
-  },
-  resetButton: {
-    padding: "0.5rem 1rem",
-    backgroundColor: "#ffffff",
-    border: "1px solid #0f766e",
-    color: "#0f766e",
-    borderRadius: "6px",
-    fontWeight: 600,
-    fontSize: "0.875rem",
-    cursor: "pointer",
-  },
-  infoCol: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "1.5rem",
-  },
-  channelsCard: {
-    backgroundColor: "#ffffff",
-    borderRadius: "18px",
-    border: "1px solid #e2e8f0",
-    padding: "2rem",
-    boxShadow: "0 4px 14px rgba(0, 0, 0, 0.03)",
-  },
-  channelsTitle: {
-    fontSize: "1.25rem",
-    fontWeight: 700,
-    color: "#0f172a",
-    margin: "0 0 1.5rem 0",
-  },
-  channelList: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "1.5rem",
-  },
-  channelItem: {
-    display: "flex",
-    gap: "1rem",
-    alignItems: "flex-start",
-  },
-  channelIcon: {
-    width: "40px",
-    height: "40px",
-    borderRadius: "10px",
-    backgroundColor: "#f0fdfa",
-    color: "#0f766e",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexShrink: 0,
-  },
-  chTitle: {
-    fontSize: "0.9375rem",
-    fontWeight: 600,
-    color: "#0f172a",
-    margin: "0 0 0.25rem 0",
-  },
-  chValue: {
-    fontSize: "0.875rem",
-    color: "#0f766e",
-    fontWeight: 600,
-    margin: "0 0 0.25rem 0",
-  },
-  chSub: {
-    fontSize: "0.8125rem",
-    color: "#64748b",
-    margin: 0,
-  },
-  areaBox: {
-    backgroundColor: "#f0fdfa",
-    border: "1px solid #ccfbf1",
-    borderRadius: "14px",
-    padding: "1.75rem",
-  },
-  areaTitle: {
-    fontSize: "1.0625rem",
-    fontWeight: 700,
-    color: "#0f766e",
-    margin: "0 0 0.5rem 0",
-  },
-  areaText: {
-    fontSize: "0.875rem",
-    color: "#334155",
-    lineHeight: 1.5,
-    margin: "0 0 1rem 0",
-  },
-  areaLink: {
-    fontSize: "0.875rem",
-    fontWeight: 600,
-    color: "#0f766e",
-    textDecoration: "none",
-  },
-  emergencyCard: {
-    backgroundColor: "#fffbeb",
-    border: "1px solid #fde68a",
-    borderRadius: "14px",
-    padding: "1.5rem",
-  },
-  emergencyTitle: {
-    fontSize: "0.9375rem",
-    fontWeight: 700,
-    color: "#92400e",
-    margin: "0 0 0.35rem 0",
-  },
-  emergencyText: {
-    fontSize: "0.875rem",
-    color: "#b45309",
-    lineHeight: 1.5,
-    margin: 0,
-  },
-};

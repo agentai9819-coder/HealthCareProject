@@ -5,6 +5,7 @@ import { Header } from "../components/Header";
 import { MarketingFooter } from "../components/MarketingFooter";
 import { CookieBanner } from "../components/CookieBanner";
 import { StickyMobileCta } from "../components/StickyMobileCta";
+import { CursorGlow } from "../components/CursorGlow";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -21,7 +22,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#080d0c",
+  themeColor: "#000000",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -86,17 +87,17 @@ export const metadata: Metadata = {
       "Compassionate, state-licensed in-home clinical care, nursing assessments, physical therapy, and personalized recovery delivered directly to your doorstep.",
     images: ["/assets/images/about-img.png"],
   },
-    robots: {
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
       index: true,
       follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-video-preview": -1,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-      },
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
+  },
   verification: {
     google: "wB7DFyJxxysgOt1gd_-X9M4pyepew6heR4lcrqrRrv0",
   },
@@ -122,13 +123,14 @@ export default function RootLayout({
         style={{
           margin: 0,
           fontFamily: "var(--font-sans, 'Plus Jakarta Sans', sans-serif)",
-          backgroundColor: "#080d0c",
-          color: "#f8fafc",
+          backgroundColor: "#000000",
+          color: "#ffffff",
           minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
         }}
       >
+        <CursorGlow />
         <Header />
         <div style={{ flex: 1 }}>{children}</div>
         <MarketingFooter />

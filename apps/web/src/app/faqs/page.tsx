@@ -15,23 +15,36 @@ export default function FaqsPage() {
       : faqs.filter((item) => item.category === selectedCategory);
 
   return (
-    <main style={styles.main}>
-      {/* Header */}
-      <section style={styles.headerSection}>
-        <div style={styles.container}>
-          <span style={styles.badge}>{header.badge}</span>
-          <h1 style={styles.title}>{header.title}</h1>
-          <p style={styles.subtitle}>{header.subtitle}</p>
+    <main style={{ backgroundColor: "#000000", color: "#ffffff", minHeight: "100vh" }}>
+      {/* Dark Cinematic Header */}
+      <section className="sp-section" style={{ padding: "90px 0 60px", borderBottom: "1px solid rgba(255, 255, 255, 0.08)" }}>
+        <div className="sp-container">
+          <div className="sp-section-header" style={{ marginBottom: "32px" }}>
+            <span className="sp-kicker">{header.badge}</span>
+            <h1 className="sp-section-title">
+              Frequently Asked <br />
+              <span className="sp-gradient-text">Clinical Questions.</span>
+            </h1>
+            <p className="sp-section-desc">{header.subtitle}</p>
+          </div>
 
           {/* Category Filter Pills */}
-          <div style={styles.categoryPillRow}>
+          <div style={{ display: "flex", justifyContent: "center", gap: "8px", flexWrap: "wrap" }}>
             {categories.map((cat) => (
               <button
                 key={cat}
+                type="button"
                 onClick={() => setSelectedCategory(cat)}
                 style={{
-                  ...styles.categoryPill,
-                  ...(selectedCategory === cat ? styles.categoryPillActive : {}),
+                  padding: "8px 18px",
+                  borderRadius: "9999px",
+                  fontSize: "13px",
+                  fontWeight: 700,
+                  cursor: "pointer",
+                  transition: "all 0.15s ease",
+                  backgroundColor: selectedCategory === cat ? "#ff6b2c" : "rgba(255, 255, 255, 0.05)",
+                  color: selectedCategory === cat ? "#ffffff" : "#94a3b8",
+                  border: selectedCategory === cat ? "1px solid #ff6b2c" : "1px solid rgba(255, 255, 255, 0.12)",
                 }}
               >
                 {cat}
@@ -41,23 +54,42 @@ export default function FaqsPage() {
         </div>
       </section>
 
-      {/* Accordion Section */}
-      <section style={styles.faqsSection}>
-        <div style={styles.container}>
-          <FaqAccordion items={filteredFaqs} />
+      {/* Light Cream Accordion Section */}
+      <section className="light-services-section" style={{ padding: "90px 0" }}>
+        <div className="light-services-container">
+          <div style={{ maxWidth: "860px", margin: "0 auto" }}>
+            <FaqAccordion items={filteredFaqs} />
+          </div>
         </div>
       </section>
 
-      {/* Still Have Questions Box */}
-      <section style={styles.contactPromptSection}>
-        <div style={styles.container}>
-          <div style={styles.promptCard}>
-            <h2 style={styles.promptTitle}>Still have questions about our care?</h2>
-            <p style={styles.promptText}>
-              Our care coordination team is available to assist you with scheduling questions, service details, or clinician matching.
+      {/* Dark Still Have Questions Box */}
+      <section className="sp-section" style={{ padding: "80px 0" }}>
+        <div className="sp-container">
+          <div
+            style={{
+              maxWidth: "860px",
+              margin: "0 auto",
+              backgroundColor: "#080808",
+              borderRadius: "24px",
+              padding: "40px",
+              border: "1px solid rgba(255, 107, 44, 0.3)",
+              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.6)",
+              textAlign: "center",
+            }}
+          >
+            <span className="sp-kicker">24/7 Clinical Coordination</span>
+            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "24px", fontWeight: 800, color: "#ffffff", margin: "8px 0 12px" }}>
+              Still have questions about our in-home care?
+            </h2>
+            <p style={{ fontSize: "15px", color: "#94a3b8", lineHeight: 1.65, margin: "0 auto 28px", maxWidth: "600px" }}>
+              Our care coordination team is available to assist you with scheduling inquiries, doctor tele-desk details, or clinician matching.
             </p>
-            <Link href="/contact" style={styles.contactBtn}>
-              Contact Our Care Team
+            <Link href="/contact" className="sp-btn-primary">
+              <span>Contact Care Concierge</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
             </Link>
           </div>
         </div>
@@ -65,105 +97,3 @@ export default function FaqsPage() {
     </main>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  main: {
-    backgroundColor: "#f8fafc",
-    minHeight: "100vh",
-  },
-  headerSection: {
-    backgroundColor: "#ffffff",
-    padding: "4.5rem 1.5rem 3rem",
-    borderBottom: "1px solid #e2e8f0",
-    background: "linear-gradient(180deg, #f0fdfa 0%, #ffffff 100%)",
-    textAlign: "center",
-  },
-  container: {
-    maxWidth: "900px",
-    margin: "0 auto",
-  },
-  badge: {
-    display: "inline-block",
-    backgroundColor: "#ccfbf1",
-    color: "#0f766e",
-    fontWeight: 600,
-    fontSize: "0.875rem",
-    padding: "0.35rem 0.85rem",
-    borderRadius: "9999px",
-    marginBottom: "1rem",
-  },
-  title: {
-    fontSize: "clamp(2rem, 4vw, 2.75rem)",
-    fontWeight: 800,
-    color: "#0f172a",
-    margin: "0 0 1rem 0",
-    letterSpacing: "-0.03em",
-  },
-  subtitle: {
-    fontSize: "1.125rem",
-    color: "#475569",
-    lineHeight: 1.6,
-    maxWidth: "680px",
-    margin: "0 auto 2.5rem",
-  },
-  categoryPillRow: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    gap: "0.75rem",
-  },
-  categoryPill: {
-    backgroundColor: "#ffffff",
-    border: "1px solid #cbd5e1",
-    color: "#475569",
-    padding: "0.5rem 1rem",
-    borderRadius: "9999px",
-    fontSize: "0.875rem",
-    fontWeight: 500,
-    cursor: "pointer",
-    transition: "all 0.15s",
-  },
-  categoryPillActive: {
-    backgroundColor: "#0f766e",
-    borderColor: "#0f766e",
-    color: "#ffffff",
-    fontWeight: 600,
-  },
-  faqsSection: {
-    padding: "4rem 1.5rem",
-  },
-  contactPromptSection: {
-    padding: "0 1.5rem 5rem",
-  },
-  promptCard: {
-    backgroundColor: "#ffffff",
-    borderRadius: "16px",
-    border: "1px solid #e2e8f0",
-    padding: "3rem",
-    textAlign: "center",
-    boxShadow: "0 2px 10px rgba(0, 0, 0, 0.03)",
-  },
-  promptTitle: {
-    fontSize: "1.5rem",
-    fontWeight: 700,
-    color: "#0f172a",
-    margin: "0 0 0.75rem 0",
-  },
-  promptText: {
-    fontSize: "1rem",
-    color: "#64748b",
-    lineHeight: 1.6,
-    maxWidth: "560px",
-    margin: "0 auto 2rem",
-  },
-  contactBtn: {
-    display: "inline-block",
-    padding: "0.75rem 1.75rem",
-    backgroundColor: "#0f766e",
-    color: "#ffffff",
-    borderRadius: "8px",
-    textDecoration: "none",
-    fontWeight: 600,
-    fontSize: "0.9375rem",
-  },
-};

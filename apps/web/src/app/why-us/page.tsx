@@ -5,148 +5,95 @@ export default function WhyUsPage() {
   const { header, pillars, emergencyNotice } = whyUsContent;
 
   return (
-    <main style={styles.main}>
-      {/* Header */}
-      <section style={styles.headerSection}>
-        <div style={styles.container}>
-          <span style={styles.badge}>{header.badge}</span>
-          <h1 style={styles.title}>{header.title}</h1>
-          <p style={styles.subtitle}>{header.subtitle}</p>
+    <main style={{ backgroundColor: "#000000", color: "#ffffff", minHeight: "100vh" }}>
+      {/* Dark Cinematic Header */}
+      <section className="sp-section" style={{ padding: "90px 0 70px", borderBottom: "1px solid rgba(255, 255, 255, 0.08)" }}>
+        <div className="sp-container">
+          <div className="sp-section-header" style={{ marginBottom: "0" }}>
+            <span className="sp-kicker">{header.badge}</span>
+            <h1 className="sp-section-title">
+              {header.title.split(":")[0]}: <br />
+              <span className="sp-gradient-text">{header.title.split(":")[1] || "Clinical Rigor & Unwavering Trust."}</span>
+            </h1>
+            <p className="sp-section-desc">{header.subtitle}</p>
+          </div>
         </div>
       </section>
 
-      {/* Pillars Grid */}
-      <section style={styles.pillarsSection}>
-        <div style={styles.container}>
-          <div style={styles.grid}>
+      {/* Light Cream Pillars Grid Section */}
+      <section className="light-services-section" style={{ padding: "90px 0" }}>
+        <div className="light-services-container">
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(320px, 1fr))", gap: "28px" }}>
             {pillars.map((pillar, idx) => (
-              <div key={idx} style={styles.card}>
-                <div style={styles.iconCircle}>
+              <article
+                key={idx}
+                style={{
+                  backgroundColor: "#ffffff",
+                  borderRadius: "24px",
+                  padding: "36px",
+                  border: "1px solid rgba(0, 0, 0, 0.08)",
+                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <div
+                  style={{
+                    width: "48px",
+                    height: "48px",
+                    borderRadius: "14px",
+                    backgroundColor: "#ffedd5",
+                    border: "1px solid #fdba74",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "#ea580c",
+                    marginBottom: "20px",
+                  }}
+                >
                   <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </div>
-                <h2 style={styles.cardTitle}>{pillar.title}</h2>
-                <p style={styles.cardDesc}>{pillar.description}</p>
-              </div>
+
+                <h2 style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 800, color: "#0f172a", margin: "0 0 12px" }}>
+                  {pillar.title}
+                </h2>
+                <p style={{ fontSize: "14px", color: "#475569", lineHeight: 1.65, margin: 0 }}>
+                  {pillar.description}
+                </p>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Safety Notice */}
-      <section style={styles.safetySection}>
-        <div style={styles.container}>
-          <div style={styles.safetyCard}>
-            <h2 style={styles.safetyTitle}>{emergencyNotice.title}</h2>
-            <p style={styles.safetyDesc}>{emergencyNotice.description}</p>
+      {/* Dark Governance & Emergency Notice */}
+      <section className="sp-section" style={{ padding: "80px 0" }}>
+        <div className="sp-container">
+          <div
+            style={{
+              maxWidth: "860px",
+              margin: "0 auto",
+              backgroundColor: "#080808",
+              borderRadius: "24px",
+              padding: "36px",
+              border: "1px solid rgba(255, 107, 44, 0.3)",
+              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.6)",
+            }}
+          >
+            <span className="sp-kicker">Emergency Governance</span>
+            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "22px", fontWeight: 800, color: "#ffffff", margin: "8px 0 12px" }}>
+              {emergencyNotice.title}
+            </h2>
+            <p style={{ fontSize: "14px", color: "#94a3b8", lineHeight: 1.7, margin: 0 }}>
+              {emergencyNotice.description}
+            </p>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
       <CtaBanner />
     </main>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  main: {
-    backgroundColor: "#f8fafc",
-    minHeight: "100vh",
-  },
-  headerSection: {
-    backgroundColor: "#ffffff",
-    padding: "4.5rem 1.5rem 3.5rem",
-    borderBottom: "1px solid #e2e8f0",
-    background: "linear-gradient(180deg, #f0fdfa 0%, #ffffff 100%)",
-    textAlign: "center",
-  },
-  container: {
-    maxWidth: "1080px",
-    margin: "0 auto",
-  },
-  badge: {
-    display: "inline-block",
-    backgroundColor: "#ccfbf1",
-    color: "#0f766e",
-    fontWeight: 600,
-    fontSize: "0.875rem",
-    padding: "0.35rem 0.85rem",
-    borderRadius: "9999px",
-    marginBottom: "1rem",
-  },
-  title: {
-    fontSize: "clamp(2rem, 4vw, 2.75rem)",
-    fontWeight: 800,
-    color: "#0f172a",
-    margin: "0 0 1rem 0",
-    letterSpacing: "-0.03em",
-  },
-  subtitle: {
-    fontSize: "1.125rem",
-    color: "#475569",
-    lineHeight: 1.6,
-    maxWidth: "760px",
-    margin: "0 auto",
-  },
-  pillarsSection: {
-    padding: "4.5rem 1.5rem",
-  },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-    gap: "2rem",
-  },
-  card: {
-    backgroundColor: "#ffffff",
-    borderRadius: "16px",
-    border: "1px solid #e2e8f0",
-    padding: "2.25rem",
-    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.03)",
-  },
-  iconCircle: {
-    width: "44px",
-    height: "44px",
-    borderRadius: "12px",
-    backgroundColor: "#ccfbf1",
-    color: "#0f766e",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: "1.25rem",
-  },
-  cardTitle: {
-    fontSize: "1.25rem",
-    fontWeight: 700,
-    color: "#0f172a",
-    margin: "0 0 0.75rem 0",
-  },
-  cardDesc: {
-    fontSize: "0.9375rem",
-    color: "#475569",
-    lineHeight: 1.6,
-    margin: 0,
-  },
-  safetySection: {
-    padding: "0 1.5rem 4.5rem",
-  },
-  safetyCard: {
-    backgroundColor: "#fffbeb",
-    border: "1px solid #fde68a",
-    borderRadius: "16px",
-    padding: "2.25rem",
-  },
-  safetyTitle: {
-    fontSize: "1.1875rem",
-    fontWeight: 700,
-    color: "#92400e",
-    margin: "0 0 0.5rem 0",
-  },
-  safetyDesc: {
-    fontSize: "0.9375rem",
-    color: "#b45309",
-    lineHeight: 1.6,
-    margin: 0,
-  },
-};
