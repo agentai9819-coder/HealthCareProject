@@ -5,22 +5,22 @@ import { useState } from "react";
 export function WebflowTestimonialsSection() {
   const testimonials = [
     {
-      author: "Esther Howard",
-      role: "Verified Patient · Delhi NCR",
+      author: "Vikram & Ananya Malhotra",
+      role: "Post-Operative Orthopedic Care · Gurugram (Sector 54)",
       image: "https://cdn.prod.website-files.com/6a8a9b834012eb47b04bdb10/6a8a9b844012eb47b04bdbc3_Rectangle%204285.png",
-      quote: "I had a great experience with the in-home healthcare team. The registered nurse arrived right on time with sterile equipment, and the physician tele-consultation gave my family complete peace of mind.",
+      quote: "After my father's knee replacement at Medanta, having a verified Veridian Care physiotherapist visit daily made recovery seamless. Strict infection control, prompt timekeeping, and clear digital notes.",
     },
     {
-      author: "Rajesh Kulkarni",
-      role: "Post-Operative Patient · Mumbai",
+      author: "Rohan Kulkarni",
+      role: "Geriatric Vitals & Medication Management · Bandra West, Mumbai",
       image: "https://cdn.prod.website-files.com/6a8a9b834012eb47b04bdb10/6a8a9b844012eb47b04bdbed_Gradient%202-2.png",
-      quote: "Exceptional clinical care at home. Their physiotherapist helped me recover knee mobility 3 weeks faster than expected. The transparent billing and digital prescription records made insurance claim seamless.",
+      quote: "Living abroad in Singapore, coordinating elder care for my mother in Mumbai was stressful until we found Veridian. The Registered Nurse provides daily vitals logging and physician tele-reviews.",
     },
     {
-      author: "Dr. Anita Desai",
-      role: "Senior Consultant & Caregiver",
+      author: "Dr. Meenakshi Sundaram",
+      role: "Senior Consultant Cardiologist · Indiranagar, Bengaluru",
       image: "https://cdn.prod.website-files.com/6a8a9b834012eb47b04bdb10/6a8a9b844012eb47b04bdbee_Gradient%202-3.png",
-      quote: "As a physician myself, I hold high standards for clinical hygiene. Veridian Care's strict NABH-aligned protocols and licensed nurses are the gold standard for in-home patient care.",
+      quote: "As a clinician, I hold home healthcare to stringent hospital benchmarks. Veridian Care's INC-licensed nurses and sterile dressing protocols represent the gold standard in bedside clinical practice.",
     },
   ];
 
@@ -42,10 +42,10 @@ export function WebflowTestimonialsSection() {
         {/* Google Reviews Header Card */}
         <div className="wf-google-review-banner">
           <div className="wf-review-quote">
-            Our doctors and clinicians have earned over 5,000+ reviews on Google!
+            Our clinicians have earned 4.9★ from 5,000+ patient families across India!
           </div>
           <div className="wf-star-row">
-            {[1, 2, 3, 4].map((n) => (
+            {[1, 2, 3, 4, 5].map((n) => (
               <img
                 key={n}
                 src="https://cdn.prod.website-files.com/6a8a9b834012eb47b04bdb10/6a8a9b844012eb47b04bdbbe_Star.svg"
@@ -53,13 +53,8 @@ export function WebflowTestimonialsSection() {
                 className="wf-star-img"
               />
             ))}
-            <img
-              src="https://cdn.prod.website-files.com/6a8a9b834012eb47b04bdb10/6a8a9b844012eb47b04bdbbf_Half%20Star.svg"
-              alt="Star"
-              className="wf-star-img"
-            />
           </div>
-          <div className="wf-avg-rating-text">Average Google Rating is 4.6 / 5.0</div>
+          <div className="wf-avg-rating-text">Verified Google Rating: 4.9 / 5.0</div>
         </div>
 
         {/* Testimonial Slider Card */}

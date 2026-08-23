@@ -9,11 +9,10 @@ export function WebflowFooter() {
         <div className="wf-footer-top-grid">
           {/* Col 1: Brand & Emergency Disclaimer */}
           <div className="wf-footer-col">
-            <img
-              src="https://cdn.prod.website-files.com/6a8a9b834012eb47b04bdb10/6a8a9b844012eb47b04bdb83_logo.svg"
-              alt="Veridian Care"
-              className="wf-footer-logo"
-            />
+            <div className="wf-brand-badge" style={{ marginBottom: "16px" }}>
+              <span className="wf-brand-main" style={{ color: "#ffffff" }}>VERIDIAN</span>
+              <span className="wf-brand-sub" style={{ color: "#ff6b2c" }}>CARE</span>
+            </div>
             <p className="wf-footer-about-text">
               NABH-aligned in-home clinical care, registered nursing, and physician tele-oversight across Delhi NCR, Mumbai, Bengaluru, and Hyderabad.
             </p>
@@ -39,20 +38,20 @@ export function WebflowFooter() {
             <h4 className="wf-footer-heading">Clinical Care</h4>
             <ul className="wf-footer-list">
               <li><Link href="/services/critical-care-nursing">Critical Care Nursing</Link></li>
-              <li><Link href="/services/geriatric-vitality">Geriatric & Palliative Care</Link></li>
-              <li><Link href="/services/post-operative-recovery">Post-Op Recovery</Link></li>
-              <li><Link href="/services/physiotherapy-rehab">Physiotherapy & Rehab</Link></li>
+              <li><Link href="/services/geriatric-vitality">Geriatric &amp; Palliative Care</Link></li>
+              <li><Link href="/services/wound-care-and-dressing">Post-Op Wound Dressing</Link></li>
+              <li><Link href="/services/physical-therapy-session">Physiotherapy &amp; Rehab</Link></li>
               <li><Link href="/service-areas">Metro Service Hubs</Link></li>
             </ul>
           </div>
 
           {/* Col 4: Support & Legal */}
           <div className="wf-footer-col">
-            <h4 className="wf-footer-heading">Support & Privacy</h4>
+            <h4 className="wf-footer-heading">Support &amp; Privacy</h4>
             <ul className="wf-footer-list">
               <li><Link href="/faqs">Frequently Asked Questions</Link></li>
-              <li><Link href="/privacy">DISHA & ABHA Data Privacy</Link></li>
-              <li><Link href="/terms">Terms of Service</Link></li>
+              <li><Link href="/why-us">DISHA &amp; ABHA Data Privacy</Link></li>
+              <li><Link href="/services">Standard Pricing (INR)</Link></li>
               <li><Link href="/auth/login">Clinician Portal</Link></li>
             </ul>
           </div>
@@ -60,10 +59,10 @@ export function WebflowFooter() {
 
         <div className="wf-footer-bottom-row">
           <div className="wf-footer-copy">
-            © {new Date().getFullYear()} Veridian Care India. All clinical protocols aligned with NABH & INC standards.
+            © {new Date().getFullYear()} Veridian Care India. All clinical protocols aligned with NABH &amp; INC standards.
           </div>
           <div className="wf-footer-links">
-            <span>24/7 Clinical Hotline: 1800-VERIDIAN</span>
+            <span>24/7 National Care Desk: 1800-VERIDIAN</span>
           </div>
         </div>
       </div>

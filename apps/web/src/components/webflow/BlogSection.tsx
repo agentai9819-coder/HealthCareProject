@@ -8,11 +8,11 @@ export function BlogSection() {
       <div className="wf-container">
         <div className="wf-block-header">
           <h2 className="wf-block-title">
-            Read Top Articles From <br />
-            Health Experts
+            Read Clinical Guides From <br />
+            Our Medical Directorate
           </h2>
           <Link href="/services" className="wf-view-all-link dark">
-            <span>Read All Blogs</span>
+            <span>Read All Guides</span>
             <img
               src="https://cdn.prod.website-files.com/6a8a9b834012eb47b04bdb10/6a8a9b844012eb47b04bdbda_arrow-right-02-round.png"
               alt=""
@@ -23,7 +23,7 @@ export function BlogSection() {
         <div className="wf-blog-grid">
           {/* Article 1 */}
           <div className="wf-blog-card">
-            <span className="wf-blog-tag">Clinical Guide</span>
+            <span className="wf-blog-tag">Post-Op Recovery</span>
             <div className="wf-blog-images-stack">
               <img
                 src="https://cdn.prod.website-files.com/6a8a9b834012eb47b04bdb10/6a8a9b844012eb47b04bdbdd_Rectangle%204279.png"
@@ -42,20 +42,20 @@ export function BlogSection() {
               />
             </div>
             <h3 className="wf-blog-article-title">
-              In-Home Post-Surgical Wound Management: Best Practices & Sterile Protocols
+              In-Home Post-Surgical Wound Management: Best Practices &amp; Sterile Protocols
             </h3>
           </div>
 
           {/* Article 2 */}
           <div className="wf-blog-card wf-blog-card-highlight">
             <div className="wf-blog-content-side">
-              <span className="wf-blog-tag">Healthy Lifestyle</span>
+              <span className="wf-blog-tag">Geriatric Vitality</span>
               <h3 className="wf-blog-article-title">
-                Your Ultimate Guide to Preventive Health, Vitals Tracking & Longevity
+                Your Complete Guide to In-Home Senior Care, Fall Prevention &amp; Medication Reconciliation
               </h3>
 
               <Link href="/services" className="wf-blog-cta-btn">
-                <span>Book Consultation</span>
+                <span>Book In-Home Care</span>
                 <img
                   src="https://cdn.prod.website-files.com/6a8a9b834012eb47b04bdb10/6a8a9b844012eb47b04bdb8b_arrow.svg"
                   alt=""
