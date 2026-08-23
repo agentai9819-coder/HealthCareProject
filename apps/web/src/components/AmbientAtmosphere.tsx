@@ -15,10 +15,18 @@ export function AmbientAtmosphere() {
       }}
       aria-hidden="true"
     >
-      {/* Slow-breathing atmospheric ambient light pools */}
-      <div className="ambient-orb ambient-orb-1" />
-      <div className="ambient-orb ambient-orb-2" />
-      <div className="ambient-grid-pattern" />
+      {/* Zero-repaint lightweight static ambient gradient backdrop */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background: "radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255, 107, 44, 0.08) 0%, rgba(251, 191, 36, 0.02) 40%, transparent 75%)",
+          pointerEvents: "none",
+        }}
+      />
     </div>
   );
 }

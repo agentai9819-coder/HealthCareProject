@@ -1770,69 +1770,11 @@ button:focus-visible, a:focus-visible {
    ✨ LUXURY EDITORIAL ANIMATIONS & AESTHETIC ENHANCEMENTS
    ========================================================================== */
 
-/* 1. Atmospheric Ambient Floating Orbs */
-.ambient-orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  pointer-events: none;
-  will-change: transform, opacity;
-}
-
-.ambient-orb-1 {
-  top: -100px;
-  left: 20%;
-  width: 550px;
-  height: 550px;
-  background: radial-gradient(circle, rgba(255, 107, 44, 0.07) 0%, rgba(245, 158, 11, 0.02) 60%, transparent 80%);
-  animation: floatOrb 22s ease-in-out infinite alternate;
-}
-
-.ambient-orb-2 {
-  top: 45%;
-  right: 15%;
-  width: 650px;
-  height: 650px;
-  background: radial-gradient(circle, rgba(251, 191, 36, 0.05) 0%, rgba(255, 107, 44, 0.015) 60%, transparent 80%);
-  animation: floatOrb 28s ease-in-out infinite alternate-reverse;
-}
-
-@keyframes floatOrb {
-  0% {
-    transform: translate(0, 0) scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: translate(60px, 40px) scale(1.12);
-    opacity: 1;
-  }
-  100% {
-    transform: translate(-40px, 80px) scale(0.95);
-    opacity: 0.7;
-  }
-}
-
-/* 2. Editorial Ambient Micro-Grid Texture */
-.ambient-grid-pattern {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
-  background-size: 80px 80px;
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 40%, transparent 80%);
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 40%, transparent 80%);
-  pointer-events: none;
-}
-
-/* 3. Smooth Hardware-Accelerated Scroll Reveal */
+/* 1. Smooth Hardware-Accelerated Scroll Reveal */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
@@ -1841,7 +1783,7 @@ button:focus-visible, a:focus-visible {
   transform: translateY(0);
 }
 
-/* 4. Specular Button Shimmer Light-Sweep */
+/* 2. Specular Button Shimmer Light-Sweep */
 .sp-btn-primary, .light-book-btn {
   position: relative;
   overflow: hidden;
@@ -1875,20 +1817,21 @@ button:focus-visible, a:focus-visible {
   box-shadow: 0 10px 24px rgba(255, 107, 44, 0.35);
 }
 
-/* 5. 3D Card Hover Lift & Soft Specular Lighting */
+/* 3. 3D Card Hover Lift & Soft Specular Lighting */
 .service-catalog-row, .light-service-card, .sp-card {
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
 }
 
 .service-catalog-row:hover, .light-service-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06) !important;
   border-color: rgba(255, 107, 44, 0.3) !important;
 }
 
 .sp-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 107, 44, 0.08) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 24px rgba(255, 107, 44, 0.08) !important;
   border-color: rgba(255, 107, 44, 0.4) !important;
 }
+
 
