@@ -58,8 +58,8 @@ export function CursorGlow() {
       // Instant 0ms update for inner laser dot (zero lag)
       dot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
 
-      // Emit high-speed sparks only during active movement
-      if (Math.random() > 0.35 && particles.length < 24) {
+      // Emit high-speed micro sparks only during fast movement over open space
+      if (!isHoveringInteractive && Math.random() > 0.4 && particles.length < 20) {
         const speed = Math.random() * 2 + 0.5;
         const angle = Math.random() * Math.PI * 2;
         particles.push({
@@ -68,9 +68,9 @@ export function CursorGlow() {
           vx: Math.cos(angle) * speed,
           vy: Math.sin(angle) * speed,
           life: 1,
-          decay: Math.random() * 0.05 + 0.03, // Fast clean decay
-          size: Math.random() * 2.2 + 1.2,
-          color: Math.random() > 0.3 ? "255, 107, 44" : "251, 191, 36",
+          decay: Math.random() * 0.06 + 0.04, // Fast clean decay
+          size: Math.random() * 1.8 + 1,
+          color: "255, 107, 44",
         });
       }
 
@@ -83,9 +83,9 @@ export function CursorGlow() {
           target.closest("input") ||
           target.closest("select") ||
           target.closest("textarea") ||
-          target.closest(".sp-card") ||
-          target.closest(".service-catalog-row") ||
-          target.closest("[role='button']");
+          target.closest("[role='button']") ||
+          target.closest(".sp-btn-primary") ||
+          target.closest(".light-book-btn");
 
         if (Boolean(isClickable) !== isHoveringInteractive) {
           isHoveringInteractive = Boolean(isClickable);
@@ -109,26 +109,24 @@ export function CursorGlow() {
     let animationId: number;
 
     const renderLoop = () => {
-      // Snappy high-frequency lerp (0.32 speed for immediate, elastic snap)
-      ringX += (mouseX - ringX) * 0.32;
-      ringY += (mouseY - ringY) * 0.32;
+      // Snappy high-frequency lerp (0.35 speed for immediate response)
+      ringX += (mouseX - ringX) * 0.35;
+      ringY += (mouseY - ringY) * 0.35;
 
-      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%) scale(${
-        isHoveringInteractive ? 1.7 : 1
-      })`;
+      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0) translate(-50%, -50%)`;
 
-      // Render lightweight high-speed sparks
+      // Render lightweight ambient glow and sparks
       ctx.clearRect(0, 0, width, height);
 
-      // Ambient subtle spotlight aura on canvas
-      if (mouseX > 0 && mouseY > 0) {
-        const aura = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 160);
-        aura.addColorStop(0, "rgba(255, 107, 44, 0.08)");
-        aura.addColorStop(0.5, "rgba(251, 191, 36, 0.02)");
+      // Subtle ambient background aura (never overlays buttons)
+      if (mouseX > 0 && mouseY > 0 && !isHoveringInteractive) {
+        const aura = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, 140);
+        aura.addColorStop(0, "rgba(255, 107, 44, 0.06)");
+        aura.addColorStop(0.6, "rgba(251, 191, 36, 0.015)");
         aura.addColorStop(1, "rgba(255, 107, 44, 0)");
         ctx.fillStyle = aura;
         ctx.beginPath();
-        ctx.arc(mouseX, mouseY, 160, 0, Math.PI * 2);
+        ctx.arc(mouseX, mouseY, 140, 0, Math.PI * 2);
         ctx.fill();
       }
 
@@ -145,11 +143,8 @@ export function CursorGlow() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.color}, ${p.life * 0.9})`;
-        ctx.shadowColor = `rgba(${p.color}, 0.8)`;
-        ctx.shadowBlur = 6;
+        ctx.fillStyle = `rgba(${p.color}, ${p.life * 0.8})`;
         ctx.fill();
-        ctx.shadowBlur = 0;
       }
 
       animationId = requestAnimationFrame(renderLoop);
@@ -168,7 +163,7 @@ export function CursorGlow() {
 
   return (
     <>
-      {/* 1. Hardware Accelerated Ambient Particle & Aura Canvas */}
+      {/* 1. Ambient Particle & Aura Canvas (Background Layer) */}
       <canvas
         ref={canvasRef}
         style={{
@@ -183,53 +178,53 @@ export function CursorGlow() {
         aria-hidden="true"
       />
 
-      {/* 2. Instant 0ms Core Laser Dot (Centered directly at cursor tip) */}
+      {/* 2. Instant 0ms Core Laser Dot (Zero Lag, Perfectly Centered) */}
       <div
         ref={dotRef}
         style={{
           position: "fixed",
           top: 0,
           left: 0,
-          width: "6px",
-          height: "6px",
-          marginLeft: "-3px",
-          marginTop: "-3px",
+          width: isHovered ? "4px" : "6px",
+          height: isHovered ? "4px" : "6px",
+          marginLeft: isHovered ? "-2px" : "-3px",
+          marginTop: isHovered ? "-2px" : "-3px",
           backgroundColor: "#ff6b2c",
           borderRadius: "50%",
           pointerEvents: "none",
           zIndex: 9999,
-          boxShadow: "0 0 10px #ff6b2c, 0 0 20px #fbbf24",
+          boxShadow: isHovered ? "0 0 6px #ff6b2c" : "0 0 10px #ff6b2c, 0 0 16px #fbbf24",
           opacity: isVisible ? 1 : 0,
-          transition: "opacity 0.2s ease",
+          transition: "width 0.15s ease, height 0.15s ease, margin 0.15s ease, opacity 0.2s ease",
           willChange: "transform",
         }}
         aria-hidden="true"
       />
 
-      {/* 3. Snappy Luxury Spring Follower Ring (Dynamic Hover Morph) */}
+      {/* 3. Creative Precision Reticle Ring (100% Crystal-Clear, ZERO Blur, ZERO Text Obstruction) */}
       <div
         ref={ringRef}
         style={{
           position: "fixed",
           top: 0,
           left: 0,
-          width: isHovered ? "46px" : "34px",
-          height: isHovered ? "46px" : "34px",
+          // Over buttons: contracts into a sharp 18px precision ring; in open space: 34px smooth halo
+          width: isHovered ? "18px" : "34px",
+          height: isHovered ? "18px" : "34px",
           borderRadius: "50%",
+          // 100% Transparent interior with NO backdrop blur at all!
+          backgroundColor: "transparent",
+          backdropFilter: "none",
           border: isHovered
-            ? "1.5px solid rgba(255, 107, 44, 0.9)"
-            : "1px solid rgba(255, 180, 120, 0.5)",
-          backgroundColor: isHovered
-            ? "rgba(255, 107, 44, 0.1)"
-            : "rgba(255, 107, 44, 0.02)",
-          backdropFilter: isHovered ? "blur(2px)" : "none",
+            ? "1.5px solid #ff6b2c"
+            : "1px solid rgba(255, 107, 44, 0.4)",
+          boxShadow: isHovered
+            ? "0 0 12px rgba(255, 107, 44, 0.5), inset 0 0 6px rgba(255, 107, 44, 0.25)"
+            : "0 0 8px rgba(255, 107, 44, 0.15)",
           pointerEvents: "none",
           zIndex: 9998,
-          boxShadow: isHovered
-            ? "0 0 24px rgba(255, 107, 44, 0.35), inset 0 0 12px rgba(255, 107, 44, 0.2)"
-            : "0 0 12px rgba(255, 107, 44, 0.15)",
           opacity: isVisible ? 1 : 0,
-          transition: "width 0.2s ease, height 0.2s ease, border 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease",
+          transition: "width 0.18s cubic-bezier(0.16, 1, 0.3, 1), height 0.18s cubic-bezier(0.16, 1, 0.3, 1), border 0.18s ease, box-shadow 0.18s ease, opacity 0.2s ease",
           willChange: "transform",
         }}
         aria-hidden="true"
