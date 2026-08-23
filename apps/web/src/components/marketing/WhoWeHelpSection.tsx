@@ -6,6 +6,7 @@ import Link from "next/link";
 const pathways = [
   {
     id: "post-op",
+    indexNo: "01",
     title: "Post-Hospital Discharge",
     subtitle: "For patients transitioning home after surgery or ICU stay.",
     protocol: "Wound inspection, drain care, medication review, and recovery milestone monitoring under physician supervision.",
@@ -19,6 +20,7 @@ const pathways = [
   },
   {
     id: "chronic",
+    indexNo: "02",
     title: "Elderly & Chronic Disease Care",
     subtitle: "For seniors managing hypertension, diabetes, cardiac or renal conditions.",
     protocol: "Comprehensive bedside vitals, portable 12-lead ECG, blood glucose charting, and continuous family caregiver updates.",
@@ -35,6 +37,7 @@ const pathways = [
   },
   {
     id: "rehab",
+    indexNo: "03",
     title: "Neuro & Orthopedic Rehabilitation",
     subtitle: "For stroke survivors, joint replacement, and mobility restoration.",
     protocol: "One-on-one physiotherapy by certified BPT clinicians focusing on balance, gait training, and neuromuscular re-education.",
@@ -48,6 +51,7 @@ const pathways = [
   },
   {
     id: "palliative",
+    indexNo: "04",
     title: "Comfort & Palliative Support",
     subtitle: "For individuals needing compassionate pain and symptom management at home.",
     protocol: "Non-invasive symptom relief, catheter management, oxygen therapy coordination, and respectful family guidance.",
@@ -69,10 +73,10 @@ export function WhoWeHelpSection() {
       <div style={styles.container}>
         <div style={styles.header}>
           <span className="section-kicker" style={{ justifyContent: "center" }}>
-            Tailored Clinical Pathways
+            - 05 / Specialized Pathways
           </span>
           <h2 id="who-we-help-title" className="section-heading" style={{ margin: "16px auto", textAlign: "center" }}>
-            Specialized Care Designed Around Your Life
+            Specialized Care, <em>Designed Around Your Life.</em>
           </h2>
           <p style={styles.subtitle}>
             Every patient is unique. Our clinical pathways combine verified hospital-grade practitioners with customized in-home protocols.
@@ -88,14 +92,19 @@ export function WhoWeHelpSection() {
                 className="service-card"
                 style={{
                   ...styles.card,
-                  borderColor: isSelected ? "rgba(52, 211, 153, 0.4)" : "rgba(255, 255, 255, 0.08)",
-                  background: isSelected ? "linear-gradient(145deg, rgba(16, 185, 129, 0.08), rgba(12, 20, 26, 0.8))" : "rgba(12, 20, 26, 0.72)",
+                  borderColor: isSelected ? "#f59e0b" : "rgba(255, 255, 255, 0.08)",
+                  boxShadow: isSelected ? "0 16px 36px -10px rgba(245, 158, 11, 0.2)" : "0 8px 24px -8px rgba(0, 0, 0, 0.4)",
                 }}
                 onClick={() => setActiveTab(item.id)}
               >
                 <div style={styles.cardTop}>
-                  <div style={styles.iconCircle}>
-                    {item.icon}
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    <div style={styles.iconCircle}>
+                      {item.icon}
+                    </div>
+                    <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 700, color: "#f59e0b" }}>
+                      № {item.indexNo}
+                    </span>
                   </div>
                   <span style={styles.cardTag}>{item.badge}</span>
                 </div>
@@ -104,7 +113,7 @@ export function WhoWeHelpSection() {
                 <p style={styles.cardSubtitle}>{item.subtitle}</p>
 
                 <div style={styles.protocolBox}>
-                  <strong style={{ display: "block", fontSize: "11px", color: "#a7f3d0", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "6px" }}>
+                  <strong style={{ display: "block", fontSize: "10px", color: "#fbbf24", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "6px", fontFamily: "var(--font-mono)" }}>
                     Clinical Protocol
                   </strong>
                   <p style={{ margin: 0, fontSize: "13px", color: "#cbd5e1", lineHeight: 1.55 }}>
@@ -112,11 +121,11 @@ export function WhoWeHelpSection() {
                   </p>
                 </div>
 
-                <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "14px", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
-                  <span style={{ fontSize: "12px", color: "#94a3b8", fontWeight: 600 }}>{item.duration}</span>
+                <div style={{ marginTop: "auto", display: "flex", justifyContent: "space-between", alignItems: "center", paddingTop: "14px", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                  <span style={{ fontSize: "11px", color: "#94a3b8", fontFamily: "var(--font-mono)" }}>{item.duration}</span>
                   <Link
                     href="/services"
-                    style={{ fontSize: "12px", color: "#34d399", fontWeight: 700, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px" }}
+                    style={{ fontSize: "13px", color: "#fbbf24", fontWeight: 700, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "4px" }}
                   >
                     <span>View Pathway</span>
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -135,8 +144,9 @@ export function WhoWeHelpSection() {
 
 const styles: Record<string, React.CSSProperties> = {
   section: {
-    padding: "90px 0",
+    padding: "95px 0",
     position: "relative",
+    borderTop: "1px solid rgba(255, 255, 255, 0.08)",
   },
   container: {
     maxWidth: "1320px",
@@ -159,11 +169,13 @@ const styles: Record<string, React.CSSProperties> = {
     gap: "1.5rem",
   },
   card: {
-    padding: "24px",
+    padding: "26px",
     display: "flex",
     flexDirection: "column",
     cursor: "pointer",
     borderRadius: "20px",
+    backgroundColor: "rgba(14, 18, 24, 0.8)",
+    backdropFilter: "blur(16px)",
   },
   cardTop: {
     display: "flex",
@@ -172,26 +184,27 @@ const styles: Record<string, React.CSSProperties> = {
     marginBottom: "1.25rem",
   },
   iconCircle: {
-    width: "44px",
-    height: "44px",
-    borderRadius: "12px",
-    backgroundColor: "rgba(56, 189, 248, 0.12)",
-    color: "#38bdf8",
-    border: "1px solid rgba(56, 189, 248, 0.3)",
+    width: "42px",
+    height: "42px",
+    borderRadius: "11px",
+    backgroundColor: "rgba(245, 158, 11, 0.12)",
+    color: "#f59e0b",
+    border: "1px solid rgba(245, 158, 11, 0.25)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
   cardTag: {
-    fontSize: "10px",
+    fontSize: "9px",
     fontWeight: 800,
     textTransform: "uppercase",
     letterSpacing: "0.08em",
-    color: "#38bdf8",
-    backgroundColor: "rgba(56, 189, 248, 0.12)",
+    color: "#fbbf24",
+    backgroundColor: "rgba(245, 158, 11, 0.12)",
     padding: "3px 8px",
-    borderRadius: "6px",
-    border: "1px solid rgba(56, 189, 248, 0.3)",
+    borderRadius: "5px",
+    border: "1px solid rgba(245, 158, 11, 0.25)",
+    fontFamily: "var(--font-mono)",
   },
   cardTitle: {
     fontFamily: "var(--font-display, 'Outfit', sans-serif)",
@@ -208,8 +221,8 @@ const styles: Record<string, React.CSSProperties> = {
     margin: "0 0 1rem 0",
   },
   protocolBox: {
-    backgroundColor: "rgba(14, 23, 42, 0.7)",
-    border: "1px solid rgba(255, 255, 255, 0.08)",
+    backgroundColor: "rgba(9, 12, 16, 0.6)",
+    border: "1px solid rgba(255, 255, 255, 0.06)",
     borderRadius: "12px",
     padding: "12px 14px",
     marginBottom: "1rem",

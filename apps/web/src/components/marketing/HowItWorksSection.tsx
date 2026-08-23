@@ -30,9 +30,9 @@ export function HowItWorksSection() {
     <section id="journey" className="journey-section" aria-labelledby="journey-title">
       <div className="journey-top">
         <div>
-          <span className="section-kicker">4-Step Care Journey</span>
+          <span className="section-kicker">- 06 / 4-Stage Care Timeline</span>
           <h2 id="journey-title" className="section-heading">
-            How In-Home Care Works: From First Call to Bedside Care
+            How In-Home Care Works: <em>From Request to Bedside.</em>
           </h2>
         </div>
         <p className="journey-caption">
@@ -43,9 +43,13 @@ export function HowItWorksSection() {
       <div className="journey-track">
         {careJourney.map((item) => (
           <article className="journey-item" key={item.step}>
-            <span className="journey-number">{item.step}</span>
+            <span className="journey-number" style={{ fontFamily: "var(--font-mono)", color: "rgba(245, 158, 11, 0.4)" }}>
+              {item.step}
+            </span>
             <div className="journey-content">
-              <span className="journey-step">{item.kicker}</span>
+              <span className="journey-step" style={{ fontFamily: "var(--font-mono)", color: "#f59e0b" }}>
+                {item.kicker}
+              </span>
               <h3 className="journey-title">{item.title}</h3>
               <p className="journey-copy">{item.copy}</p>
             </div>

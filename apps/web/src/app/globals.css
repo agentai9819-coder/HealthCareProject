@@ -1,27 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 /*
- * VERIDIAN CARE — Midnight Sapphire & Electric Emerald Luxury Studio Design System
- * $20K Bespoke Studio Standard
+ * VERIDIAN CARE — Bespoke Editorial Clinical Atelier
+ * Inspired by Web Design Awards & Awwwards Site of the Month (Outsiders Agency aesthetic)
  */
 :root {
-  --background: #080d1a;
+  --background: #090c10;
   --foreground: #f8fafc;
-  --border: rgba(255, 255, 255, 0.09);
-  --border-light: rgba(255, 255, 255, 0.15);
-  --border-glow: rgba(56, 189, 248, 0.4);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.14);
+  --border-glow: rgba(245, 158, 11, 0.35);
   
-  --color-obsidian: #080d1a;
-  --color-slate-surface: #0e1726;
-  --color-glass-surface: rgba(14, 23, 42, 0.82);
-  --color-glass-surface-hover: rgba(20, 32, 56, 0.92);
+  --color-obsidian: #090c10;
+  --color-slate-surface: #0e1218;
+  --color-glass-surface: rgba(14, 18, 24, 0.82);
+  --color-glass-surface-hover: rgba(20, 26, 36, 0.92);
+  
+  --color-amber: #f59e0b;
+  --color-amber-bright: #fbbf24;
+  --color-amber-glow: rgba(245, 158, 11, 0.2);
   
   --color-sapphire: #38bdf8;
-  --color-sapphire-deep: #0284c7;
-  --color-sapphire-glow: rgba(56, 189, 248, 0.25);
-  
   --color-mint: #10b981;
   --color-mint-bright: #34d399;
   --color-mint-dark: #059669;
-  --color-mint-subtle: rgba(16, 185, 129, 0.15);
   
   --color-text-primary: #ffffff;
   --color-text-secondary: #94a3b8;
@@ -29,12 +31,14 @@
   
   --radius-sm: 8px;
   --radius-md: 14px;
-  --radius-lg: 22px;
-  --radius-xl: 30px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
   --radius-pill: 9999px;
   
   --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  --font-serif: 'Instrument Serif', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
   
   /* Emil Kowalski Motion & Interaction Tokens */
   --ease-snappy: cubic-bezier(0.16, 1, 0.3, 1);
@@ -660,42 +664,49 @@ button:focus-visible, a:focus-visible {
   grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
   align-items: center;
   gap: clamp(45px, 8vw, 120px);
-}
-.section-kicker {
-  display: flex;
+}.section-kicker {
+  display: inline-flex;
   align-items: center;
-  gap: 9px;
-  color: #86e7bb;
+  gap: 8px;
+  color: var(--color-amber-bright);
+  font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
 }
 .section-kicker::before {
-  content: "";
-  width: 28px;
-  height: 1px;
-  background: #10b981;
-  box-shadow: 0 0 8px rgba(16, 185, 129, 0.7);
+  content: "—";
+  color: var(--color-amber);
+  margin-right: 2px;
 }
 .section-heading {
-  max-width: 650px;
+  max-width: 720px;
   margin: 16px 0 16px;
-  color: #f3f6f3;
+  color: #ffffff;
   font-family: var(--font-display);
-  font-size: clamp(32px, 3.65vw, 50px);
+  font-size: clamp(32px, 3.8vw, 52px);
   font-weight: 800;
-  letter-spacing: -0.045em;
-  line-height: 1.06;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+}
+.section-heading em, .hero h1 em, h1 em, h2 em, h3 em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: #fbbf24;
+  text-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
 }
 .section-body {
-  max-width: 590px;
+  max-width: 600px;
   margin: 0;
-  color: #98a49e;
+  color: #94a3b8;
   font-size: 15px;
   font-weight: 500;
   line-height: 1.75;
 }
+
 .clinician-proof {
   display: flex;
   flex-wrap: wrap;

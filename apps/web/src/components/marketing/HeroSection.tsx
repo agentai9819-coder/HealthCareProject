@@ -21,6 +21,7 @@ const cityHubs: CityHub[] = [
 const specialties = [
   {
     id: "nursing",
+    indexNo: "01",
     name: "Skilled Nursing",
     sub: "IV therapy, sterile wound dressing & catheter care",
     price: "₹1,499",
@@ -36,6 +37,7 @@ const specialties = [
   },
   {
     id: "therapy",
+    indexNo: "02",
     name: "Physical Therapy",
     sub: "Neuro rehab, ortho mobilization & post-fracture",
     price: "₹1,900",
@@ -49,6 +51,7 @@ const specialties = [
   },
   {
     id: "postop",
+    indexNo: "03",
     name: "Post-Surgical Care",
     sub: "Drain care, suture monitoring & vitals telemetry",
     price: "₹2,499",
@@ -62,6 +65,7 @@ const specialties = [
   },
   {
     id: "wellness",
+    indexNo: "04",
     name: "Elder Wellness Check",
     sub: "12-lead ECG, blood glucose, fall-risk & companion",
     price: "₹1,299",
@@ -89,7 +93,7 @@ export function HeroSection() {
   const activeHub = cityHubs.find((c) => c.id === selectedCity) || cityHubs[0];
   const activeSpec = specialties.find((s) => s.id === selectedSpecialty) || specialties[0];
 
-  // Interactive 3D Medical Radar Background Effect
+  // Interactive Medical Telemetry Canvas (Cyan / Mint / Amber nodes)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -108,7 +112,6 @@ export function HeroSection() {
 
     window.addEventListener("resize", handleResize);
 
-    // Particle nodes simulating clinical telemetry network
     const nodes: { x: number; y: number; vx: number; vy: number; radius: number; alpha: number }[] = [];
     const nodeCount = Math.min(28, Math.floor(width / 45));
 
@@ -128,11 +131,9 @@ export function HeroSection() {
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Radar focal coordinate center
       const centerX = width * 0.82;
       const centerY = height * 0.38;
 
-      // Draw subtle radar sweep pulse
       angle += 0.008;
       const radarRadius = Math.min(width * 0.25, 220);
 
@@ -140,7 +141,7 @@ export function HeroSection() {
       for (let r = 50; r <= radarRadius; r += 55) {
         ctx.beginPath();
         ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(56, 189, 248, 0.08)";
+        ctx.strokeStyle = "rgba(245, 158, 11, 0.06)";
         ctx.lineWidth = 1;
         ctx.stroke();
       }
@@ -150,9 +151,9 @@ export function HeroSection() {
       ctx.translate(centerX, centerY);
       ctx.rotate(angle);
       const gradient = ctx.createLinearGradient(0, 0, radarRadius, 0);
-      gradient.addColorStop(0, "rgba(56, 189, 248, 0.25)");
-      gradient.addColorStop(0.5, "rgba(16, 185, 129, 0.15)");
-      gradient.addColorStop(1, "rgba(56, 189, 248, 0)");
+      gradient.addColorStop(0, "rgba(245, 158, 11, 0.2)");
+      gradient.addColorStop(0.5, "rgba(16, 185, 129, 0.12)");
+      gradient.addColorStop(1, "rgba(245, 158, 11, 0)");
       ctx.beginPath();
       ctx.moveTo(0, 0);
       ctx.arc(0, 0, radarRadius, -0.28, 0);
@@ -172,7 +173,7 @@ export function HeroSection() {
 
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-        ctx.fillStyle = i % 2 === 0 ? `rgba(56, 189, 248, ${node.alpha})` : `rgba(52, 211, 153, ${node.alpha})`;
+        ctx.fillStyle = i % 2 === 0 ? `rgba(245, 158, 11, ${node.alpha})` : `rgba(52, 211, 153, ${node.alpha})`;
         ctx.fill();
 
         for (let j = i + 1; j < nodes.length; j++) {
@@ -182,7 +183,7 @@ export function HeroSection() {
             ctx.beginPath();
             ctx.moveTo(node.x, node.y);
             ctx.lineTo(other.x, other.y);
-            ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 * (1 - dist / 110)})`;
+            ctx.strokeStyle = `rgba(245, 158, 11, ${0.12 * (1 - dist / 110)})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
@@ -223,13 +224,16 @@ export function HeroSection() {
         <div className="hero-intro">
           <div className="eyebrow fade-in">
             <span className="live-dot" />
-            <span>NABH Aligned Clinical Protocol</span>
-            <span style={{ opacity: 0.4 }}>•</span>
-            <span>ABHA Digital Health Connected</span>
+            <span style={{ fontFamily: "var(--font-mono)", letterSpacing: "0.14em" }}>Index № 01</span>
+            <span style={{ opacity: 0.4 }}>/</span>
+            <span>Hospital-Grade Clinical Care</span>
+            <span style={{ opacity: 0.4 }}>/</span>
+            <span>NABH Protocol</span>
           </div>
 
           <h1 id="hero-title" className="fade-in delay-1">
-            Hospital-Grade Clinical Care, <em>Restored at Your Doorstep.</em>
+            Hospital-Grade Clinical Care, <br />
+            <em>Restored at Your Bedside.</em>
           </h1>
 
           <p className="hero-description fade-in delay-2">
@@ -237,36 +241,36 @@ export function HeroSection() {
           </p>
 
           {/* Quick Credential Badges */}
-          <div className="hero-trust-badges fade-in delay-2" style={{ display: "flex", gap: "12px", flexWrap: "wrap", marginTop: "24px" }}>
+          <div className="hero-trust-badges fade-in delay-2" style={{ display: "flex", gap: "10px", flexWrap: "wrap", marginTop: "24px" }}>
             <span style={styles.trustPill}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-              </svg>
+              <span style={{ color: "#f59e0b", fontFamily: "var(--font-mono)", fontWeight: 700 }}>01</span>
               <span>100% NMC & INC Registered Clinicians</span>
             </span>
             <span style={styles.trustPill}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5">
-                <circle cx="12" cy="12" r="10" />
-                <polyline points="12 6 12 12 16 14" />
-              </svg>
+              <span style={{ color: "#f59e0b", fontFamily: "var(--font-mono)", fontWeight: 700 }}>02</span>
               <span>Avg {activeHub.dispatchTime} Doorstep Arrival</span>
             </span>
             <span style={styles.trustPill}>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5">
-                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+              <span style={{ color: "#f59e0b", fontFamily: "var(--font-mono)", fontWeight: 700 }}>03</span>
               <span>Tamper-Sealed Consumable Kits</span>
             </span>
           </div>
         </div>
 
-        {/* Live Dispatch Window Radar Aside */}
+        {/* Editorial Index Scorecard Aside */}
         <aside className="hero-aside fade-in delay-3" aria-label="Live dispatch status">
-          <span className="aside-label">Live Dispatch Window</span>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "8px" }}>
+            <span className="aside-label" style={{ fontFamily: "var(--font-mono)" }}>Index № 4082 · Cycle 2026</span>
+            <span style={{ fontSize: "10px", color: "#34d399", fontWeight: 800, fontFamily: "var(--font-mono)" }}>LIVE DISPATCH</span>
+          </div>
           <span className="aside-big">{activeHub.name} · {activeHub.dispatchTime}</span>
           <p className="aside-caption">
             <strong>{activeHub.cliniciansOnline} licensed practitioners</strong> on active dispatch across {activeHub.activeZone}.
           </p>
+          <div style={{ marginTop: "14px", paddingTop: "12px", borderTop: "1px solid rgba(255,255,255,0.08)", display: "flex", gap: "12px", fontSize: "11px", color: "#94a3b8" }}>
+            <span>✓ Sealed Kits</span>
+            <span>✓ Physician MD Desk</span>
+          </div>
         </aside>
       </div>
 
@@ -274,14 +278,14 @@ export function HeroSection() {
       <section id="care-console" className="booking-console" aria-labelledby="booking-title" style={{ position: "relative", zIndex: 3 }}>
         <div className="console-top">
           <div>
-            <p className="console-kicker">Live Care Dispatch Console</p>
+            <p className="console-kicker" style={{ fontFamily: "var(--font-mono)" }}>- 01 / Configurator</p>
             <h2 id="booking-title" className="console-title">Configure your in-home clinical visit</h2>
           </div>
 
           {/* City Hub Switcher */}
           <div style={{ display: "flex", alignItems: "center", gap: "6px", flexWrap: "wrap" }}>
-            <span style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.1em", marginRight: "4px" }}>
-              Coverage:
+            <span style={{ fontSize: "10px", color: "#94a3b8", fontWeight: 800, textTransform: "uppercase", letterSpacing: "0.14em", fontFamily: "var(--font-mono)", marginRight: "4px" }}>
+              Hub:
             </span>
             {cityHubs.map((hub) => (
               <button
@@ -299,7 +303,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        {/* Specialty Selector Grid */}
+        {/* Specialty Selector Grid with Mono Indexing */}
         <div className="specialty-grid">
           {specialties.map((specialty) => {
             const active = selectedSpecialty === specialty.id;
@@ -312,17 +316,22 @@ export function HeroSection() {
                 aria-pressed={active}
               >
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", width: "100%" }}>
-                  <span className="specialty-icon">{specialty.icon}</span>
+                  <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                    <span className="specialty-icon">{specialty.icon}</span>
+                    <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 700, color: active ? "#fbbf24" : "#64748b" }}>
+                      {specialty.indexNo}
+                    </span>
+                  </div>
                   <span style={styles.cardTag}>{specialty.tag}</span>
                 </div>
                 <span className="specialty-name">{specialty.name}</span>
                 <span className="specialty-sub">{specialty.sub}</span>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", marginTop: "14px", borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: "10px" }}>
-                  <span style={{ fontSize: "16px", fontWeight: 800, color: "#34d399", fontFamily: "var(--font-display)" }}>{specialty.price}</span>
-                  <span style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 600 }}>{specialty.duration}</span>
+                  <span style={{ fontSize: "16px", fontWeight: 800, color: "#ffffff", fontFamily: "var(--font-display)" }}>{specialty.price}</span>
+                  <span style={{ fontSize: "11px", color: "#94a3b8", fontFamily: "var(--font-mono)" }}>{specialty.duration}</span>
                 </div>
                 <span className="selection-check">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a7f3d0" strokeWidth="3">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" strokeWidth="3">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
                 </span>
@@ -334,7 +343,7 @@ export function HeroSection() {
         {/* Console Summary & Actions */}
         <div className="console-bottom">
           <div className="time-list" aria-label="Available appointment times">
-            <span style={{ fontSize: "12px", color: "#94a3b8", fontWeight: 600, display: "flex", alignItems: "center", marginRight: "6px" }}>
+            <span style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 700, display: "flex", alignItems: "center", marginRight: "6px", fontFamily: "var(--font-mono)" }}>
               Slot:
             </span>
             {timeSlots.map((time) => (
@@ -351,12 +360,12 @@ export function HeroSection() {
           </div>
 
           <div className="hero-btn-group" style={{ display: "flex", gap: "14px", flexWrap: "wrap", alignItems: "center" }}>
-            <div style={{ marginRight: "10px" }}>
-              <div style={{ fontSize: "10px", color: "#94a3b8", textTransform: "uppercase", fontWeight: 700, letterSpacing: "0.1em" }}>
+            <div style={{ marginRight: "8px" }}>
+              <div style={{ fontSize: "10px", color: "#64748b", textTransform: "uppercase", fontWeight: 800, letterSpacing: "0.12em", fontFamily: "var(--font-mono)" }}>
                 Total Visit Fee
               </div>
-              <div style={{ fontSize: "19px", fontWeight: 800, color: "#f8fafc", fontFamily: "var(--font-display)" }}>
-                {activeSpec.price} <span style={{ fontSize: "11px", fontWeight: 600, color: "#34d399" }}>incl. GST</span>
+              <div style={{ fontSize: "20px", fontWeight: 800, color: "#ffffff", fontFamily: "var(--font-display)" }}>
+                {activeSpec.price} <span style={{ fontSize: "11px", fontWeight: 700, color: "#34d399" }}>incl. GST</span>
               </div>
             </div>
 
@@ -380,21 +389,25 @@ export function HeroSection() {
         </div>
       </section>
 
-      {/* Metrics Ribbon */}
+      {/* Editorial Index Metrics Ribbon */}
       <div className="metrics-ribbon" aria-label="Veridian Care quality metrics">
         <div className="metric">
+          <span style={{ fontSize: "10px", color: "#f59e0b", fontFamily: "var(--font-mono)", fontWeight: 700, display: "block", marginBottom: "4px" }}>INDEX № 01</span>
           <span className="metric-value">14,800+</span>
           <span className="metric-label">In-Home Visits Delivered</span>
         </div>
         <div className="metric">
+          <span style={{ fontSize: "10px", color: "#f59e0b", fontFamily: "var(--font-mono)", fontWeight: 700, display: "block", marginBottom: "4px" }}>INDEX № 02</span>
           <span className="metric-value">100% Verified</span>
           <span className="metric-label">NMC & INC Registered Nurses</span>
         </div>
         <div className="metric">
+          <span style={{ fontSize: "10px", color: "#f59e0b", fontFamily: "var(--font-mono)", fontWeight: 700, display: "block", marginBottom: "4px" }}>INDEX № 03</span>
           <span className="metric-value">4.96 ★</span>
           <span className="metric-label">Patient Clinical Rating</span>
         </div>
         <div className="metric">
+          <span style={{ fontSize: "10px", color: "#f59e0b", fontFamily: "var(--font-mono)", fontWeight: 700, display: "block", marginBottom: "4px" }}>INDEX № 04</span>
           <span className="metric-value">DISHA / ABHA</span>
           <span className="metric-label">Indian Health Data Privacy</span>
         </div>
@@ -407,43 +420,44 @@ const styles: Record<string, React.CSSProperties> = {
   trustPill: {
     display: "inline-flex",
     alignItems: "center",
-    gap: "7px",
+    gap: "8px",
     fontSize: "12px",
     fontWeight: 600,
     color: "#cbd5e1",
-    padding: "6px 12px",
+    padding: "6px 14px",
     borderRadius: "999px",
-    backgroundColor: "rgba(255, 255, 255, 0.04)",
-    border: "1px solid rgba(255, 255, 255, 0.09)",
-    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.2)",
+    backgroundColor: "rgba(255, 255, 255, 0.03)",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
   },
   cityChip: {
     padding: "6px 14px",
-    fontSize: "12px",
+    fontSize: "11px",
     fontWeight: 700,
     color: "#94a3b8",
-    backgroundColor: "rgba(255, 255, 255, 0.04)",
-    border: "1px solid rgba(255, 255, 255, 0.09)",
+    backgroundColor: "rgba(255, 255, 255, 0.03)",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
     borderRadius: "999px",
     cursor: "pointer",
     transition: "all 0.18s cubic-bezier(0.16, 1, 0.3, 1)",
+    fontFamily: "var(--font-sans)",
   },
   cityChipActive: {
-    backgroundColor: "rgba(16, 185, 129, 0.2)",
-    color: "#a7f3d0",
-    borderColor: "rgba(52, 211, 153, 0.5)",
-    boxShadow: "0 0 16px rgba(16, 185, 129, 0.25)",
+    backgroundColor: "rgba(245, 158, 11, 0.12)",
+    color: "#fbbf24",
+    borderColor: "rgba(245, 158, 11, 0.4)",
+    boxShadow: "0 0 12px rgba(245, 158, 11, 0.2)",
   },
   cardTag: {
-    fontSize: "10px",
-    fontWeight: 700,
-    color: "#a7f3d0",
-    backgroundColor: "rgba(16, 185, 129, 0.15)",
-    border: "1px solid rgba(16, 185, 129, 0.3)",
-    padding: "3px 8px",
-    borderRadius: "6px",
-    letterSpacing: "0.05em",
+    fontSize: "9px",
+    fontWeight: 800,
+    color: "#34d399",
+    backgroundColor: "rgba(16, 185, 129, 0.12)",
+    border: "1px solid rgba(16, 185, 129, 0.25)",
+    padding: "2px 7px",
+    borderRadius: "5px",
+    letterSpacing: "0.06em",
     textTransform: "uppercase",
+    fontFamily: "var(--font-mono)",
   },
   secondaryBtn: {
     display: "inline-flex",

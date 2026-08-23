@@ -46,10 +46,10 @@ export default function HomePage() {
             <div style={styles.container}>
               <div style={styles.faqHeader}>
                 <span className="section-kicker" style={{ justifyContent: "center" }}>
-                  Patient Clarity
+                  - 09 / Patient Clarity
                 </span>
                 <h2 id="home-faq-title" className="section-heading" style={{ textAlign: "center", margin: "14px auto" }}>
-                  Frequently Asked Questions
+                  Frequently Asked <em>Questions.</em>
                 </h2>
                 <p style={styles.faqSubtitle}>
                   Transparent answers regarding clinician licensing, appointment booking, and in-home care delivery.

@@ -4,21 +4,25 @@ import Image from "next/image";
 export function ClinicalCareSection() {
   const points = [
     {
+      indexNo: "01",
       title: "100% Sealed Single-Use Sterile Kits",
       desc: "Every procedure uses tamper-evident sealed consumable kits opened exclusively at your bedside.",
       badge: "Infection Control",
     },
     {
+      indexNo: "02",
       title: "Digital Vitals & Telemetry Telemetry",
       desc: "Instant multi-parameter monitoring: blood pressure, pulse oximetry, capillary glucose & temperature.",
       badge: "Real-Time Telemetry",
     },
     {
+      indexNo: "03",
       title: "Active Physician Tele-Supervision",
       desc: "Continuous physician oversight via encrypted digital charting with immediate escalation protocols.",
       badge: "Doctor Oversight",
     },
     {
+      indexNo: "04",
       title: "ABHA & DISHA Aligned Care Summary",
       desc: "Comprehensive digital visit report dispatched to you and your authorized family care coordinators within 30 minutes.",
       badge: "Digital Health",
@@ -29,7 +33,7 @@ export function ClinicalCareSection() {
     <section style={styles.section} aria-labelledby="clinical-care-heading">
       <div style={styles.container}>
         <div style={styles.row}>
-          {/* Left Column: Glass Medical Graphic & Live Telemetry Badge */}
+          {/* Left Column: Clinical Photo & Telemetry Badge */}
           <div style={styles.imageColumn}>
             <div style={styles.imageWrapper}>
               <Image
@@ -50,21 +54,21 @@ export function ClinicalCareSection() {
 
           {/* Right Column: Narrative & Checklist */}
           <div style={styles.contentColumn}>
-            <span className="section-kicker">Hospital-Grade Clinical Standards</span>
+            <span className="section-kicker">- 03 / Hospital-Grade Protocols</span>
             <h2 id="clinical-care-heading" className="section-heading" style={{ margin: "16px 0" }}>
-              Hospital-Quality Precision, Delivered to Your Living Room
+              Hospital-Quality Precision, <em>Delivered at Your Bedside.</em>
             </h2>
             <p style={styles.lead}>
-              We eliminate the anxiety of hospital waiting rooms and clinic commutes. Verified, hospital-trained Registered Nurses and Certified Physiotherapists bring clinical rigor, advanced monitoring, and calm reassurance to your bedside.
+              We eliminate the anxiety of hospital waiting rooms and clinic commutes. Verified, hospital-trained Registered Nurses and Certified Physiotherapists bring clinical rigor, advanced monitoring, and calm reassurance to your living room.
             </p>
 
             <div style={styles.pointsList}>
               {points.map((pt, idx) => (
                 <div key={idx} style={styles.pointItem}>
                   <div style={styles.pointIcon}>
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.5">
-                      <polyline points="20 6 9 17 4 12" />
-                    </svg>
+                    <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 700, color: "#f59e0b" }}>
+                      {pt.indexNo}
+                    </span>
                   </div>
                   <div>
                     <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
@@ -99,8 +103,7 @@ const styles: Record<string, React.CSSProperties> = {
   section: {
     padding: "95px 0",
     position: "relative",
-    borderTop: "1px solid rgba(255, 255, 255, 0.06)",
-    background: "linear-gradient(180deg, rgba(6, 11, 14, 0) 0%, rgba(12, 20, 26, 0.4) 100%)",
+    borderTop: "1px solid rgba(255, 255, 255, 0.08)",
   },
   container: {
     maxWidth: "1320px",
@@ -124,26 +127,26 @@ const styles: Record<string, React.CSSProperties> = {
     overflow: "hidden",
     boxShadow: "0 24px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12)",
     border: "1px solid rgba(255, 255, 255, 0.1)",
-    background: "rgba(12, 20, 26, 0.8)",
+    background: "rgba(14, 18, 24, 0.8)",
   },
   image: {
     width: "100%",
     height: "auto",
     display: "block",
     objectFit: "cover",
-    opacity: 0.9,
+    opacity: 0.92,
   },
   imageBadge: {
     position: "absolute",
     bottom: "1.25rem",
     left: "1.25rem",
     right: "1.25rem",
-    backgroundColor: "rgba(6, 11, 14, 0.88)",
+    backgroundColor: "rgba(9, 12, 16, 0.92)",
     backdropFilter: "blur(12px)",
     borderRadius: "14px",
     padding: "0.65rem 1rem",
     boxShadow: "0 8px 24px rgba(0, 0, 0, 0.4)",
-    border: "1px solid rgba(16, 185, 129, 0.25)",
+    border: "1px solid rgba(245, 158, 11, 0.3)",
     display: "inline-flex",
     alignItems: "center",
     gap: "0.6rem",
@@ -152,8 +155,8 @@ const styles: Record<string, React.CSSProperties> = {
     width: "8px",
     height: "8px",
     borderRadius: "50%",
-    backgroundColor: "#38bdf8",
-    boxShadow: "0 0 10px #38bdf8",
+    backgroundColor: "#f59e0b",
+    boxShadow: "0 0 10px #f59e0b",
     flexShrink: 0,
   },
   badgeText: {
@@ -185,15 +188,15 @@ const styles: Record<string, React.CSSProperties> = {
     gap: "1rem",
     padding: "14px 16px",
     borderRadius: "16px",
-    backgroundColor: "rgba(14, 23, 42, 0.75)",
+    backgroundColor: "rgba(14, 18, 24, 0.75)",
     border: "1px solid rgba(255, 255, 255, 0.08)",
   },
   pointIcon: {
-    width: "36px",
-    height: "36px",
+    width: "34px",
+    height: "34px",
     borderRadius: "10px",
-    backgroundColor: "rgba(56, 189, 248, 0.12)",
-    border: "1px solid rgba(56, 189, 248, 0.3)",
+    backgroundColor: "rgba(245, 158, 11, 0.12)",
+    border: "1px solid rgba(245, 158, 11, 0.3)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -211,12 +214,13 @@ const styles: Record<string, React.CSSProperties> = {
     fontSize: "9px",
     fontWeight: 800,
     textTransform: "uppercase",
-    letterSpacing: "0.06em",
-    color: "#38bdf8",
-    backgroundColor: "rgba(56, 189, 248, 0.15)",
+    letterSpacing: "0.08em",
+    color: "#fbbf24",
+    backgroundColor: "rgba(245, 158, 11, 0.12)",
     padding: "2px 6px",
     borderRadius: "4px",
-    border: "1px solid rgba(56, 189, 248, 0.25)",
+    border: "1px solid rgba(245, 158, 11, 0.25)",
+    fontFamily: "var(--font-mono)",
   },
   pointDesc: {
     fontSize: "13px",
