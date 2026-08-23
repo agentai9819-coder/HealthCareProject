@@ -6,6 +6,8 @@ import { MarketingFooter } from "../components/MarketingFooter";
 import { CookieBanner } from "../components/CookieBanner";
 import { StickyMobileCta } from "../components/StickyMobileCta";
 import { CursorGlow } from "../components/CursorGlow";
+import { AmbientAtmosphere } from "../components/AmbientAtmosphere";
+import { ScrollReveal } from "../components/ScrollReveal";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -128,11 +130,14 @@ export default function RootLayout({
           minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
+          position: "relative",
         }}
       >
+        <AmbientAtmosphere />
+        <ScrollReveal />
         <CursorGlow />
         <Header />
-        <div style={{ flex: 1 }}>{children}</div>
+        <div style={{ flex: 1, position: "relative", zIndex: 1 }}>{children}</div>
         <MarketingFooter />
         <CookieBanner />
         <StickyMobileCta />
