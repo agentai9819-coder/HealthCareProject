@@ -2,95 +2,76 @@ import Link from "next/link";
 import Image from "next/image";
 
 export function ClinicalCareSection() {
-  const points = [
+  const standards = [
     {
-      indexNo: "01",
-      title: "100% Sealed Single-Use Sterile Kits",
-      desc: "Every procedure uses tamper-evident sealed consumable kits opened exclusively at your bedside.",
-      badge: "Infection Control",
+      title: "100% Sealed Single-Use Consumables",
+      desc: "Every cannula, dressing, and syringe kit is opened exclusively at your bedside from tamper-sealed packaging.",
     },
     {
-      indexNo: "02",
-      title: "Digital Vitals & Telemetry Telemetry",
-      desc: "Instant multi-parameter monitoring: blood pressure, pulse oximetry, capillary glucose & temperature.",
-      badge: "Real-Time Telemetry",
+      title: "Active Physician Tele-Desk Oversight",
+      desc: "Bedside vitals and medication titration are monitored by consulting physicians via encrypted telemetry.",
     },
     {
-      indexNo: "03",
-      title: "Active Physician Tele-Supervision",
-      desc: "Continuous physician oversight via encrypted digital charting with immediate escalation protocols.",
-      badge: "Doctor Oversight",
+      title: "NMC & INC Registered Clinicians",
+      desc: "Only hospital-experienced Registered Nurses and Certified Physiotherapists are dispatched to your home.",
     },
     {
-      indexNo: "04",
-      title: "ABHA & DISHA Aligned Care Summary",
-      desc: "Comprehensive digital visit report dispatched to you and your authorized family care coordinators within 30 minutes.",
-      badge: "Digital Health",
+      title: "Instant ABHA-Linked Care Summaries",
+      desc: "Comprehensive clinical reports are dispatched digitally to family members and doctors within 30 minutes.",
     },
   ];
 
   return (
-    <section style={styles.section} aria-labelledby="clinical-care-heading">
-      <div style={styles.container}>
-        <div style={styles.row}>
-          {/* Left Column: Clinical Photo & Telemetry Badge */}
-          <div style={styles.imageColumn}>
-            <div style={styles.imageWrapper}>
-              <Image
-                src="/assets/images/about-img.png"
-                alt="Clinical In-Home Examination and Sterile Care"
-                width={540}
-                height={400}
-                quality={85}
-                loading="lazy"
-                style={styles.image}
-              />
-              <div style={styles.imageBadge}>
-                <div style={styles.badgePulse} />
-                <span style={styles.badgeText}>Live Supervisory Physician Tele-Desk Active</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Narrative & Checklist */}
-          <div style={styles.contentColumn}>
-            <span className="section-kicker">- 03 / Hospital-Grade Protocols</span>
-            <h2 id="clinical-care-heading" className="section-heading" style={{ margin: "16px 0" }}>
-              Hospital-Quality Precision, <em>Delivered at Your Bedside.</em>
+    <section className="sp-section" aria-labelledby="clinical-standards-title">
+      <div className="sp-container">
+        <div className="sp-standards-layout">
+          <div className="sp-standards-content">
+            <span className="sp-kicker">The Clinical Standard</span>
+            <h2 id="clinical-standards-title" className="sp-section-title">
+              Hospital precision, <br />
+              <span className="sp-gradient-text">in the sanctuary of your home.</span>
             </h2>
-            <p style={styles.lead}>
-              We eliminate the anxiety of hospital waiting rooms and clinic commutes. Verified, hospital-trained Registered Nurses and Certified Physiotherapists bring clinical rigor, advanced monitoring, and calm reassurance to your living room.
+            <p className="sp-section-desc">
+              We eliminate the stress and infection risk of hospital waiting rooms by bringing ICU-grade clinical rigor, sterile consumables, and unhurried bedside care directly to you.
             </p>
 
-            <div style={styles.pointsList}>
-              {points.map((pt, idx) => (
-                <div key={idx} style={styles.pointItem}>
-                  <div style={styles.pointIcon}>
-                    <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 700, color: "#f59e0b" }}>
-                      {pt.indexNo}
-                    </span>
-                  </div>
+            <div className="sp-standards-grid">
+              {standards.map((s, idx) => (
+                <div className="sp-standard-item" key={idx}>
+                  <div className="sp-standard-dot" />
                   <div>
-                    <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "4px" }}>
-                      <h3 style={styles.pointTitle}>{pt.title}</h3>
-                      <span style={styles.pointBadge}>{pt.badge}</span>
-                    </div>
-                    <p style={styles.pointDesc}>{pt.desc}</p>
+                    <h3 className="sp-standard-title">{s.title}</h3>
+                    <p className="sp-standard-desc">{s.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div style={styles.ctaRow}>
-              <Link href="/services" className="shimmer-button" style={{ minHeight: "44px", padding: "0 22px" }}>
-                <span>Explore Clinical Services</span>
+            <div style={{ marginTop: "32px" }}>
+              <Link href="/about" className="sp-btn-secondary">
+                <span>Read Full Clinical Protocol</span>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
               </Link>
-              <Link href="/about" style={styles.secondaryBtn}>
-                <span>Our Clinical Standard</span>
-              </Link>
+            </div>
+          </div>
+
+          <div className="sp-standards-visual">
+            <div className="sp-visual-frame">
+              <Image
+                src="/assets/images/about-img.png"
+                alt="Clinical In-Home Examination and Sterile Care"
+                width={540}
+                height={400}
+                quality={90}
+                loading="lazy"
+                className="sp-visual-img"
+              />
+              <div className="sp-visual-badge">
+                <span className="sp-beacon-dot" />
+                <span>Supervisory Doctor Tele-Desk Active</span>
+              </div>
             </div>
           </div>
         </div>
@@ -98,155 +79,3 @@ export function ClinicalCareSection() {
     </section>
   );
 }
-
-const styles: Record<string, React.CSSProperties> = {
-  section: {
-    padding: "95px 0",
-    position: "relative",
-    borderTop: "1px solid rgba(255, 255, 255, 0.08)",
-  },
-  container: {
-    maxWidth: "1320px",
-    margin: "0 auto",
-  },
-  row: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(360px, 1fr))",
-    gap: "4rem 3.5rem",
-    alignItems: "center",
-  },
-  imageColumn: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  imageWrapper: {
-    position: "relative",
-    maxWidth: "540px",
-    width: "100%",
-    borderRadius: "24px",
-    overflow: "hidden",
-    boxShadow: "0 24px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12)",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    background: "rgba(14, 18, 24, 0.8)",
-  },
-  image: {
-    width: "100%",
-    height: "auto",
-    display: "block",
-    objectFit: "cover",
-    opacity: 0.92,
-  },
-  imageBadge: {
-    position: "absolute",
-    bottom: "1.25rem",
-    left: "1.25rem",
-    right: "1.25rem",
-    backgroundColor: "rgba(9, 12, 16, 0.92)",
-    backdropFilter: "blur(12px)",
-    borderRadius: "14px",
-    padding: "0.65rem 1rem",
-    boxShadow: "0 8px 24px rgba(0, 0, 0, 0.4)",
-    border: "1px solid rgba(245, 158, 11, 0.3)",
-    display: "inline-flex",
-    alignItems: "center",
-    gap: "0.6rem",
-  },
-  badgePulse: {
-    width: "8px",
-    height: "8px",
-    borderRadius: "50%",
-    backgroundColor: "#f59e0b",
-    boxShadow: "0 0 10px #f59e0b",
-    flexShrink: 0,
-  },
-  badgeText: {
-    fontSize: "12px",
-    fontWeight: 700,
-    color: "#f8fafc",
-  },
-  contentColumn: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-  },
-  lead: {
-    fontSize: "15px",
-    color: "#94a3b8",
-    lineHeight: 1.7,
-    margin: "0 0 2rem 0",
-  },
-  pointsList: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "1.25rem",
-    marginBottom: "2.5rem",
-    width: "100%",
-  },
-  pointItem: {
-    display: "flex",
-    alignItems: "flex-start",
-    gap: "1rem",
-    padding: "14px 16px",
-    borderRadius: "16px",
-    backgroundColor: "rgba(14, 18, 24, 0.75)",
-    border: "1px solid rgba(255, 255, 255, 0.08)",
-  },
-  pointIcon: {
-    width: "34px",
-    height: "34px",
-    borderRadius: "10px",
-    backgroundColor: "rgba(245, 158, 11, 0.12)",
-    border: "1px solid rgba(245, 158, 11, 0.3)",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexShrink: 0,
-    marginTop: "0.1rem",
-  },
-  pointTitle: {
-    fontFamily: "var(--font-display, 'Outfit', sans-serif)",
-    fontSize: "15px",
-    fontWeight: 800,
-    color: "#ffffff",
-    margin: 0,
-  },
-  pointBadge: {
-    fontSize: "9px",
-    fontWeight: 800,
-    textTransform: "uppercase",
-    letterSpacing: "0.08em",
-    color: "#fbbf24",
-    backgroundColor: "rgba(245, 158, 11, 0.12)",
-    padding: "2px 6px",
-    borderRadius: "4px",
-    border: "1px solid rgba(245, 158, 11, 0.25)",
-    fontFamily: "var(--font-mono)",
-  },
-  pointDesc: {
-    fontSize: "13px",
-    color: "#94a3b8",
-    lineHeight: 1.5,
-    margin: "4px 0 0 0",
-  },
-  ctaRow: {
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-    gap: "12px",
-  },
-  secondaryBtn: {
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: "0 18px",
-    minHeight: "44px",
-    borderRadius: "999px",
-    backgroundColor: "rgba(255, 255, 255, 0.04)",
-    color: "#cbd5e1",
-    fontSize: "13px",
-    fontWeight: 600,
-    textDecoration: "none",
-    border: "1px solid rgba(255, 255, 255, 0.12)",
-    transition: "all 0.18s ease",
-  },
-};

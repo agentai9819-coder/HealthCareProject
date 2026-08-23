@@ -58,11 +58,10 @@ export function MarketingHeader() {
   };
 
   const navLinks = [
-    { href: "/services", label: "Care services" },
-    { href: "/how-it-works", label: "How it works" },
-    { href: "/why-us", label: "Our clinicians" },
+    { href: "/services", label: "Clinical Services" },
+    { href: "/how-it-works", label: "How It Works" },
+    { href: "/why-us", label: "Clinicians" },
     { href: "/about", label: "About" },
-    { href: "/faqs", label: "FAQs" },
     { href: "/contact", label: "Contact" },
   ];
 
