@@ -140,7 +140,7 @@ export function HeroSection() {
       for (let r = 50; r <= radarRadius; r += 55) {
         ctx.beginPath();
         ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
-        ctx.strokeStyle = "rgba(16, 185, 129, 0.05)";
+        ctx.strokeStyle = "rgba(56, 189, 248, 0.08)";
         ctx.lineWidth = 1;
         ctx.stroke();
       }
@@ -150,11 +150,12 @@ export function HeroSection() {
       ctx.translate(centerX, centerY);
       ctx.rotate(angle);
       const gradient = ctx.createLinearGradient(0, 0, radarRadius, 0);
-      gradient.addColorStop(0, "rgba(16, 185, 129, 0.2)");
-      gradient.addColorStop(1, "rgba(16, 185, 129, 0)");
+      gradient.addColorStop(0, "rgba(56, 189, 248, 0.25)");
+      gradient.addColorStop(0.5, "rgba(16, 185, 129, 0.15)");
+      gradient.addColorStop(1, "rgba(56, 189, 248, 0)");
       ctx.beginPath();
       ctx.moveTo(0, 0);
-      ctx.arc(0, 0, radarRadius, -0.25, 0);
+      ctx.arc(0, 0, radarRadius, -0.28, 0);
       ctx.closePath();
       ctx.fillStyle = gradient;
       ctx.fill();
@@ -171,7 +172,7 @@ export function HeroSection() {
 
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(52, 211, 153, ${node.alpha})`;
+        ctx.fillStyle = i % 2 === 0 ? `rgba(56, 189, 248, ${node.alpha})` : `rgba(52, 211, 153, ${node.alpha})`;
         ctx.fill();
 
         for (let j = i + 1; j < nodes.length; j++) {
@@ -181,7 +182,7 @@ export function HeroSection() {
             ctx.beginPath();
             ctx.moveTo(node.x, node.y);
             ctx.lineTo(other.x, other.y);
-            ctx.strokeStyle = `rgba(16, 185, 129, ${0.12 * (1 - dist / 110)})`;
+            ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 * (1 - dist / 110)})`;
             ctx.lineWidth = 0.8;
             ctx.stroke();
           }
