@@ -7,6 +7,11 @@ import { PortalHeader } from "./PortalHeader";
 export function Header() {
   const pathname = usePathname();
 
+  // If on homepage, the Webflow header is rendered within the page
+  if (pathname === "/") {
+    return null;
+  }
+
   // If on staff or admin operational pages, render the operations header
   if (pathname.startsWith("/staff") || pathname.startsWith("/admin")) {
     return <PortalHeader />;

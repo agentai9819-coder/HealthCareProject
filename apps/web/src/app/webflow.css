@@ -1,0 +1,1632 @@
+/* ==========================================================================
+   🏥 AGENT'S MARVELOUS SITE — PIXEL-PERFECT WEBFLOW THEME STYLES
+   ========================================================================== */
+
+/* --- Top Container --- */
+.wf-container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* --- 1. Navbar --- */
+.wf-navbar-section {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #ffffff;
+  border-bottom: 1px solid #eef2f6;
+  padding: 16px 0;
+}
+
+.wf-navbar-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.wf-brand-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.wf-logo-img {
+  height: 38px;
+  width: auto;
+}
+
+.wf-nav-divider {
+  width: 1px;
+  height: 28px;
+  background: #e2e8f0;
+}
+
+/* Location Selector */
+.wf-location-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.wf-location-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.wf-loc-icon {
+  width: 12px;
+  height: 12px;
+}
+
+.wf-loc-text-sub {
+  font-size: 11px;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.wf-location-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: #252b61;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.wf-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 8px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  border: 1px solid #e2e8f0;
+  padding: 8px;
+  z-index: 100;
+  min-width: 150px;
+}
+
+.wf-dropdown-item {
+  width: 100%;
+  text-align: left;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: #1e293b;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.15s ease;
+}
+
+.wf-dropdown-item:hover {
+  background: #f1f5f9;
+  color: #252b61;
+}
+
+/* Search Bar */
+.wf-search-wrapper {
+  flex: 1;
+  max-width: 380px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.wf-search-icon {
+  position: absolute;
+  left: 16px;
+  pointer-events: none;
+  display: flex;
+}
+
+.wf-search-input {
+  width: 100%;
+  height: 44px;
+  border-radius: 50px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  padding: 0 20px 0 46px;
+  font-size: 13px;
+  color: #1e293b;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.wf-search-input:focus {
+  border-color: #252b61;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(37, 43, 97, 0.08);
+}
+
+/* Healthcare Services Mega Menu */
+.wf-services-mega-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wf-new-badge {
+  background: #ff6b2c;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.wf-services-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #252b61;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wf-mega-menu {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: -120px;
+  width: 620px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  border: 1px solid #e2e8f0;
+  padding: 24px;
+  z-index: 100;
+}
+
+.wf-mega-title {
+  font-size: 16px;
+  font-weight: 800;
+  color: #252b61;
+  margin-bottom: 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.wf-mega-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.wf-mega-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.wf-mega-item:hover {
+  background: #f8fafc;
+}
+
+.wf-mega-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.wf-mega-item-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.wf-mega-item-count {
+  font-size: 11px;
+  color: #64748b;
+}
+
+/* Nav Right */
+.wf-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: auto;
+}
+
+.wf-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #252b61;
+  transition: color 0.15s ease;
+}
+
+.wf-nav-link:hover {
+  color: #ff6b2c;
+}
+
+.wf-nav-action-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* --- 2. Hero Banner Card --- */
+.wf-banner-section {
+  padding: 24px 0 40px;
+  background: #f8fafc;
+}
+
+.wf-banner-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.wf-banner-card {
+  background-color: #252b61;
+  border-radius: 36px;
+  padding: 48px 48px 40px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(37, 43, 97, 0.25);
+}
+
+.wf-banner-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.wf-banner-title-wrap {
+  width: 100%;
+  text-align: center;
+}
+
+.wf-banner-big-text {
+  font-size: clamp(60px, 13vw, 156px);
+  font-weight: 900;
+  color: #e9ecf8;
+  letter-spacing: -2px;
+  line-height: 0.88;
+  margin: 0;
+  text-transform: uppercase;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+  user-select: none;
+}
+
+.wf-banner-tags-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.wf-banner-tag-pill {
+  background: #ffffff;
+  color: #252b61;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.wf-tag-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* Cutout Doctor */
+.wf-banner-doctor-wrap {
+  position: relative;
+  z-index: 3;
+  margin: -60px auto -30px;
+  max-width: 440px;
+  display: flex;
+  justify-content: center;
+}
+
+.wf-banner-doctor-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.3));
+}
+
+/* Bottom Banner Content */
+.wf-banner-bottom {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 24px;
+  margin-top: 10px;
+}
+
+.wf-banner-paragraph {
+  color: #ffffff;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  max-width: 440px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.wf-consultation-btn {
+  background: #ffffff;
+  color: #252b61;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 14px;
+  font-weight: 800;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wf-consultation-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.wf-btn-arrow-left,
+.wf-btn-arrow-right {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #f1f5f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wf-btn-arrow-left img,
+.wf-btn-arrow-right img {
+  width: 12px;
+  height: 12px;
+}
+
+/* --- 3. Treatment Categories Grid --- */
+.wf-treatment-section {
+  padding: 40px 0 60px;
+  background: #ffffff;
+}
+
+.wf-treatment-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.wf-treatment-card {
+  border-radius: 28px;
+  padding: 32px 26px;
+  position: relative;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.wf-treatment-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.06);
+}
+
+.wf-cat-blue {
+  background-color: #e8effd;
+}
+
+.wf-cat-purple {
+  background-color: #f4eefd;
+}
+
+.wf-cat-coral {
+  background-color: #fdeeee;
+}
+
+.wf-cat-orange {
+  background-color: #fef6ee;
+}
+
+.wf-treatment-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #252b61;
+  line-height: 1.2;
+  margin: 0 0 8px;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+}
+
+.wf-treatment-subtitle {
+  font-size: 13px;
+  color: #64748b;
+  font-weight: 500;
+  margin: 0;
+}
+
+.wf-treatment-book-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  align-self: flex-start;
+  z-index: 2;
+}
+
+.wf-treatment-btn-arrow {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #252b61;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.wf-treatment-card:hover .wf-treatment-btn-arrow {
+  transform: scale(1.06);
+  background: #ff6b2c;
+}
+
+.wf-treatment-btn-arrow img {
+  width: 14px;
+  height: 14px;
+}
+
+.wf-treatment-btn-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: #252b61;
+}
+
+.wf-treatment-corner-icon {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* --- 4. Doctor Appointment Section --- */
+.wf-doctor-tabs-section {
+  padding: 60px 0;
+  background: #f8fafc;
+}
+
+.wf-section-header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.wf-section-title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  color: #252b61;
+  line-height: 1.15;
+  margin: 0;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+}
+
+.wf-tabs-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  overflow-x: auto;
+  padding: 8px 0 24px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.wf-tab-btn {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 50px;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.wf-tab-btn.active {
+  background: #252b61;
+  color: #ffffff;
+  border-color: #252b61;
+  box-shadow: 0 8px 20px rgba(37, 43, 97, 0.2);
+}
+
+.wf-tab-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.wf-doctor-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.wf-doctor-card {
+  background: #ffffff;
+  border-radius: 28px;
+  border: 1px solid #eef2f6;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.wf-doctor-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+}
+
+.wf-doctor-img-wrap {
+  width: 100%;
+  height: 220px;
+  background: #f1f5f9;
+  overflow: hidden;
+}
+
+.wf-doctor-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.wf-doctor-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.wf-doctor-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: #252b61;
+  margin: 0 0 4px;
+}
+
+.wf-doctor-role {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ff6b2c;
+  margin-bottom: 8px;
+}
+
+.wf-doctor-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 16px;
+}
+
+.wf-doctor-rating {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.wf-doctor-book-action {
+  margin-top: auto;
+  background: #252b61;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.15s ease;
+}
+
+.wf-doctor-book-action:hover {
+  background: #ff6b2c;
+}
+
+/* --- 5. Lab Tests & Deals Section --- */
+.wf-lab-deals-section {
+  padding: 60px 0;
+  background: #ffffff;
+}
+
+.wf-block-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.wf-block-title {
+  font-size: clamp(26px, 3.5vw, 36px);
+  font-weight: 800;
+  color: #252b61;
+  line-height: 1.15;
+  margin: 0;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+}
+
+.wf-view-all-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #252b61;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 50px;
+  transition: background 0.15s ease;
+}
+
+.wf-view-all-link:hover {
+  background: #ff6b2c;
+}
+
+.wf-view-all-link.dark {
+  background: #f1f5f9;
+  color: #252b61;
+}
+
+.wf-view-all-link.dark:hover {
+  background: #e2e8f0;
+}
+
+.wf-view-all-link img {
+  width: 12px;
+  height: 12px;
+}
+
+.wf-lab-tests-block {
+  margin-bottom: 64px;
+}
+
+.wf-lab-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.wf-lab-card {
+  background: #252b61;
+  color: #ffffff;
+  border-radius: 28px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 220px;
+  box-shadow: 0 12px 30px rgba(37, 43, 97, 0.15);
+}
+
+.wf-discount-badge {
+  background: #ff6b2c;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.wf-lab-test-title {
+  font-size: 20px;
+  font-weight: 800;
+  margin: 0 0 6px;
+}
+
+.wf-lab-test-desc {
+  font-size: 13px;
+  color: #cbd5e1;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.wf-lab-price-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.wf-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.wf-sale-price {
+  font-size: 22px;
+  font-weight: 900;
+  color: #ffffff;
+}
+
+.wf-reg-price {
+  font-size: 14px;
+  color: #94a3b8;
+  text-decoration: line-through;
+}
+
+.wf-lab-icon {
+  width: 36px;
+  height: 36px;
+}
+
+/* Products Grid */
+.wf-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.wf-product-card {
+  background: #ffffff;
+  border-radius: 24px;
+  border: 1px solid #eef2f6;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s ease;
+}
+
+.wf-product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.06);
+}
+
+.wf-product-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  background: #f8fafc;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.wf-product-img {
+  max-width: 80%;
+  max-height: 80%;
+  object-fit: contain;
+}
+
+.wf-product-discount-tag {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ff6b2c;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.wf-prod-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+.wf-prod-cat {
+  font-weight: 700;
+  color: #252b61;
+}
+
+.wf-prod-rating {
+  color: #f59e0b;
+  font-weight: 700;
+}
+
+.wf-prod-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 16px;
+  line-height: 1.35;
+  min-height: 40px;
+}
+
+.wf-prod-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.wf-add-cart-btn {
+  background: #ffffff;
+  border: 1px solid #252b61;
+  color: #252b61;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.wf-add-cart-btn:hover {
+  background: #252b61;
+  color: #ffffff;
+}
+
+.wf-prod-price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.wf-prod-price {
+  font-size: 16px;
+  font-weight: 800;
+  color: #252b61;
+}
+
+.wf-prod-orig {
+  font-size: 12px;
+  color: #94a3b8;
+  text-decoration: line-through;
+}
+
+/* --- 6. Call To Action --- */
+.wf-cta-section {
+  padding: 40px 0;
+  background: #ffffff;
+}
+
+.wf-cta-card {
+  background: #252b61;
+  border-radius: 36px;
+  padding: 48px 60px;
+  color: #ffffff;
+  box-shadow: 0 20px 50px rgba(37, 43, 97, 0.2);
+}
+
+.wf-cta-subtitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ff6b2c;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.wf-cta-content-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wf-cta-title {
+  font-size: clamp(32px, 5vw, 54px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+}
+
+.wf-cta-highlight {
+  color: #ffffff;
+}
+
+.wf-cta-circle-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.wf-cta-circle-btn:hover {
+  transform: scale(1.08);
+}
+
+.wf-cta-circle-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+/* --- 7. Expertise & Podcast --- */
+.wf-expertise-section {
+  padding: 60px 0;
+  background: #f8fafc;
+}
+
+.wf-expertise-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+}
+
+.wf-podcast-card {
+  background: #f4eefd;
+  border-radius: 32px;
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.wf-badge-row {
+  margin-bottom: 16px;
+}
+
+.wf-podcast-badge,
+.wf-live-badge {
+  background: #252b61;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.wf-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ff6b2c;
+}
+
+.wf-podcast-title {
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 900;
+  color: #252b61;
+  line-height: 1.15;
+  margin: 0 0 12px;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+}
+
+.wf-podcast-desc {
+  font-size: 14px;
+  color: #64748b;
+  max-width: 380px;
+  line-height: 1.6;
+  margin: 0 0 24px;
+}
+
+.wf-video-play-btn {
+  display: inline-block;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease;
+}
+
+.wf-video-play-btn:hover {
+  transform: scale(1.08);
+}
+
+.wf-video-play-btn img {
+  width: 100%;
+  height: 100%;
+}
+
+.wf-podcast-fruits-img {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  max-width: 220px;
+  pointer-events: none;
+}
+
+/* Right Side Grid */
+.wf-expertise-right-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.wf-live-event-card {
+  grid-column: span 2;
+  background: #252b61;
+  color: #ffffff;
+  border-radius: 28px;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.wf-live-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin: 12px 0 6px;
+}
+
+.wf-live-time {
+  font-size: 13px;
+  color: #cbd5e1;
+}
+
+.wf-live-icon {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  width: 48px;
+  height: 48px;
+}
+
+.wf-counter-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  padding: 24px;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+}
+
+.wf-counter-number {
+  font-size: 38px;
+  font-weight: 900;
+  color: #252b61;
+  line-height: 1;
+  margin-bottom: 6px;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+}
+
+.wf-counter-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.wf-counter-icon {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 32px;
+  height: 32px;
+}
+
+/* --- 8. Testimonials --- */
+.wf-testimonials-section {
+  padding: 60px 0;
+  background: #ffffff;
+}
+
+.wf-google-review-banner {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 24px 36px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.wf-review-quote {
+  font-size: 16px;
+  font-weight: 700;
+  color: #252b61;
+}
+
+.wf-star-row {
+  display: flex;
+  gap: 4px;
+}
+
+.wf-star-img {
+  width: 20px;
+  height: 20px;
+}
+
+.wf-avg-rating-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.wf-testimonial-slider-card {
+  background: #f8fafc;
+  border-radius: 32px;
+  padding: 48px;
+  position: relative;
+}
+
+.wf-testimonial-content {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.wf-author-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 240px;
+}
+
+.wf-author-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.wf-author-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: #252b61;
+  margin: 0 0 2px;
+}
+
+.wf-author-role {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+}
+
+.wf-author-divider {
+  width: 1px;
+  height: 60px;
+  background: #cbd5e1;
+}
+
+.wf-quote-wrap {
+  flex: 1;
+}
+
+.wf-quote-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #1e293b;
+  font-weight: 500;
+  margin: 0;
+}
+
+.wf-slider-nav-arrows {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+
+.wf-slider-arrow-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.wf-slider-arrow-btn:hover {
+  background: #252b61;
+  color: #ffffff;
+}
+
+.wf-slider-arrow-btn img {
+  width: 16px;
+  height: 16px;
+}
+
+/* --- 9. App Download Section --- */
+.wf-download-section {
+  padding: 60px 0;
+  background: #f8fafc;
+}
+
+.wf-download-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.wf-download-preview-card {
+  background: #252b61;
+  border-radius: 36px;
+  padding: 48px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wf-download-logo {
+  height: 32px;
+  margin-bottom: 24px;
+}
+
+.wf-mockup-stack {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wf-floating-phone {
+  height: 260px;
+  position: relative;
+  z-index: 2;
+}
+
+.wf-floating-card-left {
+  position: absolute;
+  left: 0;
+  top: 40px;
+  width: 140px;
+  z-index: 1;
+}
+
+.wf-floating-card-right {
+  position: absolute;
+  right: 0;
+  bottom: 20px;
+  width: 140px;
+  z-index: 1;
+}
+
+.wf-download-cta-card {
+  background: #f4eefd;
+  border-radius: 36px;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.wf-app-screen-group-wrap {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.wf-app-screen-group {
+  max-width: 100%;
+  height: auto;
+}
+
+.wf-download-headline {
+  font-size: clamp(26px, 3.5vw, 36px);
+  font-weight: 900;
+  color: #252b61;
+  line-height: 1.2;
+  margin: 0 0 24px;
+  font-family: var(--font-heading, "Outfit", sans-serif);
+}
+
+.wf-text-gradient {
+  color: #ff6b2c;
+}
+
+.wf-store-badges-row {
+  display: flex;
+  gap: 16px;
+}
+
+.wf-store-badge-img {
+  height: 44px;
+  width: auto;
+  border-radius: 8px;
+}
+
+/* --- 10. Blog Area --- */
+.wf-blog-section {
+  padding: 60px 0;
+  background: #ffffff;
+}
+
+.wf-blog-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 24px;
+}
+
+.wf-blog-card {
+  background: #f8fafc;
+  border-radius: 28px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.wf-blog-card-highlight {
+  background: #252b61;
+  color: #ffffff;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+}
+
+.wf-blog-tag {
+  background: #ffffff;
+  color: #252b61;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  display: inline-block;
+  align-self: flex-start;
+  margin-bottom: 16px;
+}
+
+.wf-blog-card-highlight .wf-blog-tag {
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.wf-blog-images-stack {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.wf-blog-thumb {
+  width: 32%;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.wf-blog-article-title {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.35;
+  margin: 0;
+  color: #1e293b;
+}
+
+.wf-blog-card-highlight .wf-blog-article-title {
+  color: #ffffff;
+  margin-bottom: 24px;
+}
+
+.wf-blog-cta-btn {
+  background: #ffffff;
+  color: #252b61;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 10px 20px;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.wf-blog-cta-btn img {
+  width: 14px;
+  height: 14px;
+}
+
+.wf-blog-hero-thumb {
+  max-width: 180px;
+  height: auto;
+}
+
+/* --- 11. Footer --- */
+.wf-footer-section {
+  background: #0f132a;
+  color: #cbd5e1;
+  padding: 70px 0 30px;
+}
+
+.wf-footer-top-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 36px;
+  margin-bottom: 48px;
+}
+
+.wf-footer-logo {
+  height: 36px;
+  margin-bottom: 16px;
+  filter: brightness(0) invert(1);
+}
+
+.wf-footer-about-text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #94a3b8;
+  margin-bottom: 20px;
+}
+
+.wf-emergency-pill {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.wf-footer-heading {
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 20px;
+}
+
+.wf-footer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wf-footer-list a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.15s ease;
+}
+
+.wf-footer-list a:hover {
+  color: #ffffff;
+}
+
+.wf-footer-bottom-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #64748b;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* --- Responsive Media Queries --- */
+@media (max-width: 1024px) {
+  .wf-treatment-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .wf-doctor-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .wf-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .wf-lab-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wf-expertise-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wf-download-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wf-blog-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wf-footer-top-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .wf-navbar-container {
+    flex-wrap: wrap;
+  }
+
+  .wf-search-wrapper {
+    order: 3;
+    max-width: 100%;
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .wf-banner-card {
+    padding: 32px 20px 24px;
+  }
+
+  .wf-banner-bottom {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .wf-treatment-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wf-doctor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wf-products-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .wf-testimonial-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .wf-author-divider {
+    display: none;
+  }
+
+  .wf-footer-top-grid {
+    grid-template-columns: 1fr;
+  }
+}

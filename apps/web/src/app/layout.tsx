@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "../components/Header";
-import { MarketingFooter } from "../components/MarketingFooter";
+import { FooterWrapper } from "../components/FooterWrapper";
 import { CookieBanner } from "../components/CookieBanner";
 import { StickyMobileCta } from "../components/StickyMobileCta";
 import { CursorGlow } from "../components/CursorGlow";
@@ -138,7 +138,7 @@ export default function RootLayout({
         <CursorGlow />
         <Header />
         <div style={{ flex: 1, position: "relative", zIndex: 1 }}>{children}</div>
-        <MarketingFooter />
+        <FooterWrapper />
         <CookieBanner />
         <StickyMobileCta />
       </body>
