@@ -40,7 +40,7 @@ export function FaqAccordion({ items, limit }: FaqAccordionProps) {
                   height="18"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="#10b981"
+                  stroke="#ff6b2c"
                   strokeWidth="2.5"
                   style={{
                     transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
@@ -72,43 +72,43 @@ const styles: Record<string, React.CSSProperties> = {
     margin: "0 auto",
   },
   faqCard: {
-    backgroundColor: "rgba(18, 30, 27, 0.55)",
-    borderRadius: "16px",
+    backgroundColor: "#080808",
+    borderRadius: "18px",
     border: "1px solid rgba(255, 255, 255, 0.08)",
     overflow: "hidden",
-    backdropFilter: "blur(12px)",
   },
   questionButton: {
     width: "100%",
-    padding: "1.25rem 1.5rem",
-    backgroundColor: "transparent",
-    border: "none",
-    textAlign: "left",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    padding: "1.25rem 1.5rem",
+    backgroundColor: "transparent",
+    border: "none",
     cursor: "pointer",
-    color: "#f8fafc",
-    fontSize: "1.0625rem",
-    fontWeight: 600,
+    textAlign: "left",
     gap: "1rem",
   },
   questionText: {
-    lineHeight: 1.4,
+    fontFamily: "var(--font-display)",
+    fontSize: "1.05rem",
+    fontWeight: 700,
+    color: "#f8fafc",
   },
   iconWrapper: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    flexShrink: 0,
   },
   answerPanel: {
     padding: "0 1.5rem 1.25rem 1.5rem",
-    borderTop: "1px solid rgba(255, 255, 255, 0.05)",
+    borderTop: "1px solid rgba(255, 255, 255, 0.04)",
   },
   answerText: {
-    margin: "0.85rem 0 0 0",
-    color: "#98a49e",
-    fontSize: "0.9375rem",
+    fontSize: "0.95rem",
+    color: "#94a3b8",
     lineHeight: 1.65,
+    margin: 0,
   },
 };
