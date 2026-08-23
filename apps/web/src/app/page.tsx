@@ -1,35 +1,40 @@
 import Link from "next/link";
 import { HeroSection } from "../components/marketing/HeroSection";
-import { ServiceFinder } from "../components/marketing/ServiceFinder";
 import { FeaturedServicesSection } from "../components/marketing/FeaturedServicesSection";
 import { ClinicalCareSection } from "../components/marketing/ClinicalCareSection";
+import { TestimonialsCarousel } from "../components/marketing/TestimonialsCarousel";
+import { ServiceFinder } from "../components/marketing/ServiceFinder";
 import { HowItWorksSection } from "../components/marketing/HowItWorksSection";
 import { FaqAccordion } from "../components/marketing/FaqAccordion";
 import { CtaBanner } from "../components/marketing/CtaBanner";
+import { StickyPromoBanner } from "../components/marketing/StickyPromoBanner";
 import { faqsContent } from "../content/marketing/faqs";
 
 export const revalidate = 3600;
 
 export default function HomePage() {
   return (
-    <div className="sp-page-shell">
+    <div className="editorial-page-shell">
       <main id="top">
-        {/* 1. Cinematic Centered Hero with 3D Glowing Amber Wave */}
+        {/* 1. Dark Cinematic Hero with 3D Glowing Amber Orbit */}
         <HeroSection />
 
-        {/* 2. Interactive Service Finder & Care Match Guide */}
-        <ServiceFinder />
-
-        {/* 3. Core Clinical Programs Catalog */}
+        {/* 2. Light Cream Clinical Services Catalog (Stark Visual Rhythm) */}
         <FeaturedServicesSection />
 
-        {/* 4. Hospital-Grade Clinical Standard & Doctor Tele-Desk */}
+        {/* 3. Dark Edge-to-Edge Feature Protocol Cards with Bottom Overlays */}
         <ClinicalCareSection />
 
-        {/* 5. 3-Step Care Journey Timeline */}
+        {/* 4. Light Cream Verified Patient Stories Carousel with Line Progress Indicator */}
+        <TestimonialsCarousel />
+
+        {/* 5. Dark Interactive 1-Minute Service Guide / Care Matcher */}
+        <ServiceFinder />
+
+        {/* 6. Dark 4-Stage Care Timeline */}
         <HowItWorksSection />
 
-        {/* 6. Patient Clarity & FAQ Knowledgebase */}
+        {/* 7. Dark FAQ Section with '+' and '-' Accordions */}
         <section className="sp-section" aria-labelledby="home-faq-title">
           <div className="sp-container">
             <div className="sp-section-header">
@@ -55,8 +60,11 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 7. Direct 24/7 Clinical Concierge Conversion Banner */}
+        {/* 8. Conversion Banner */}
         <CtaBanner />
+
+        {/* 9. Floating Persistent Sticky Promo Bar at Bottom */}
+        <StickyPromoBanner />
       </main>
     </div>
   );
