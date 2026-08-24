@@ -35,7 +35,7 @@ runStep("Testing Backend API Concurrency, Auth, Injection, IDOR, Abuse & Transpo
 
 // 3. Indian Market Emergency Number Check
 runStep("Verifying Indian Emergency Protocol (112 / 108)", () => {
-  const footerContent = fs.readFileSync("apps/web/src/components/MarketingFooter.tsx", "utf8");
+  const footerContent = fs.readFileSync("apps/web/src/components/webflow/WebflowFooter.tsx", "utf8");
   assert.ok(footerContent.includes("112"), "Footer must reference 112 National Emergency");
   assert.ok(footerContent.includes("108"), "Footer must reference 108 Ambulance Services");
   assert.ok(!footerContent.includes("call 911 immediately"), "Footer must not contain 911 emergency instruction");

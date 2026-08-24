@@ -21,15 +21,15 @@ export default async function ServiceDetailPage({
 
   if (!service) {
     return (
-      <main style={{ backgroundColor: "#000000", color: "#ffffff", minHeight: "80vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 24px" }}>
-        <div style={{ maxWidth: "480px", textAlign: "center", padding: "40px", borderRadius: "24px", backgroundColor: "#080808", border: "1px solid rgba(255, 255, 255, 0.1)" }}>
-          <h1 style={{ fontFamily: "var(--font-display)", fontSize: "24px", fontWeight: 800, color: "#ffffff", margin: "0 0 12px" }}>
+      <main className="wf-subpage-wrapper" style={{ backgroundColor: "#f8fafc", minHeight: "80vh", display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 24px" }}>
+        <div style={{ maxWidth: "480px", textAlign: "center", padding: "40px", borderRadius: "28px", backgroundColor: "#ffffff", border: "1px solid #eef2f6", boxShadow: "0 10px 30px rgba(0,0,0,0.05)" }}>
+          <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "24px", fontWeight: 800, color: "#252b61", margin: "0 0 12px" }}>
             Service Not Found
           </h1>
-          <p style={{ fontSize: "14px", color: "#94a3b8", margin: "0 0 24px" }}>
+          <p style={{ fontSize: "14px", color: "#64748b", margin: "0 0 24px" }}>
             The requested clinical care service could not be located in our active directory.
           </p>
-          <Link href="/services" className="sp-btn-primary">
+          <Link href="/services" className="wf-consultation-btn" style={{ background: "#252b61", color: "#ffffff", justifyContent: "center" }}>
             <span>← Return to Services Directory</span>
           </Link>
         </div>
@@ -41,180 +41,119 @@ export default async function ServiceDetailPage({
   const formattedPrice = Number(service.price).toLocaleString("en-IN");
 
   return (
-    <main style={{ backgroundColor: "#000000", color: "#ffffff", minHeight: "100vh" }}>
-      {/* Dark Cinematic Breadcrumb & Hero */}
-      <section className="sp-section" style={{ padding: "80px 0 60px", borderBottom: "1px solid rgba(255, 255, 255, 0.08)" }}>
-        <div className="sp-container">
-          <div style={{ marginBottom: "20px" }}>
-            <Link href="/services" style={{ fontSize: "13px", color: "#ff8c52", fontWeight: 700, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "6px" }}>
-              <span>← Back to All Clinical Services</span>
-            </Link>
-          </div>
+    <main className="wf-subpage-wrapper" style={{ backgroundColor: "#f8fafc", minHeight: "100vh", paddingBottom: "80px" }}>
+      {/* Subpage Navy Banner */}
+      <section className="wf-banner-section" style={{ padding: "24px 0 32px" }}>
+        <div className="wf-container">
+          <div className="wf-subpage-hero-card">
+            <div style={{ marginBottom: "16px" }}>
+              <Link href="/services" style={{ fontSize: "13px", color: "#ffffff", fontWeight: 700, textDecoration: "none", opacity: 0.9 }}>
+                ← Back to All Clinical Services
+              </Link>
+            </div>
 
-          <div style={{ maxWidth: "860px" }}>
-            <span className="sp-kicker">{enrichment.category} · {service.durationMinutes} Mins Bedside Visit</span>
-            <h1 className="sp-section-title" style={{ textAlign: "left", margin: "10px 0 16px" }}>
-              {service.name}
-            </h1>
-            <p className="sp-section-desc" style={{ textAlign: "left" }}>
-              {service.description || enrichment.shortSummary}
-            </p>
+            <div className="wf-badge-row">
+              <span className="wf-podcast-badge" style={{ background: "rgba(255, 255, 255, 0.15)", color: "#ffffff" }}>
+                <span className="wf-badge-dot" /> {enrichment.category} · {service.durationMinutes} Mins Visit
+              </span>
+            </div>
+
+            <h1 className="wf-subpage-title">{service.name}</h1>
+            <p className="wf-subpage-desc">{service.description || enrichment.shortSummary}</p>
           </div>
         </div>
       </section>
 
-      {/* Light Cream Detailed Protocol Section */}
-      <section className="light-services-section" style={{ padding: "90px 0" }}>
-        <div className="light-services-container">
-          <div style={{ display: "grid", gridTemplateColumns: "1.4fr 340px", gap: "48px", alignItems: "flex-start" }}>
-            {/* Left: Comprehensive Clinical Details */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "36px" }}>
-              {/* Overview */}
-              <div
-                style={{
-                  backgroundColor: "#ffffff",
-                  borderRadius: "24px",
-                  padding: "36px",
-                  border: "1px solid rgba(0, 0, 0, 0.08)",
-                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
-                }}
-              >
-                <h2 style={{ fontFamily: "var(--font-display)", fontSize: "22px", fontWeight: 800, color: "#0f172a", margin: "0 0 14px" }}>
-                  Clinical Overview & Objectives
-                </h2>
-                <p style={{ fontSize: "15px", color: "#475569", lineHeight: 1.7, margin: 0 }}>
-                  {enrichment.shortSummary}
-                </p>
-              </div>
-
-              {/* What's Included */}
-              <div
-                style={{
-                  backgroundColor: "#ffffff",
-                  borderRadius: "24px",
-                  padding: "36px",
-                  border: "1px solid rgba(0, 0, 0, 0.08)",
-                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
-                }}
-              >
-                <h2 style={{ fontFamily: "var(--font-display)", fontSize: "22px", fontWeight: 800, color: "#0f172a", margin: "0 0 18px" }}>
-                  What’s Included in Every Visit
-                </h2>
-                <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "12px" }}>
-                  {enrichment.whatsIncluded.map((item, idx) => (
-                    <li key={idx} style={{ display: "flex", alignItems: "flex-start", gap: "12px", fontSize: "14px", color: "#334155" }}>
-                      <span style={{ color: "#ff6b2c", fontWeight: 800, fontSize: "16px" }}>✓</span>
-                      <span style={{ lineHeight: 1.55 }}>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Who It's For & Preparation */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px" }}>
-                <div
-                  style={{
-                    backgroundColor: "#ffffff",
-                    borderRadius: "22px",
-                    padding: "30px",
-                    border: "1px solid rgba(0, 0, 0, 0.08)",
-                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
-                  }}
-                >
-                  <h3 style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 800, color: "#0f172a", margin: "0 0 14px" }}>
-                    Who This Care Is For
-                  </h3>
-                  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "8px" }}>
-                    {enrichment.whoItsFor.map((item, idx) => (
-                      <li key={idx} style={{ display: "flex", alignItems: "flex-start", gap: "8px", fontSize: "13px", color: "#475569" }}>
-                        <span style={{ color: "#ea580c" }}>•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div
-                  style={{
-                    backgroundColor: "#ffffff",
-                    borderRadius: "22px",
-                    padding: "30px",
-                    border: "1px solid rgba(0, 0, 0, 0.08)",
-                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
-                  }}
-                >
-                  <h3 style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 800, color: "#0f172a", margin: "0 0 14px" }}>
-                    Preparation Before Visit
-                  </h3>
-                  <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "8px" }}>
-                    {enrichment.preparationTips.map((item, idx) => (
-                      <li key={idx} style={{ display: "flex", alignItems: "flex-start", gap: "8px", fontSize: "13px", color: "#475569" }}>
-                        <span style={{ color: "#ea580c" }}>•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+      {/* Detailed Clinical Protocol & Sticky Booking Sidebar */}
+      <section className="wf-container" style={{ paddingTop: "24px" }}>
+        <div className="wf-service-detail-grid">
+          {/* Left Details */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+            {/* Overview */}
+            <div className="wf-detail-box">
+              <h2 className="wf-detail-heading">Clinical Overview &amp; Objectives</h2>
+              <p style={{ fontSize: "14px", color: "#64748b", lineHeight: 1.7, margin: 0 }}>
+                {enrichment.shortSummary}
+              </p>
             </div>
 
-            {/* Right: Sticky Booking Box */}
-            <aside
-              style={{
-                position: "sticky",
-                top: "90px",
-                backgroundColor: "#ffffff",
-                borderRadius: "24px",
-                padding: "32px",
-                border: "1px solid rgba(0, 0, 0, 0.08)",
-                boxShadow: "0 14px 40px rgba(0, 0, 0, 0.06)",
-                textAlign: "center",
-              }}
-            >
-              <span style={{ fontSize: "11px", color: "#64748b", textTransform: "uppercase", fontWeight: 800, letterSpacing: "0.08em", fontFamily: "var(--font-mono)" }}>
-                Total Visit Fee
-              </span>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: "36px", fontWeight: 800, color: "#0f172a", margin: "8px 0" }}>
+            {/* What's Included */}
+            <div className="wf-detail-box">
+              <h2 className="wf-detail-heading">What&apos;s Included in Your Home Visit</h2>
+              <ul className="wf-detail-checklist">
+                {enrichment.whatsIncluded.map((item, idx) => (
+                  <li key={idx}>
+                    <span style={{ color: "#10b981", fontWeight: 900 }}>✓</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Suitable For */}
+            <div className="wf-detail-box">
+              <h2 className="wf-detail-heading">Who This Service Is For</h2>
+              <ul className="wf-detail-checklist">
+                {enrichment.whoItsFor.map((item, idx) => (
+                  <li key={idx}>
+                    <span style={{ color: "#252b61", fontWeight: 900 }}>•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Pre-Visit Preparation */}
+            <div className="wf-detail-box">
+              <h2 className="wf-detail-heading">Pre-Visit Patient Instructions</h2>
+              <ul className="wf-detail-checklist">
+                {enrichment.preparationTips.map((tip, idx) => (
+                  <li key={idx}>
+                    <span style={{ color: "#ff6b2c", fontWeight: 900 }}>→</span>
+                    <span>{tip}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          {/* Right Sticky Booking Card */}
+          <aside className="wf-detail-sticky-sidebar">
+            <div className="wf-sticky-booking-card">
+              <div style={{ fontSize: "11px", textTransform: "uppercase", color: "#64748b", fontWeight: 700 }}>
+                Bedside Appointment
+              </div>
+              <div style={{ fontSize: "32px", fontWeight: 900, color: "#252b61", margin: "6px 0" }}>
                 ₹{formattedPrice}
               </div>
-              <span style={{ fontSize: "12px", color: "#16a34a", fontWeight: 700, display: "block", marginBottom: "20px" }}>
-                Incl. Single-Use Sterile Kit & GST
-              </span>
+              <div style={{ fontSize: "12px", color: "#10b981", fontWeight: 700, marginBottom: "20px" }}>
+                ✓ Includes Sterile PPE &amp; Consumables
+              </div>
 
-              <div style={{ display: "flex", flexDirection: "column", gap: "10px", textAlign: "left", marginBottom: "24px", borderTop: "1px solid #f1f5f9", paddingTop: "18px" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px", color: "#334155" }}>
-                  <span style={{ color: "#ff6b2c" }}>✓</span>
-                  <span>100% Licensed B.Sc/GNM/BPT</span>
+              <div style={{ borderTop: "1px solid #eef2f6", paddingTop: "16px", marginBottom: "20px" }}>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", color: "#475569", marginBottom: "8px" }}>
+                  <span>Visit Duration</span>
+                  <strong>{service.durationMinutes} Minutes</strong>
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px", color: "#334155" }}>
-                  <span style={{ color: "#ff6b2c" }}>✓</span>
-                  <span>Avg 45 Mins Doorstep Arrival</span>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", color: "#475569", marginBottom: "8px" }}>
+                  <span>Clinician Level</span>
+                  <strong>Verified RN / PT</strong>
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px", color: "#334155" }}>
-                  <span style={{ color: "#ff6b2c" }}>✓</span>
-                  <span>ABHA-Linked Visit Summary</span>
+                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "13px", color: "#475569" }}>
+                  <span>Supervision</span>
+                  <strong>Doctor Tele-Oversight</strong>
                 </div>
               </div>
 
               <Link
-                href={`/booking/select-slot?serviceId=${service.id}`}
-                className="sp-btn-primary"
-                style={{ width: "100%", justifyContent: "center", minHeight: "48px", fontSize: "14px", marginBottom: "12px" }}
+                href={`/auth/login?redirect=/services/${slug}`}
+                className="wf-doctor-book-action"
+                style={{ width: "100%", textAlign: "center", textDecoration: "none", padding: "12px" }}
               >
-                <span>Schedule This Service</span>
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
+                <span>Proceed to Schedule Visit</span>
               </Link>
-
-              <a
-                href="tel:+911140506070"
-                style={{ fontSize: "12px", color: "#64748b", textDecoration: "none", display: "inline-flex", alignItems: "center", gap: "5px" }}
-              >
-                <span>Questions? Call 24/7 Desk</span>
-              </a>
-            </aside>
-          </div>
+            </div>
+          </aside>
         </div>
       </section>
     </main>

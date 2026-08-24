@@ -1,13 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
-import { Header } from "../components/Header";
-import { FooterWrapper } from "../components/FooterWrapper";
+import { WebflowNavbar } from "../components/webflow/WebflowNavbar";
+import { WebflowFooter } from "../components/webflow/WebflowFooter";
 import { CookieBanner } from "../components/CookieBanner";
 import { StickyMobileCta } from "../components/StickyMobileCta";
-import { CursorGlow } from "../components/CursorGlow";
-import { AmbientAtmosphere } from "../components/AmbientAtmosphere";
-import { ScrollReveal } from "../components/ScrollReveal";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -24,7 +21,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#252B61",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
@@ -32,11 +29,11 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "Veridian Care — Luxury In-Home Clinical Healthcare",
+    default: "Veridian Care — In-Home Clinical Healthcare & Nursing",
     template: "%s | Veridian Care",
   },
   description:
-    "Compassionate, state-licensed in-home clinical care, nursing assessments, physical therapy, and personalized recovery delivered directly to your doorstep.",
+    "NABH-aligned in-home clinical nursing, physiotherapy, wound dressing, and elder care delivered by state-licensed clinicians across Delhi NCR, Mumbai, Bengaluru, and Hyderabad.",
   keywords: [
     "in-home healthcare",
     "skilled nursing visit",
@@ -70,9 +67,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: "https://health-care-project-api-delta.vercel.app",
     siteName: "Veridian Care",
-    title: "Veridian Care — Luxury In-Home Clinical Healthcare",
+    title: "Veridian Care — In-Home Clinical Healthcare & Nursing",
     description:
-      "Compassionate, state-licensed in-home clinical care, nursing assessments, physical therapy, and personalized recovery delivered directly to your doorstep.",
+      "NABH-aligned in-home clinical nursing, physiotherapy, wound dressing, and elder care delivered by state-licensed clinicians.",
     images: [
       {
         url: "/assets/images/about-img.png",
@@ -84,9 +81,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Veridian Care — Luxury In-Home Clinical Healthcare",
+    title: "Veridian Care — In-Home Clinical Healthcare & Nursing",
     description:
-      "Compassionate, state-licensed in-home clinical care, nursing assessments, physical therapy, and personalized recovery delivered directly to your doorstep.",
+      "NABH-aligned in-home clinical nursing, physiotherapy, wound dressing, and elder care delivered by state-licensed clinicians.",
     images: ["/assets/images/about-img.png"],
   },
   robots: {
@@ -125,20 +122,17 @@ export default function RootLayout({
         style={{
           margin: 0,
           fontFamily: "var(--font-sans, 'Plus Jakarta Sans', sans-serif)",
-          backgroundColor: "#000000",
-          color: "#ffffff",
+          backgroundColor: "#ffffff",
+          color: "#1e293b",
           minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
           position: "relative",
         }}
       >
-        <AmbientAtmosphere />
-        <ScrollReveal />
-        <CursorGlow />
-        <Header />
-        <div style={{ flex: 1, position: "relative", zIndex: 1 }}>{children}</div>
-        <FooterWrapper />
+        <WebflowNavbar />
+        <div style={{ flex: 1, position: "relative" }}>{children}</div>
+        <WebflowFooter />
         <CookieBanner />
         <StickyMobileCta />
       </body>

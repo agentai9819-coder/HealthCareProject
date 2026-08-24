@@ -1,96 +1,78 @@
 import { aboutContent } from "../../content/marketing/about";
-import { CtaBanner } from "../../components/marketing/CtaBanner";
+import { CallToActionSection } from "../../components/webflow/CallToActionSection";
 
 export default function AboutPage() {
   const { header, mission, values, clinicianStandards } = aboutContent;
 
   return (
-    <main style={{ backgroundColor: "#000000", color: "#ffffff", minHeight: "100vh" }}>
-      {/* Dark Cinematic Header */}
-      <section className="sp-section" style={{ padding: "90px 0 70px", borderBottom: "1px solid rgba(255, 255, 255, 0.08)" }}>
-        <div className="sp-container">
-          <div className="sp-section-header" style={{ marginBottom: "0" }}>
-            <span className="sp-kicker">{header.badge}</span>
-            <h1 className="sp-section-title">
-              {header.title.split(":")[0]}: <br />
-              <span className="sp-gradient-text">{header.title.split(":")[1] || "Clinical Excellence at Your Bedside."}</span>
-            </h1>
-            <p className="sp-section-desc">{header.subtitle}</p>
+    <main className="wf-subpage-wrapper" style={{ backgroundColor: "#f8fafc", minHeight: "100vh", paddingBottom: "80px" }}>
+      {/* Subpage Navy Banner */}
+      <section className="wf-banner-section" style={{ padding: "24px 0 32px" }}>
+        <div className="wf-container">
+          <div className="wf-subpage-hero-card">
+            <div className="wf-badge-row">
+              <span className="wf-podcast-badge" style={{ background: "rgba(255, 255, 255, 0.15)", color: "#ffffff" }}>
+                <span className="wf-badge-dot" /> {header.badge}
+              </span>
+            </div>
+            <h1 className="wf-subpage-title">{header.title}</h1>
+            <p className="wf-subpage-desc">{header.subtitle}</p>
           </div>
         </div>
       </section>
 
-      {/* Light Cream Mission & Values Section */}
-      <section className="light-services-section" style={{ padding: "90px 0" }}>
-        <div className="light-services-container">
-          <div style={{ maxWidth: "860px", margin: "0 auto 60px", textAlign: "center" }}>
-            <span className="light-kicker">Our Core Mission</span>
-            <h2 className="light-title" style={{ marginBottom: "18px" }}>{mission.title}</h2>
-            <p className="light-desc" style={{ marginBottom: "14px" }}>{mission.paragraph1}</p>
-            <p className="light-desc">{mission.paragraph2}</p>
-          </div>
+      {/* Mission & Principles Grid */}
+      <section className="wf-container" style={{ paddingTop: "24px", paddingBottom: "40px" }}>
+        <div className="wf-detail-box" style={{ marginBottom: "32px", padding: "40px" }}>
+          <span className="wf-new-badge" style={{ background: "#252b61", marginBottom: "12px", display: "inline-block" }}>
+            Our Mission
+          </span>
+          <h2 className="wf-detail-heading" style={{ fontSize: "24px", margin: "0 0 16px" }}>{mission.title}</h2>
+          <p style={{ fontSize: "15px", color: "#475569", lineHeight: 1.7, marginBottom: "12px" }}>{mission.paragraph1}</p>
+          <p style={{ fontSize: "15px", color: "#475569", lineHeight: 1.7, margin: 0 }}>{mission.paragraph2}</p>
+        </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "24px" }}>
-            {values.map((val, idx) => (
-              <article
-                key={idx}
-                style={{
-                  backgroundColor: "#ffffff",
-                  borderRadius: "22px",
-                  padding: "32px",
-                  border: "1px solid rgba(0, 0, 0, 0.08)",
-                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
-                }}
-              >
-                <span style={{ fontFamily: "var(--font-mono)", fontSize: "11px", fontWeight: 700, color: "#ea580c", display: "block", marginBottom: "8px" }}>
-                  0{idx + 1} / PRINCIPLE
-                </span>
-                <h3 style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 800, color: "#0f172a", margin: "0 0 10px" }}>
-                  {val.title}
-                </h3>
-                <p style={{ fontSize: "14px", color: "#475569", lineHeight: 1.6, margin: 0 }}>
-                  {val.description}
-                </p>
-              </article>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: "24px" }}>
+          {values.map((val, idx) => (
+            <article key={idx} className="wf-detail-box" style={{ padding: "28px" }}>
+              <span style={{ fontSize: "11px", fontWeight: 800, color: "#ff6b2c", letterSpacing: "1px", display: "block", marginBottom: "8px" }}>
+                0{idx + 1} / PRINCIPLE
+              </span>
+              <h3 className="wf-detail-heading" style={{ fontSize: "18px", margin: "0 0 10px" }}>
+                {val.title}
+              </h3>
+              <p style={{ fontSize: "13px", color: "#64748b", lineHeight: 1.6, margin: 0 }}>
+                {val.description}
+              </p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* Clinician Standards Box */}
+      <section className="wf-container" style={{ paddingBottom: "40px" }}>
+        <div className="wf-detail-box" style={{ background: "#252b61", color: "#ffffff", border: "none", padding: "40px" }}>
+          <span className="wf-new-badge" style={{ marginBottom: "14px", display: "inline-block" }}>
+            NABH Aligned Standards
+          </span>
+          <h2 style={{ fontSize: "22px", fontWeight: 800, color: "#ffffff", margin: "0 0 14px" }}>
+            {clinicianStandards.title}
+          </h2>
+          <p style={{ fontSize: "14px", color: "#cbd5e1", lineHeight: 1.65, margin: "0 0 20px" }}>
+            We hold our clinical care team to rigorous vetting and infection-control standards:
+          </p>
+          <ul className="wf-detail-checklist">
+            {clinicianStandards.points.map((pt, idx) => (
+              <li key={idx}>
+                <span style={{ color: "#ff6b2c", fontWeight: 900 }}>✓</span>
+                <span style={{ color: "#f1f5f9" }}>{pt}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      {/* Dark Clinician Standards Section */}
-      <section className="sp-section" style={{ padding: "90px 0" }}>
-        <div className="sp-container">
-          <div
-            style={{
-              maxWidth: "860px",
-              margin: "0 auto",
-              backgroundColor: "#080808",
-              borderRadius: "24px",
-              padding: "40px",
-              border: "1px solid rgba(255, 107, 44, 0.3)",
-              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.6)",
-            }}
-          >
-            <span className="sp-kicker">NABH Aligned Practice</span>
-            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "24px", fontWeight: 800, color: "#ffffff", margin: "8px 0 16px" }}>
-              {clinicianStandards.title}
-            </h2>
-            <p style={{ fontSize: "15px", color: "#94a3b8", lineHeight: 1.65, margin: "0 0 24px" }}>
-              We hold our clinical team to rigorous standards to ensure safe, trustworthy, and effective care:
-            </p>
-            <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "10px" }}>
-              {clinicianStandards.points.map((pt, idx) => (
-                <li key={idx} style={{ display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "14px", color: "#cbd5e1" }}>
-                  <span style={{ color: "#ff6b2c", fontWeight: 800 }}>✓</span>
-                  <span>{pt}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <CtaBanner />
+      <CallToActionSection />
     </main>
   );
 }
