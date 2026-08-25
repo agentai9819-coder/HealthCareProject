@@ -48,7 +48,7 @@ const generateFallbackSlots = (): Slot[] => {
 export function SelectSlotPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const serviceId = searchParams.get("serviceId");
+  const serviceId = searchParams.get("serviceId") || searchParams.get("service");
   const rebookFrom = searchParams.get("rebookFrom");
   const [service, setService] = useState<Service | null>(null);
   const [slots, setSlots] = useState<Slot[]>([]);

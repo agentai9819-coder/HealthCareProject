@@ -41,7 +41,7 @@ import { DEFAULT_SERVICES, getServiceSlug } from "../../../lib/services";
 
 export function ConfirmPageContent() {
   const searchParams = useSearchParams();
-  const serviceId = searchParams.get("serviceId");
+  const serviceId = searchParams.get("serviceId") || searchParams.get("service");
   const slotId = searchParams.get("slotId");
   const rebookFrom = searchParams.get("rebookFrom");
 

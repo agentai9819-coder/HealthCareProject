@@ -81,16 +81,27 @@ export async function getServicesCatalog(): Promise<Service[]> {
   return DEFAULT_SERVICES;
 }
 
+const SLUG_ALIASES: Record<string, string> = {
+  "critical-care-nursing": "skilled-nursing-visit",
+  "wound-care-and-dressing": "skilled-nursing-visit",
+  "physical-therapy-session": "physical-therapy-rehabilitation",
+  "geriatric-vitality": "elder-wellness-companion-check",
+  "teleconsultation": "home-health-assessment",
+};
+
 export function findServiceBySlug(services: Service[], slug: string): Service | undefined {
   if (!slug) return undefined;
+  const canonicalSlug = SLUG_ALIASES[slug] || slug;
   // 1. Match by exact slugified name
-  const matched = services.find((s) => slugify(s.name) === slug);
+  const matched = services.find((s) => slugify(s.name) === canonicalSlug || slugify(s.name) === slug);
   if (matched) return matched;
   // 2. Match by direct ID if slug is a UUID
-  const matchedById = services.find((s) => s.id === slug);
+  const matchedById = services.find((s) => s.id === canonicalSlug || s.id === slug);
   if (matchedById) return matchedById;
   // 3. Match from default catalog
-  const matchedDefault = DEFAULT_SERVICES.find((s) => slugify(s.name) === slug || s.id === slug);
+  const matchedDefault = DEFAULT_SERVICES.find(
+    (s) => slugify(s.name) === canonicalSlug || slugify(s.name) === slug || s.id === canonicalSlug || s.id === slug
+  );
   return matchedDefault;
 }
 
