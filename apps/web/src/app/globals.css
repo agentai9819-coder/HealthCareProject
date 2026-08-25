@@ -83,6 +83,11 @@ button:focus-visible, a:focus-visible {
   outline-offset: 4px;
 }
 
+input:focus-visible {
+  outline: 2px solid var(--color-coral);
+  outline-offset: 4px;
+}
+
 /* Animations */
 @keyframes reveal-up {
   from {
@@ -1836,3 +1841,25 @@ button:focus-visible, a:focus-visible {
 }
 
 
+/*
+
+* PREFERRED REDUCED-MOTION
+* Animation disabled for users with reduced motion sensitivity.
+* Keeps the design kinetic but inclusive.
+*/
+
+
+
+@media (prefers-reduced-motion: reduce) {
+  .live-dot,
+  .live-dot::after,
+  .sticky-pulse-dot,
+  .pulse-beacon {
+    animation: none !important;
+  }
+  .sp-btn-primary,
+  .sp-btn-secondary,
+  .shimmer-button {
+    transition: none !important;
+  }
+}

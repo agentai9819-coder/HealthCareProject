@@ -54,7 +54,7 @@ export function WebflowTestimonialsSection() {
               />
             ))}
           </div>
-          <div className="wf-avg-rating-text">Verified Google Rating: 4.9 / 5.0</div>
+          <div className="wf-avg-rating-text">Patient Satisfaction</div>
         </div>
 
         {/* Testimonial Slider Card */}

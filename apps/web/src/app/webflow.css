@@ -157,7 +157,6 @@
   padding: 0 20px 0 46px;
   font-size: 13px;
   color: #1e293b;
-  outline: none;
   transition: all 0.2s ease;
 }
 
@@ -1720,6 +1719,7 @@
   .wf-service-row-card {
     grid-template-columns: 1fr;
   }
+
   .wf-service-detail-grid {
     grid-template-columns: 1fr;
   }
@@ -1777,4 +1777,3 @@
     grid-template-columns: 1fr;
   }
 }
-

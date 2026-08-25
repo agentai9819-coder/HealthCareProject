@@ -74,8 +74,8 @@ export function ExpertiseSection() {
 
             {/* Counter 2: Indian Families Supported */}
             <div className="wf-counter-card wf-counter-alt">
-              <div className="wf-counter-number">12,000+</div>
-              <div className="wf-counter-label">Indian Families Cared For</div>
+              <div className="wf-counter-number">8</div>
+              <div className="wf-counter-label">Years Clinical Excellence</div>
               <img
                 src="https://cdn.prod.website-files.com/6a8a9b834012eb47b04bdb10/6a8a9b844012eb47b04bdbbd_happy.svg"
                 alt=""

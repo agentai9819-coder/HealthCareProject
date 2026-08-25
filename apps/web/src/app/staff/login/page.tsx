@@ -212,8 +212,7 @@ const styles: Record<string, React.CSSProperties> = {
     fontSize: "0.95rem",
     backgroundColor: "rgba(255, 255, 255, 0.04)",
     color: "#f8fafc",
-    outline: "none",
-    transition: "border-color 0.15s ease",
+    transition: "border-color 0.2s, box-shadow 0.2s",
   },
   footer: {
     marginTop: "2rem",

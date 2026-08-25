@@ -17,7 +17,7 @@ export function WebflowFooter() {
               NABH-aligned in-home clinical care, registered nursing, and physician tele-oversight across Delhi NCR, Mumbai, Bengaluru, and Hyderabad.
             </p>
             <div className="wf-emergency-pill">
-              <span>🚨 Medical Emergency: Call 112 / 108 immediately</span>
+              <span>Medical Emergency: Call 112 / 108 immediately</span>
             </div>
           </div>
 

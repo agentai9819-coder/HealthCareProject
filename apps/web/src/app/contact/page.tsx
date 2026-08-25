@@ -151,7 +151,7 @@ export default function ContactPage() {
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Briefly describe patient condition, preferred visit timing, or special clinical instructions..."
-                    style={{ width: "100%", padding: "14px 16px", borderRadius: "12px", border: "1px solid #e2e8f0", fontSize: "13px", color: "#1e293b", outline: "none", resize: "vertical" }}
+                    style={{ width: "100%", padding: "14px 16px", borderRadius: "12px", border: "1px solid #e2e8f0", fontSize: "13px", color: "#1e293b", resize: "vertical" }}
                   />
                 </div>
 

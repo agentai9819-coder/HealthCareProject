@@ -48,14 +48,14 @@ export function AppDownloadSection() {
             </h3>
 
             <div className="wf-store-badges-row">
-              <Link href="/services" className="wf-store-badge-link">
+              <Link href="https://apps.apple.com/us/search?q=Veridian%20Care" target="_blank" rel="noreferrer" className="wf-store-badge-link">
                 <img
                   src="https://cdn.prod.website-files.com/6a8a9b834012eb47b04bdb10/6a8a9b844012eb47b04bdbc8_Button.png"
                   alt="Download on App Store"
                   className="wf-store-badge-img"
                 />
               </Link>
-              <Link href="/services" className="wf-store-badge-link">
+              <Link href="https://play.google.com/store/search?q=Veridian%20Care" target="_blank" rel="noreferrer" className="wf-store-badge-link">
                 <img
                   src="https://cdn.prod.website-files.com/6a8a9b834012eb47b04bdb10/6a8a9b844012eb47b04bdbc7_play%20store.png"
                   alt="Get it on Google Play"

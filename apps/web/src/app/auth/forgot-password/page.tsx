@@ -34,7 +34,7 @@ function ForgotPasswordForm() {
 
       setMessage(
         data.message ||
-          "If an account exists with this email, password reset instructions have been sent."
+        "If an account exists with this email, password reset instructions have been sent."
       );
     } catch {
       setError("Network error. Please try again.");
@@ -134,7 +134,7 @@ export default function ForgotPasswordPage() {
   return (
     <Suspense
       fallback={
-        <div style={{ color: "#94a3b8", textAlign: "center", padding: "80px 20px" }}>
+        <div style={{ color: "#94a3b8", textAlign: "center", padding: "80px 20px", role: "status" }}>
           Loading recovery portal...
         </div>
       }
@@ -212,7 +212,6 @@ const styles: Record<string, React.CSSProperties> = {
     fontSize: "0.95rem",
     border: "1px solid rgba(255, 255, 255, 0.12)",
     borderRadius: "10px",
-    outline: "none",
     backgroundColor: "rgba(255, 255, 255, 0.04)",
     color: "#f8fafc",
     transition: "border-color 0.2s, box-shadow 0.2s",

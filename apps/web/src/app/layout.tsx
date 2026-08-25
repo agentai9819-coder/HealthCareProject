@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://health-care-project-api-delta.vercel.app",
+    url: "https://veridiancare.vercel.app",
     siteName: "Veridian Care",
     title: "Veridian Care — In-Home Clinical Healthcare & Nursing",
     description:
@@ -100,10 +100,6 @@ export const metadata: Metadata = {
   verification: {
     google: "wB7DFyJxxysgOt1gd_-X9M4pyepew6heR4lcrqrRrv0",
   },
-  other: {
-    "google-site-verification": "wB7DFyJxxysgOt1gd_-X9M4pyepew6heR4lcrqrRrv0",
-    "zero-threat-verification": "zeroThreat=MTA4OTA=TVRBNE9UQT0=TVRBNE9UQT",
-  },
 };
 
 export default function RootLayout({
@@ -113,10 +109,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${outfit.variable} ${plusJakartaSans.variable}`} suppressHydrationWarning>
-      <head>
-        <meta name="google-site-verification" content="wB7DFyJxxysgOt1gd_-X9M4pyepew6heR4lcrqrRrv0" />
-        <meta name="zero-threat-verification" content="zeroThreat=MTA4OTA=TVRBNE9UQT0=TVRBNE9UQT" />
-      </head>
+      <head></head>
       <body
         suppressHydrationWarning
         style={{

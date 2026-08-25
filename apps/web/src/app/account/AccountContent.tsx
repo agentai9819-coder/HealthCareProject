@@ -987,7 +987,6 @@ const styles: Record<string, React.CSSProperties> = {
     fontSize: "0.95rem",
     border: "1px solid rgba(255, 255, 255, 0.12)",
     borderRadius: "10px",
-    outline: "none",
     backgroundColor: "rgba(255, 255, 255, 0.04)",
     color: "#f8fafc",
     transition: "border-color 0.15s, box-shadow 0.15s",
