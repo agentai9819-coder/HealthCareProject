@@ -198,7 +198,7 @@ function RegisterForm() {
 
 export default function RegisterPage() {
   return (
-    <Suspense fallback={<div style={{ color: "#94a3b8", textAlign: "center", padding: "80px 20px", role: "status" }}>Loading registration portal...</div>}>
+    <Suspense fallback={<div style={{ color: "#94a3b8", textAlign: "center", padding: "80px 20px" }} role="status">Loading registration portal...</div>}>
       <RegisterForm />
     </Suspense>
   );

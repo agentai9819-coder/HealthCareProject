@@ -143,7 +143,7 @@ function LoginForm() {
 
 export default function LoginPage() {
   return (
-    <Suspense fallback={<div style={{ color: "#94a3b8", textAlign: "center", padding: "80px 20px", role: "status" }}>Loading sign in portal...</div>}>
+    <Suspense fallback={<div style={{ color: "#94a3b8", textAlign: "center", padding: "80px 20px" }} role="status">Loading sign in portal...</div>}>
       <LoginForm />
     </Suspense>
   );

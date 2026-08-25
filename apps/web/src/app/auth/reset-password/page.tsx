@@ -199,7 +199,7 @@ export default function ResetPasswordPage() {
   return (
     <Suspense
       fallback={
-        <div style={{ color: "#94a3b8", textAlign: "center", padding: "80px 20px", role: "status" }}>
+        <div style={{ color: "#94a3b8", textAlign: "center", padding: "80px 20px" }} role="status">
           Loading password reset portal...
         </div>
       }
