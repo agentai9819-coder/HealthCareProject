@@ -59,7 +59,7 @@ export default function StaffLoginPage() {
       <div style={styles.card}>
         <div style={styles.header}>
           <div style={styles.badge}>
-            <span className="live-dot" />
+            <span style={styles.badgeDot} />
             <span>Clinical Staff & Admin Gateway</span>
           </div>
           <h1 style={styles.title}>Clinician Portal</h1>
@@ -85,7 +85,7 @@ export default function StaffLoginPage() {
               type="email"
               value={formData.email}
               onChange={handleChange}
-              placeholder="e.g. nurse@springfield-health.org"
+              placeholder="e.g. nurse@veridiancare.in"
               required
               style={styles.input}
               autoComplete="email"
@@ -112,10 +112,9 @@ export default function StaffLoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="shimmer-button"
-            style={{ width: "100%", minHeight: "46px", marginTop: "8px", fontSize: "14px" }}
+            style={styles.submitBtn}
           >
-            <span>{loading ? "Authenticating..." : "Sign In to Operations"}</span>
+            <span>{loading ? "Authenticating..." : "Sign In to Operations →"}</span>
           </button>
         </form>
 
@@ -131,62 +130,70 @@ export default function StaffLoginPage() {
 
 const styles: Record<string, React.CSSProperties> = {
   main: {
-    minHeight: "80vh",
+    minHeight: "85vh",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     padding: "3rem 1.5rem 6rem 1.5rem",
+    backgroundColor: "#f8fafc",
+    backgroundImage: "radial-gradient(at 50% 0%, rgba(37, 43, 97, 0.05) 0px, transparent 60%)",
     position: "relative",
   },
   card: {
-    backgroundColor: "rgba(18, 30, 27, 0.8)",
-    borderRadius: "24px",
-    padding: "2.5rem",
     width: "100%",
     maxWidth: "460px",
-    boxShadow: "0 24px 60px rgba(0, 0, 0, 0.5)",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    backdropFilter: "blur(20px)",
+    padding: "2.75rem 2.5rem",
+    backgroundColor: "#ffffff",
+    border: "1.5px solid #eef2f6",
+    borderRadius: "28px",
+    boxShadow: "0 20px 45px -12px rgba(37, 43, 97, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03)",
   },
   header: {
-    textAlign: "center" as const,
-    marginBottom: "2rem",
+    textAlign: "center",
+    marginBottom: "1.75rem",
   },
   badge: {
     display: "inline-flex",
     alignItems: "center",
     gap: "8px",
-    padding: "4px 12px",
-    backgroundColor: "rgba(52, 211, 153, 0.1)",
-    border: "1px solid rgba(52, 211, 153, 0.25)",
-    color: "#a7f3d0",
-    borderRadius: "9999px",
+    padding: "6px 14px",
+    borderRadius: "999px",
+    backgroundColor: "rgba(37, 43, 97, 0.06)",
+    border: "1px solid rgba(37, 43, 97, 0.12)",
+    color: "#252b61",
     fontSize: "12px",
     fontWeight: 700,
+    letterSpacing: "0.04em",
     textTransform: "uppercase",
-    letterSpacing: "0.06em",
     marginBottom: "16px",
   },
+  badgeDot: {
+    width: "6px",
+    height: "6px",
+    borderRadius: "50%",
+    backgroundColor: "#252b61",
+    display: "inline-block",
+  },
   title: {
-    margin: "0 0 0.5rem",
+    margin: "0 0 0.4rem",
     fontFamily: "var(--font-display, 'Outfit', sans-serif)",
-    fontSize: "1.85rem",
+    fontSize: "2rem",
     fontWeight: 800,
-    color: "#f6f7f3",
+    color: "#252b61",
     letterSpacing: "-0.03em",
   },
   subtitle: {
     margin: 0,
     fontSize: "0.95rem",
-    color: "#94a3b8",
+    color: "#64748b",
     lineHeight: 1.5,
   },
   errorBanner: {
     padding: "0.75rem 1rem",
-    backgroundColor: "rgba(239, 68, 68, 0.12)",
-    border: "1px solid rgba(239, 68, 68, 0.3)",
-    borderRadius: "10px",
-    color: "#fca5a5",
+    backgroundColor: "#fef2f2",
+    border: "1px solid #fee2e2",
+    borderRadius: "12px",
+    color: "#b91c1c",
     fontSize: "0.875rem",
     marginBottom: "1.25rem",
   },
@@ -201,29 +208,44 @@ const styles: Record<string, React.CSSProperties> = {
     gap: "0.4rem",
   },
   label: {
-    fontSize: "0.85rem",
-    fontWeight: 600,
-    color: "#cbd5e1",
+    fontSize: "0.875rem",
+    fontWeight: 700,
+    color: "#1e293b",
   },
   input: {
-    padding: "0.75rem 1rem",
-    borderRadius: "10px",
-    border: "1px solid rgba(255, 255, 255, 0.12)",
+    padding: "0.85rem 1rem",
     fontSize: "0.95rem",
-    backgroundColor: "rgba(255, 255, 255, 0.04)",
-    color: "#f8fafc",
-    transition: "border-color 0.2s, box-shadow 0.2s",
+    border: "1.5px solid #e2e8f0",
+    borderRadius: "14px",
+    backgroundColor: "#f8fafc",
+    color: "#0f172a",
+    outline: "none",
+    transition: "border-color 0.2s, box-shadow 0.2s, background-color 0.2s",
+  },
+  submitBtn: {
+    minHeight: "48px",
+    width: "100%",
+    marginTop: "8px",
+    fontSize: "15px",
+    fontWeight: 700,
+    color: "#ffffff",
+    background: "linear-gradient(135deg, #252b61 0%, #171a44 100%)",
+    border: "none",
+    borderRadius: "14px",
+    cursor: "pointer",
+    boxShadow: "0 8px 20px -4px rgba(37, 43, 97, 0.35)",
+    transition: "transform 0.15s ease, box-shadow 0.15s ease",
   },
   footer: {
     marginTop: "2rem",
-    textAlign: "center" as const,
-    borderTop: "1px solid rgba(255, 255, 255, 0.08)",
+    textAlign: "center",
+    borderTop: "1.5px solid #f1f5f9",
     paddingTop: "1.25rem",
   },
   customerLink: {
     fontSize: "0.875rem",
-    color: "#34d399",
+    color: "#ff6b2c",
     textDecoration: "none",
-    fontWeight: 600,
+    fontWeight: 700,
   },
 };

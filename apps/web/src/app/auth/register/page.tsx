@@ -68,12 +68,12 @@ function RegisterForm() {
     <main style={styles.main}>
       <div style={styles.card}>
         <div style={styles.headerBadge}>
-          <span className="live-dot" />
+          <span style={styles.badgeDot} />
           <span>Patient & Family Portal</span>
         </div>
 
         <h1 style={styles.title}>Create Account</h1>
-        <p style={styles.subtitle}>Register for private in-home healthcare services</p>
+        <p style={styles.subtitle}>Register for verified in-home clinical care & records</p>
 
         {error && (
           <div role="alert" style={styles.error}>
@@ -86,8 +86,8 @@ function RegisterForm() {
             <div style={styles.success}>
               Registration successful! You can now sign in to your clinical account.
             </div>
-            <Link href={loginLink} className="shimmer-button" style={{ width: "100%", justifyContent: "center", display: "inline-flex", minHeight: "44px" }}>
-              <span>Proceed to Sign In</span>
+            <Link href={loginLink} style={styles.submitBtn}>
+              <span>Proceed to Sign In →</span>
             </Link>
           </div>
         ) : (
@@ -179,8 +179,8 @@ function RegisterForm() {
               />
             </div>
 
-            <button type="submit" disabled={loading} className="shimmer-button" style={{ minHeight: "46px", width: "100%", marginTop: "8px", fontSize: "14px" }}>
-              <span>{loading ? "Creating account..." : "Create Account"}</span>
+            <button type="submit" disabled={loading} style={styles.submitBtn}>
+              <span>{loading ? "Creating account..." : "Create Clinical Account →"}</span>
             </button>
           </form>
         )}
@@ -198,7 +198,7 @@ function RegisterForm() {
 
 export default function RegisterPage() {
   return (
-    <Suspense fallback={<div style={{ color: "#94a3b8", textAlign: "center", padding: "80px 20px" }} role="status">Loading registration portal...</div>}>
+    <Suspense fallback={<div style={{ color: "#64748b", textAlign: "center", padding: "80px 20px" }} role="status">Loading registration portal...</div>}>
       <RegisterForm />
     </Suspense>
   );
@@ -206,50 +206,58 @@ export default function RegisterPage() {
 
 const styles: Record<string, React.CSSProperties> = {
   main: {
-    minHeight: "80vh",
+    minHeight: "85vh",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     padding: "3rem 1.5rem 6rem 1.5rem",
+    backgroundColor: "#f8fafc",
+    backgroundImage: "radial-gradient(at 50% 0%, rgba(37, 43, 97, 0.05) 0px, transparent 60%)",
     position: "relative",
   },
   card: {
     width: "100%",
-    maxWidth: "460px",
-    padding: "2.5rem",
-    backgroundColor: "rgba(18, 30, 27, 0.8)",
-    border: "1px solid rgba(255, 255, 255, 0.1)",
-    borderRadius: "24px",
-    backdropFilter: "blur(20px)",
-    boxShadow: "0 24px 60px rgba(0, 0, 0, 0.5)",
+    maxWidth: "480px",
+    padding: "2.75rem 2.5rem",
+    backgroundColor: "#ffffff",
+    border: "1.5px solid #eef2f6",
+    borderRadius: "28px",
+    boxShadow: "0 20px 45px -12px rgba(37, 43, 97, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03)",
   },
   headerBadge: {
     display: "inline-flex",
     alignItems: "center",
     gap: "8px",
-    padding: "4px 12px",
+    padding: "6px 14px",
     borderRadius: "999px",
-    backgroundColor: "rgba(52, 211, 153, 0.1)",
-    border: "1px solid rgba(52, 211, 153, 0.25)",
-    color: "#a7f3d0",
+    backgroundColor: "rgba(37, 43, 97, 0.06)",
+    border: "1px solid rgba(37, 43, 97, 0.12)",
+    color: "#252b61",
     fontSize: "12px",
     fontWeight: 700,
-    letterSpacing: "0.06em",
+    letterSpacing: "0.04em",
     textTransform: "uppercase",
-    marginBottom: "16px",
+    marginBottom: "18px",
+  },
+  badgeDot: {
+    width: "6px",
+    height: "6px",
+    borderRadius: "50%",
+    backgroundColor: "#ff6b2c",
+    display: "inline-block",
   },
   title: {
-    margin: "0 0 0.5rem",
+    margin: "0 0 0.4rem",
     fontFamily: "var(--font-display, 'Outfit', sans-serif)",
-    fontSize: "1.85rem",
+    fontSize: "2rem",
     fontWeight: 800,
-    color: "#f6f7f3",
+    color: "#252b61",
     letterSpacing: "-0.03em",
   },
   subtitle: {
     margin: "0 0 1.75rem",
     fontSize: "0.95rem",
-    color: "#94a3b8",
+    color: "#64748b",
     lineHeight: 1.5,
   },
   form: {
@@ -275,37 +283,56 @@ const styles: Record<string, React.CSSProperties> = {
     boxSizing: "border-box",
   },
   label: {
-    fontSize: "0.85rem",
-    fontWeight: 600,
-    color: "#cbd5e1",
+    fontSize: "0.875rem",
+    fontWeight: 700,
+    color: "#1e293b",
   },
   input: {
     width: "100%",
     maxWidth: "100%",
     boxSizing: "border-box",
-    padding: "0.75rem 0.875rem",
+    padding: "0.85rem 1rem",
     fontSize: "0.95rem",
-    border: "1px solid rgba(255, 255, 255, 0.12)",
-    borderRadius: "10px",
-    backgroundColor: "rgba(255, 255, 255, 0.04)",
-    color: "#f8fafc",
-    transition: "border-color 0.2s, box-shadow 0.2s",
+    border: "1.5px solid #e2e8f0",
+    borderRadius: "14px",
+    backgroundColor: "#f8fafc",
+    color: "#0f172a",
+    outline: "none",
+    transition: "border-color 0.2s, box-shadow 0.2s, background-color 0.2s",
+  },
+  submitBtn: {
+    minHeight: "48px",
+    width: "100%",
+    marginTop: "8px",
+    fontSize: "15px",
+    fontWeight: 700,
+    color: "#ffffff",
+    background: "linear-gradient(135deg, #ff6b2c 0%, #ff5500 100%)",
+    border: "none",
+    borderRadius: "14px",
+    cursor: "pointer",
+    boxShadow: "0 8px 20px -4px rgba(255, 107, 44, 0.35)",
+    transition: "transform 0.15s ease, box-shadow 0.15s ease",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    textDecoration: "none",
   },
   error: {
     padding: "0.75rem 1rem",
-    backgroundColor: "rgba(239, 68, 68, 0.12)",
-    border: "1px solid rgba(239, 68, 68, 0.3)",
-    borderRadius: "10px",
-    color: "#fca5a5",
+    backgroundColor: "#fef2f2",
+    border: "1px solid #fee2e2",
+    borderRadius: "12px",
+    color: "#b91c1c",
     fontSize: "0.875rem",
     marginBottom: "1rem",
   },
   success: {
     padding: "0.85rem 1rem",
-    backgroundColor: "rgba(52, 211, 153, 0.12)",
-    border: "1px solid rgba(52, 211, 153, 0.3)",
-    borderRadius: "10px",
-    color: "#a7f3d0",
+    backgroundColor: "#f0fdf4",
+    border: "1px solid #dcfce7",
+    borderRadius: "12px",
+    color: "#15803d",
     fontSize: "0.9rem",
     marginBottom: "1.25rem",
     lineHeight: 1.5,
@@ -313,12 +340,12 @@ const styles: Record<string, React.CSSProperties> = {
   footer: {
     marginTop: "1.75rem",
     textAlign: "center",
-    fontSize: "0.875rem",
-    color: "#94a3b8",
+    fontSize: "0.9rem",
+    color: "#64748b",
   },
   link: {
-    color: "#34d399",
+    color: "#ff6b2c",
     textDecoration: "none",
-    fontWeight: 600,
+    fontWeight: 700,
   },
 };
